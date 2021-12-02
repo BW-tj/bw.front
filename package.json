@@ -1,5 +1,5 @@
 {
-  "name": "big-washing",
+  "name": "bw.front",
   "private": true,
   "scripts": {
     "dev": "next dev",
