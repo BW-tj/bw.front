@@ -1,7 +1,7 @@
-import React from 'react'
-import DesktopNavigation from '../../components/DesktopNavigation/DesktopNavigation'
-import Header from '../../components/Header/Header'
-import styles from './DesktopLayout.module.scss'
+import React from "react"
+import DesktopNavigation from "../../components/DesktopNavigation/DesktopNavigation"
+import Header from "../../components/Header/Header"
+import styles from "./DesktopLayout.module.scss"
 
 const DesktopLayout = ({
 	children

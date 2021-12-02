@@ -1,5 +1,5 @@
-import DesktopLayout from '../Layouts/Desktop/DesktopLayout'
-import styles from '../styles/Home.module.scss'
+import DesktopLayout from "../Layouts/Desktop/DesktopLayout"
+import styles from "../styles/Home.module.scss"
 
 const Home = () => {
   return (

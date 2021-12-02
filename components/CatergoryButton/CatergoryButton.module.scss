@@ -1,0 +1,27 @@
+@import '../../styles/colors.scss';
+
+.root {
+	padding: 24px 15px;
+	letter-spacing: 0.03rem;
+	color: #fff;
+	font-weight: 500;
+	font-size: 1.25rem;
+	transition: 100ms linear;
+	display: flex;
+	align-items: center;
+
+	&:hover {
+		background: $primary-color-d1;
+	}
+
+	&:active {
+		background: $primary-color-d2;
+	}
+}
+
+.icon {
+	margin-right: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

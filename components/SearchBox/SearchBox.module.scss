@@ -1,0 +1,43 @@
+@import "../../styles/colors.scss";
+
+.root {
+	width: 863px;
+	border-radius: 4px;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.input {
+	flex-grow: 1;
+	padding: 14px 18px;
+	background: #fff;
+	font-weight: 500;
+
+	&::placeholder {
+		color: #BBBBBB;
+		font-size: 1.125rem;
+		letter-spacing: 0.03rem;
+		font-weight: 400;
+	}
+}
+
+.button {
+	background: $primary-color-l1;
+	align-self: stretch;
+	padding: 0 28px;
+	transition: 100ms linear;
+	svg {
+		color: #fff;
+	}
+
+	&:hover {
+		background: $primary-color-d1;
+	}
+
+	&:active {
+		background: $primary-color-d2;
+	}
+}

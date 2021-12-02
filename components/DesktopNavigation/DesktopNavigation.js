@@ -1,21 +1,19 @@
-import React from 'react'
-import { Menu as MenuIcon } from '../../icons'
-import styles from './DesktopNavigation.module.scss'
+import React, { useState } from "react"
+import CatergoryButton from "../CatergoryButton/CatergoryButton"
+import SearchBox from "../SearchBox/SearchBox"
+import styles from "./DesktopNavigation.module.scss"
 
 const DesktopNavigation = () => {
+
+	const [searchValue, setSearchValue] = useState('')
+
 	return (
 		<div className={styles.root}>
 			<div className={styles.container}>
 
-				<button className={styles.dropdown_button}>
+				<CatergoryButton />
 
-					<span className={styles.menu_icon}>
-						<MenuIcon />
-					</span>
-
-					Категории
-
-				</button>
+				<SearchBox value={searchValue} setValue={setSearchValue} onSearch={() => {}} />
 
 			</div>
 		</div>
