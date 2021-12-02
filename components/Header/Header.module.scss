@@ -1,0 +1,17 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
+
+.root {
+	width: 100%;
+	padding: 15px 0;
+}
+
+.container {
+	@include container-xxl;
+}
+
+.description {
+	color: $primary-color;
+	font-weight: 600;
+	font-size: 1.125rem;
+}

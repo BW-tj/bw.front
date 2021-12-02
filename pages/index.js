@@ -1,50 +1,16 @@
-import styles from '../styles/Home.module.css'
-import Head from 'next/head'
-import { connect } from 'react-redux'
-import { setTemplate } from '../redux/actions/template.actions'
-import { useEffect, useState } from 'react'
+import DesktopLayout from '../Layouts/Desktop/DesktopLayout'
+import styles from '../styles/Home.module.scss'
 
-const Home = ({
-  template,
-  setTemplate
-}) => {
-
-  const [state, setState] = useState('')
-  
-  const onClick = () => {
-    setTemplate("test")
-  }
-
-  useEffect(() => {
-    setState(template)
-  }, [template])
-
+const Home = () => {
   return (
     <>
-      <Head>
-        <title>Большая стирка – Главная</title>
-      </Head>
-      <div className={styles.container}>
-
-        <button onClick={() => onClick()}>
-          click
-        </button>
-
-        {state}
-
-      </div>
+      <DesktopLayout>
+        <div className={styles.root}>
+          
+        </div>
+      </DesktopLayout>
     </>
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    template: state.template
-  }
-}
-
-const mapDispatchToProps = {
-  setTemplate
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default Home

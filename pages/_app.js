@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import { wrapper } from '../redux/store'
 
 const MyApp = ({ Component, pageProps }) => {
