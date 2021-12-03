@@ -1,14 +1,14 @@
-import DesktopLayout from "../Layouts/Desktop/DesktopLayout"
+import LayoutController from "../Layouts/LayoutController"
 import styles from "../styles/Home.module.scss"
 
 const Home = () => {
   return (
     <>
-      <DesktopLayout>
+      <LayoutController>
         <div className={styles.root}>
           
         </div>
-      </DesktopLayout>
+      </LayoutController>
     </>
   )
 }

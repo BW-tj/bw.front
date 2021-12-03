@@ -1,5 +1,5 @@
 import React from "react"
-import styles from "./Mobile.module.scss"
+import styles from "./MobileLayout.module.scss"
 
 const MobileLayout = ({
 	children
