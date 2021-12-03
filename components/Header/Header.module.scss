@@ -3,11 +3,19 @@
 
 .root {
 	width: 100%;
-	padding: 15px 0;
 }
 
 .container {
-	@include container-xxl;
+	@include container-xl;
+	display: flex;
+	align-items: center;
+	height: 95px;
+}
+
+.link {
+	display: flex;
+	flex-direction: column;
+	display: inline-block;
 }
 
 .description {

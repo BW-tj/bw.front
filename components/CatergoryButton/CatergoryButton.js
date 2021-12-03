@@ -1,11 +1,12 @@
+import classNames from 'classnames'
 import React from 'react'
 import { Menu as MenuIcon } from '../../icons'
 import styles from './CatergoryButton.module.scss'
 
-const CatergoryButton = ({ onClick }) => (
-	<button className={styles.root} onClick={onClick}>
+const CatergoryButton = ({ onMouseOver, onMouseLeave, isSmall={isSticky} }) => (
+	<button className={classNames(styles.root, isSmall && styles.small)} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
 		<span className={styles.icon}>
-			<MenuIcon />
+			<MenuIcon size={isSmall ? 30 : 36} />
 		</span>
 		Категории
 	</button>

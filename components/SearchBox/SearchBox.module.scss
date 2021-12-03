@@ -1,7 +1,8 @@
 @import "../../styles/colors.scss";
 
 .root {
-	width: 863px;
+	flex-grow: 1;
+	margin: 0 35px;
 	border-radius: 4px;
 	position: relative;
 	overflow: hidden;
@@ -10,9 +11,16 @@
 	justify-content: space-between;
 }
 
+.root.small {
+	.input {
+		padding: 10px 18px;
+	} 
+}
+
 .input {
 	flex-grow: 1;
 	padding: 14px 18px;
+	transition: 100ms linear;
 	background: #fff;
 	font-weight: 500;
 
@@ -25,10 +33,12 @@
 }
 
 .button {
-	background: $primary-color-l1;
+	background: $primary-color-d0;
+	border: 1px solid $primary-color-d1;
 	align-self: stretch;
 	padding: 0 28px;
 	transition: 100ms linear;
+
 	svg {
 		color: #fff;
 	}
@@ -38,6 +48,10 @@
 	}
 
 	&:active {
+		background: $primary-color-d2;
+	}
+
+	&:focus {
 		background: $primary-color-d2;
 	}
 }

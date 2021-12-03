@@ -1,0 +1,77 @@
+import React, { useEffect, useState } from "react"
+import If from "../If/If"
+import styles from "./DesktopNavigationTools.module.scss"
+import Link from 'next/link'
+import { 
+	FavoriteBorder as FavoriteBorderIcon,
+	ShoppingCart as ShoppingCartIcon,
+	PersonOutline as PersonOutlineIcon
+} from "../../icons"
+import classNames from 'classnames'
+
+const DesktopNavigationTools = ({ isSmall }) => {
+
+	const [favoriteNotification, setFavoriteNotification] = useState(0)
+	const [cartNotification, setCartNotification] = useState(0)
+
+	useEffect(() => {
+		setFavoriteNotification(24)
+		setCartNotification(4)
+	}, [])
+
+	return (
+		<div className={classNames(styles.root, isSmall && styles.small)}>
+			
+			<ButtonComponent 
+				link='/' 
+				icon={FavoriteBorderIcon} 
+				notification={favoriteNotification} 
+				isSmall={isSmall}
+			/>
+			
+			<span className={styles.divider} />
+			
+			<ButtonComponent 
+				link='/' 
+				icon={ShoppingCartIcon} 
+				notification={cartNotification} 
+				isSmall={isSmall}
+			/>
+			
+			<span className={styles.divider} />
+			
+			<ButtonComponent 
+				link='/' 
+				icon={PersonOutlineIcon} 
+				isSmall={isSmall}
+			/>
+
+
+		</div>
+	)
+}
+
+const ButtonComponent = ({ 
+	link,
+	icon,
+	notification=0,
+	isSmall={isSmall}
+}) => {
+	const Icon = icon
+	return (
+		<Link href={link}>
+			<a className={styles.button}>
+				<span className={styles.icon}>
+					<Icon size={isSmall ? 30 : 36} />
+				</span>
+				<If condition={notification !== 0}>
+					<span className={styles.notification}>
+						{notification}
+					</span>
+				</If>
+			</a>
+		</Link>
+	)
+}
+
+export default DesktopNavigationTools
