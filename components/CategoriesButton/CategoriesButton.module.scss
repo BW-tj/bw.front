@@ -1,0 +1,84 @@
+@import '../../styles/colors.scss';
+
+.root {
+	position: relative;
+}
+
+.button {
+	letter-spacing: 0.03rem;
+	color: #fff;
+	font-weight: 500;
+	font-size: 1.125rem;
+	display: flex;
+	align-items: center;
+	padding: 0 20px;
+	align-self: stretch;
+	background: $primary-color;
+	border-radius: 4px;
+	transition: 100ms linear;
+
+	&:hover {
+		background: $primary-color-d1;
+	} 
+
+	&:active {
+		background: $primary-color-d2;
+		transform: scale(0.98);
+	} 
+}
+
+.button.active {
+	.line1 {
+		transform: rotate(45deg);
+		top: 5px;
+	}
+	
+	.line2 {
+		height: 0;
+	}
+	
+	.line3 {
+		transform: rotate(-45deg);
+		bottom: 6px;
+	}
+}
+
+.burger {
+	width: 15px;
+	height: 13px;
+	position: relative;
+	margin-right: 10px;
+}
+
+.line1, .line2, .line3 {
+	display: inline-block;
+	width: 15px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	left: 0;
+	transition: 100ms linear;
+}
+
+.line1 {
+	top: 0;
+}
+
+.line2 {
+	top: 6px;
+}
+
+.line3 {
+	bottom: 0;
+}
+
+.icon {
+	margin-right: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	svg {
+		transition: 100ms linear;
+	}
+}

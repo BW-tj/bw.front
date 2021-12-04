@@ -1,23 +1,36 @@
-import React from "react"
+import React, { useState } from "react"
 import DesktopNavigation from "../../components/DesktopNavigation/DesktopNavigation"
 import Header from "../../components/Header/Header"
+import If from '../../components/If/If'
 import styles from "./DesktopLayout.module.scss"
 
 const DesktopLayout = ({
 	children
 }) => {
+
+	const [coverState, setCoverState] = useState(false)
+
 	return (
-		<div className={styles.root}>
+		<>
+			<If condition={coverState}>
+				<span className={styles.cover} onClick={() => setCoverState(false)}></span>
+			</If>
 
-			<Header />
+			<div className={styles.root}>
 
-			<DesktopNavigation />
-			
-			<div className={styles.content}>
-				{children}
+				<Header />
+
+				<DesktopNavigation 
+					coverState={coverState} 
+					onChangeCoverState={value => setCoverState(value)} 
+				/>
+				
+				<div className={styles.content}>
+					{children}
+				</div>
+
 			</div>
-
-		</div>
+		</>
 	)
 }
 

@@ -1,0 +1,15 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	position: absolute;
+	top: calc(100% + 20px);
+	width: 100vw;
+	height: 700px;
+}
+
+.container {
+	border-radius: 6px;
+	background: $primary-color;
+	height: 100%;
+}

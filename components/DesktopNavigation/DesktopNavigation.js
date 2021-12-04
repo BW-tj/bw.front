@@ -1,61 +1,42 @@
-import classNames from 'classnames'
-import React, { useEffect, useState } from "react"
-import CatergoryButton from "../CatergoryButton/CatergoryButton"
+import React, { useState } from "react"
+import CategoriesButton from "../CategoriesButton/CategoriesButton"
 import DesktopNavigationTools from '../DesktopNavigationTools/DesktopNavigationTools'
 import SearchBox from "../SearchBox/SearchBox"
 import styles from "./DesktopNavigation.module.scss"
 
-const DesktopNavigation = () => {
+const DesktopNavigation = ({
+	coverState,
+	onChangeCoverState,
+}) => {
 
 	const [searchValue, setSearchValue] = useState('')
-	const [isSticky, setIsSticky] = useState(false)
+	const [categoryOpen, setCategoryOpen] = useState(false)
 
 	const handleSearchButtonClick = () => {
-
+		onChangeCoverState(false)
 	}
-
-	const handleCategoryButtonOver = () => {
-
-	}
-
-	const handleCategoryButtonLeave = () => {
-
-	}
-
-	useEffect(() => {
-
-		const handleWindowScroll = () => {
-			if (window.scrollY > 95) 
-				setIsSticky(true)
-			else 
-				setIsSticky(false)
-		}
-		
-		window.addEventListener('scroll', handleWindowScroll)
-
-		return () => window.removeEventListener('scroll', handleWindowScroll)
-	}, [])
 
 	return (
-		<div className={classNames(styles.root, isSticky && styles.sticky)}>
+		<div className={styles.root}>
 			<div className={styles.container}>
 
-				<CatergoryButton 
-					onMouseOver={() => handleCategoryButtonOver()} 
-					onMouseLeave={() => handleCategoryButtonLeave()}
-					isSmall={isSticky} 
+				<CategoriesButton 
+					active={categoryOpen}
+					onClick={() => setCategoryOpen(!categoryOpen)} 
 				/>
 
 				<SearchBox 
-					isSmall={isSticky}
 					value={searchValue} 
 					setValue={setSearchValue} 
+					coverState={coverState}
 					onSearch={() => handleSearchButtonClick()} 
+					onFocus={() => onChangeCoverState(true)}
 				/>
 
-				<DesktopNavigationTools isSmall={isSticky} />
+				<DesktopNavigationTools />
 
 			</div>
+
 		</div>
 	)
 }

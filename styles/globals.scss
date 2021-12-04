@@ -21,13 +21,13 @@
   }
    
   ::-webkit-scrollbar-thumb {
-    background: #a7a29e;
+    background: $primary-color;
     &:hover {
-      background: #978f89; 
+      background: $primary-color-d1; 
     }
   }
 }
 
-button {
+button, button * {
   cursor: pointer;
 }

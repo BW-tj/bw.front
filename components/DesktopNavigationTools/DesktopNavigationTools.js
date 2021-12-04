@@ -9,7 +9,7 @@ import {
 } from "../../icons"
 import classNames from 'classnames'
 
-const DesktopNavigationTools = ({ isSmall }) => {
+const DesktopNavigationTools = () => {
 
 	const [favoriteNotification, setFavoriteNotification] = useState(0)
 	const [cartNotification, setCartNotification] = useState(0)
@@ -20,30 +20,23 @@ const DesktopNavigationTools = ({ isSmall }) => {
 	}, [])
 
 	return (
-		<div className={classNames(styles.root, isSmall && styles.small)}>
+		<div className={styles.root}>
 			
 			<ButtonComponent 
 				link='/' 
 				icon={FavoriteBorderIcon} 
 				notification={favoriteNotification} 
-				isSmall={isSmall}
 			/>
-			
-			<span className={styles.divider} />
 			
 			<ButtonComponent 
 				link='/' 
 				icon={ShoppingCartIcon} 
 				notification={cartNotification} 
-				isSmall={isSmall}
 			/>
-			
-			<span className={styles.divider} />
 			
 			<ButtonComponent 
 				link='/' 
 				icon={PersonOutlineIcon} 
-				isSmall={isSmall}
 			/>
 
 

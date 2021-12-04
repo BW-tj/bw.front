@@ -2,3 +2,14 @@
 	position: relative;
 	height: 200vh;
 }
+
+.cover {
+	background: rgba(black, 0.4);
+	cursor: pointer;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100%;
+	z-index: 999;
+}

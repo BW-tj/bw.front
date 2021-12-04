@@ -2,17 +2,7 @@
 @import "../../styles/colors.scss";
 
 .root {
-	background: $primary-color;
-}
-
-.root.sticky {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	.container {
-		animation: toSticky 0.1s ease-in-out forwards;
-	}
+	position: relative;
 }
 
 .container {
@@ -20,7 +10,6 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 80px;
 }
 
 @keyframes toSticky {
