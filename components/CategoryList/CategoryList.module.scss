@@ -9,7 +9,6 @@
 	background: $categories-background-color;
 	animation: fadeIn 0.2s ease-out forwards;
 	opacity: 0;
-	pointer-events: none;
 	top: 147px;
 }
 
@@ -30,7 +29,6 @@
 	100% {
 		opacity: 1;
 		transform: translateY(0);
-		pointer-events: none;
 	}
 }
 
