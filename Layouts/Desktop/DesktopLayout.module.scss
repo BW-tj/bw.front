@@ -3,13 +3,20 @@
 	height: 200vh;
 }
 
-.cover {
+.category_cover, .search_cover {
 	background: rgba(black, 0.4);
-	cursor: pointer;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100vw;
 	height: 100%;
+}
+
+.category_cover {
 	z-index: 999;
+}
+
+.search_cover {
+	z-index: 1099;
+	cursor: pointer;
 }

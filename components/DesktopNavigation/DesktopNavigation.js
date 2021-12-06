@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React, { useState } from "react"
 import CategoriesButton from "../CategoriesButton/CategoriesButton"
 import DesktopNavigationTools from '../DesktopNavigationTools/DesktopNavigationTools'
@@ -5,32 +6,37 @@ import SearchBox from "../SearchBox/SearchBox"
 import styles from "./DesktopNavigation.module.scss"
 
 const DesktopNavigation = ({
-	coverState,
-	onChangeCoverState,
+	isSearchFocused,
+	isCatergoryOpen,
+	onChangeSearchFocus,
+	onChangeCategoryOpen
 }) => {
 
 	const [searchValue, setSearchValue] = useState('')
-	const [categoryOpen, setCategoryOpen] = useState(false)
 
 	const handleSearchButtonClick = () => {
-		onChangeCoverState(false)
+		onChangeSearchFocus(false)
+	}
+
+	const handleCategoryButtonClick = () => {
+		onChangeCategoryOpen(!isCatergoryOpen)
 	}
 
 	return (
-		<div className={styles.root}>
+		<div className={classNames(styles.root, isCatergoryOpen && !isSearchFocused && styles.focus)}>
 			<div className={styles.container}>
 
 				<CategoriesButton 
-					active={categoryOpen}
-					onClick={() => setCategoryOpen(!categoryOpen)} 
+					active={isCatergoryOpen}
+					onClick={() => handleCategoryButtonClick()} 
 				/>
 
 				<SearchBox 
 					value={searchValue} 
 					setValue={setSearchValue} 
-					coverState={coverState}
+					isFocused={isSearchFocused}
 					onSearch={() => handleSearchButtonClick()} 
-					onFocus={() => onChangeCoverState(true)}
+					onChangeSearchFocus={(value => onChangeSearchFocus(value))}
 				/>
 
 				<DesktopNavigationTools />

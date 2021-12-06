@@ -3,6 +3,7 @@
 
 .root {
 	position: relative;
+	background: #fff;
 }
 
 .container {
@@ -10,6 +11,10 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.focus.root {
+	z-index: 1000;
 }
 
 @keyframes toSticky {

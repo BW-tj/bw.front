@@ -8,21 +8,27 @@ const DesktopLayout = ({
 	children
 }) => {
 
-	const [coverState, setCoverState] = useState(false)
+	const [isSearchFocused, setSearchFocued] = useState(false)
+	const [isCatergoryOpen, setCatergoryOpen] = useState(false)
 
 	return (
 		<>
-			<If condition={coverState}>
-				<span className={styles.cover} onClick={() => setCoverState(false)}></span>
+			<If condition={isSearchFocused}>
+				<span className={styles.search_cover} onClick={() => setSearchFocued(false)}></span>
+			</If>
+			<If condition={isCatergoryOpen && !isSearchFocused}>
+				<span className={styles.category_cover} onClick={() => setCatergoryOpen(false)}></span>
 			</If>
 
 			<div className={styles.root}>
 
-				<Header />
+				<Header focused={isCatergoryOpen} />
 
 				<DesktopNavigation 
-					coverState={coverState} 
-					onChangeCoverState={value => setCoverState(value)} 
+					isSearchFocused={isSearchFocused} 
+					isCatergoryOpen={isCatergoryOpen}
+					onChangeSearchFocus={value => setSearchFocued(value)} 
+					onChangeCategoryOpen={value => setCatergoryOpen(value)} 
 				/>
 				
 				<div className={styles.content}>

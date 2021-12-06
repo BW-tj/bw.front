@@ -1,23 +1,16 @@
 import classNames from 'classnames'
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { Search as SearchIcon } from "../../icons"
 import styles from "./SearchBox.module.scss"
 
-const SearchBox = ({ value, setValue, onSearch, onFocus, coverState }) => {
-
-	const [focusState, setFocusState] = useState(false)
+const SearchBox = ({ value, setValue, onSearch, onChangeSearchFocus, isFocused }) => {
 
 	const handleFocusInput = () => {
-		onFocus()
-		setFocusState(true)
+		onChangeSearchFocus(true)
 	}
 
-	useEffect(() => {
-		setFocusState(coverState)
-	}, [coverState])
-
 	return (
-		<div className={classNames(styles.root, focusState && styles.focus)}>
+		<div className={classNames(styles.root, isFocused && styles.focus)}>
 			
 			<input
 				type="text"

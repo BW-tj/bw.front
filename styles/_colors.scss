@@ -1,7 +1,9 @@
-$primary-color: hsl(0, 93%, 48%);
+$h: 41;
 
-$primary-color-l1: hsl(0, 93%, 60%);
+$primary-color: hsl($h, 93%, 48%);
 
-$primary-color-d0: hsl(0, 93%, 45%);
-$primary-color-d1: hsl(0, 93%, 40%);
-$primary-color-d2: hsl(0, 93%, 35%);
+$primary-color-l1: hsl($h, 93%, 60%);
+
+$primary-color-d0: hsl($h, 93%, 45%);
+$primary-color-d1: hsl($h, 93%, 40%);
+$primary-color-d2: hsl($h, 93%, 35%);
