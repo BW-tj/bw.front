@@ -6,7 +6,7 @@
 
 .button {
 	letter-spacing: 0.03rem;
-	color: #fff;
+	color: $secondary-color;
 	font-weight: 500;
 	font-size: 1.125rem;
 	display: flex;
@@ -54,7 +54,7 @@
 	display: inline-block;
 	width: 15px;
 	height: 2px;
-	background: #fff;
+	background: $secondary-color;
 	position: absolute;
 	left: 0;
 	transition: 100ms linear;

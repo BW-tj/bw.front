@@ -1,6 +1,9 @@
+@import '../../styles/colors';
+
 .root {
 	position: relative;
 	height: 200vh;
+	background: $background-color;
 }
 
 .category_cover, .search_cover {
@@ -10,11 +13,12 @@
 	left: 0;
 	width: 100vw;
 	height: 100%;
-	animation: fadeIn 0.25s ease-in-out;
+	animation: fadeIn 0.2s ease-in-out;
 }
 
 .category_cover {
 	z-index: 999;
+	animation-duration: 0.5s;
 }
 
 .search_cover {

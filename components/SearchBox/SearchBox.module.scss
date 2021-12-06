@@ -10,10 +10,11 @@
 
 .root.focus {
 	.button {
-		background: #fff;
+		background: $search-active-color;
 	}
 	.input {
-		border-color: #fff;
+		border-color: $search-active-color;
+		background: $search-active-color;
 	}
 }
 
@@ -25,11 +26,11 @@
 	line-height: 20px;
 	border: 2px solid $primary-color;
 	border-right: none;
-	background: #fff;
+	background: $search-background-color;
 	border-radius: 4px 0 0 4px;
 
 	&::placeholder {
-		color: #797979;
+		color: $search-placeholder-color;
 		font-size: 1.125rem;
 		letter-spacing: 0.03rem;
 		font-weight: 400;
@@ -67,7 +68,7 @@
 	border-radius: 4px;
 
 	svg {
-		color: #fff;
+		color: $secondary-color;
 		margin-bottom: 3px;
 	}
 }

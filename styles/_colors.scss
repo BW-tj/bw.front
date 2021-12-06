@@ -1,9 +1,17 @@
 $h: 41;
 
 $primary-color: hsl($h, 93%, 48%);
+$secondary-color: #fff;
 
 $primary-color-l1: hsl($h, 93%, 60%);
 
 $primary-color-d0: hsl($h, 93%, 45%);
 $primary-color-d1: hsl($h, 93%, 40%);
 $primary-color-d2: hsl($h, 93%, 35%);
+
+$search-background-color: $secondary-color;
+$categories-background-color: $secondary-color;
+$background-color: $secondary-color;
+$search-active-color: $secondary-color;
+$search-placeholder-color: #888785;
+$navigation-icon-color: black;
