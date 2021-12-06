@@ -13,8 +13,8 @@
 	align-items: center;
 }
 
-.focus.root {
-	z-index: 1000;
+.root.focus {
+	z-index: 1050;
 }
 
 @keyframes toSticky {

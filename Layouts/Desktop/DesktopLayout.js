@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import CategoryList from '../../components/CategoryList/CategoryList'
 import DesktopNavigation from "../../components/DesktopNavigation/DesktopNavigation"
 import Header from "../../components/Header/Header"
 import If from '../../components/If/If'
@@ -30,6 +31,8 @@ const DesktopLayout = ({
 					onChangeSearchFocus={value => setSearchFocued(value)} 
 					onChangeCategoryOpen={value => setCatergoryOpen(value)} 
 				/>
+
+				<CategoryList open={isCatergoryOpen} />
 				
 				<div className={styles.content}>
 					{children}
