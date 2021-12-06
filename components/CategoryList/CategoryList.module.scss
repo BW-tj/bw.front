@@ -10,7 +10,7 @@
 	animation: fadeIn 0.2s ease-out forwards;
 	opacity: 0;
 	pointer-events: none;
-	top: 167px;
+	top: 147px;
 }
 
 .root.close {
@@ -37,20 +37,8 @@
 @keyframes fadeOut {
 	0% {
 		opacity: 1;
-		transform: translateX(0);
 	}
 	100% {
 		opacity: 0;
-		transform: translateX(-15px);
-	}
-}
-@keyframes fadeOut {
-	0% {
-		opacity: 1;
-		transform: translateX(0);
-	}
-	100% {
-		opacity: 0;
-		transform: translateX(-15px);
 	}
 }
