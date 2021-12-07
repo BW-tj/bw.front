@@ -5,11 +5,11 @@ import Link from 'next/link'
 import { 
 	FavoriteBorder as FavoriteBorderIcon,
 	ShoppingCart as ShoppingCartIcon,
-	PersonOutline as PersonOutlineIcon
+	PersonOutline as PersonOutlineIcon,
+	SaveAlt as SaveAltIcon
 } from "../../icons"
-import classNames from 'classnames'
 
-const DesktopNavigationTools = () => {
+const DesktopNavigationTools = ({ user }) => {
 
 	const [favoriteNotification, setFavoriteNotification] = useState(0)
 	const [cartNotification, setCartNotification] = useState(0)
@@ -22,23 +22,22 @@ const DesktopNavigationTools = () => {
 	return (
 		<div className={styles.root}>
 			
-			<ButtonComponent 
-				link='/' 
-				icon={FavoriteBorderIcon} 
-				notification={favoriteNotification} 
+			<ButtonComponent
+				link='/'
+				icon={FavoriteBorderIcon}
+				notification={favoriteNotification}
 			/>
 			
-			<ButtonComponent 
-				link='/' 
-				icon={ShoppingCartIcon} 
-				notification={cartNotification} 
+			<ButtonComponent
+				link='/'
+				icon={ShoppingCartIcon}
+				notification={cartNotification}
 			/>
 			
-			<ButtonComponent 
-				link='/' 
-				icon={PersonOutlineIcon} 
+			<ButtonComponent
+				link={!user ? '/login' : '/'}
+				icon={!user ? SaveAltIcon : PersonOutlineIcon}
 			/>
-
 
 		</div>
 	)

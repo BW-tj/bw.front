@@ -5,6 +5,7 @@ import PersonOutline from "./PersonOutline"
 import ShoppingCart from "./ShoppingCart"
 import ArrowBack from "./ArrowBack"
 import ArrowForward from "./ArrowForward"
+import SaveAlt from "./SaveAlt"
 
 export {
 	Menu,
@@ -13,5 +14,6 @@ export {
 	PersonOutline,
 	ShoppingCart,
 	ArrowBack,
-	ArrowForward
+	ArrowForward,
+	SaveAlt
 }

@@ -12,7 +12,7 @@ const Home = () => {
           
           <BannerSlider className={styles.banner_slider} />
 
-          <Title className={styles.title}>Наши Бренды</Title>
+          <Title className={styles.title}>Бренды</Title>
 
           <BrandsSlider className={styles.brand_slider} />
           
