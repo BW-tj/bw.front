@@ -1,0 +1,41 @@
+@import '../../styles/mixins';
+@import '../../styles/colors';
+
+.root {
+	@include container-xl;
+}
+
+.wrap {
+	display: inline-block;
+	width: calc(100% - 50px);
+	position: relative;
+}
+
+.arrow_button {
+	position: absolute;
+	background: rgba(#fff, .3);
+	width: 50px;
+	height: calc(100% - 4px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 100ms linear;
+	top: 0;
+	z-index: 100;
+	background: #fff;
+	border: 1px solid rgba(#0000, 0.1);
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	overflow: hidden;
+	border: 1px solid rgba(#0000, 0.1);
+	border-right: none;
+	padding: 0 60px;
+}
+
+.arrow_button_next {
+	left: 100%;
+}

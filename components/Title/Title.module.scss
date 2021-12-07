@@ -1,0 +1,11 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	@include container-xl;
+}
+
+.wrap {
+	font-size: 1.75rem;
+	color: $text-color;
+}

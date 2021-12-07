@@ -1,4 +1,6 @@
 import BannerSlider from '../components/BannerSlider/BannerSlider'
+import BrandsSlider from '../components/BrandsSlider/BrandsSlider'
+import Title from '../components/Title/Title'
 import LayoutController from "../Layouts/LayoutController"
 import styles from "../styles/Home.module.scss"
 
@@ -8,7 +10,11 @@ const Home = () => {
       <LayoutController>
         <div className={styles.root}>
           
-          <BannerSlider />
+          <BannerSlider className={styles.banner_slider} />
+
+          <Title className={styles.title}>Наши Бренды</Title>
+
+          <BrandsSlider className={styles.brand_slider} />
           
         </div>
       </LayoutController>

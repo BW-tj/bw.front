@@ -1,44 +1,61 @@
 import React, { useRef } from 'react'
-import Slider from "react-slick";
+import Slider from "react-slick"
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './BannerSlider.module.scss'
-import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon } from '../../icons';
-import classNames from 'classnames';
+import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon } from '../../icons'
+import classNames from 'classnames'
 
-const BannerSlider = () => {
+const BannerSlider = ({ className }) => {
+
+	const mainUrl = '/static/images/banner'
+
+	const imageList = [
+		{
+			src: `${mainUrl}/optimize.webp`,
+			href: '/',
+			alt: 'image1'
+		},
+		{
+			src: `${mainUrl}/optimize2.webp`,
+			href: '/',
+			alt: 'image2'
+		},
+		{
+			src: `${mainUrl}/optimize3.webp`,
+			href: '/',
+			alt: 'image3'
+		}
+	] 
   
 	const settings = {
     dots: true,
     infinite: true,
+		autoplay: true,
+		autoplaySpeed: 5000,
+		cssEase: "linear",
     speed: 300,
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 2,
 		arrows: false,
+		pauseOnHover: true
   }
 
 	const slider = useRef(null)
 	
 	return (
-		<div className={styles.root}>
+		<div className={classNames(styles.root, className)}>
 			<ArrowButtonPrev onClick={() => slider.slickPrev()} />
 			<Slider {...settings} ref={c => slider = c}>
-				<SliderItem 
-					src="/static/images/optimize.webp"
-					href="/"
-					alt="image1"
-				/>
-				<SliderItem 
-					src="/static/images/optimize2.webp"
-					href="/"
-					alt="image2"
-				/>
-				<SliderItem 
-					src="/static/images/optimize3.webp"
-					href="/"
-					alt="image3"
-				/>
+				{imageList.map(({ src, alt, href }) => 
+					<SliderItem 
+						src={src}
+						href={href}
+						alt={alt}
+						key={alt}
+					/>
+				)}
 			</Slider>
 			<ArrowButtonNext onClick={() => slider.slickNext()} />
 		</div>
