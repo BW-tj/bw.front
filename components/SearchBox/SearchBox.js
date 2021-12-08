@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { useEffect } from "react"
+import React from "react"
 import { Search as SearchIcon } from "../../icons"
 import styles from "./SearchBox.module.scss"
 

@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import React, { useState } from "react"
 import CategoriesButton from "../CategoriesButton/CategoriesButton"
-import CategoryList from '../CategoryList/CategoryList'
 import DesktopNavigationTools from '../DesktopNavigationTools/DesktopNavigationTools'
 import SearchBox from "../SearchBox/SearchBox"
 import styles from "./DesktopNavigation.module.scss"
