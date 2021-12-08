@@ -25,7 +25,7 @@ const CategoryList = ({ open }) => {
 		<div className={classNames(styles.root, !open && styles.close)}>
 
 			<div className={styles.container}>
-				gerhty
+				Категории
 			</div>
 
 		</div>

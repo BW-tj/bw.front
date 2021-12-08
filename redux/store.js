@@ -5,7 +5,7 @@ import rootReducer from './reducers'
  
 const middleware = [thunk]
 
-const localStorageItemName = 'bw-states'
+const localStorageItemName = process.env.NEXT_PUBLIC_LS_KEY
 
 const saveToLocalStorage = state => {
   try {
@@ -18,6 +18,7 @@ const saveToLocalStorage = state => {
 
 const loadFromLocalStorage = () => {
   try {
+    if (localStorage.getItem("username") === null) return
     const serializedState = localStorage.getItem(localStorageItemName)
     if (serializedState === null) return undefined
     return JSON.parse(serializedState)
@@ -36,7 +37,7 @@ const store = createStore(
 )
 
 store.subscribe(() => saveToLocalStorage({
-  template: store.getState().template
+  user: store.getState().user
 }))
 
 const makeStore = () => store
