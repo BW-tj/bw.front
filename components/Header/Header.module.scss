@@ -5,14 +5,10 @@
 	width: 100%;
 	background: $background-color;
 	position: relative;
-}
-
-.root.focused {
-	z-index: 1000;
+	@include container;
 }
 
 .container {
-	@include container-xl;
 	display: flex;
 	align-items: center;
 	height: 105px;

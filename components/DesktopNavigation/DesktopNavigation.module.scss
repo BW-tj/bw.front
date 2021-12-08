@@ -4,10 +4,11 @@
 .root {
 	position: relative;
 	background: $background-color;
+	@include container;
+	padding-top: 20px;
 }
 
 .container {
-	@include container-xl;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

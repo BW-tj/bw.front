@@ -2,12 +2,15 @@
 @import '../../styles/colors';
 
 .root {
-	@include container-xl;
 	position: relative;
 	&:hover {
 		.arrow_button {
 			opacity: 1;
 		}
+	}
+	@include container;
+	@include _720 {
+		display: none;
 	}
 }
 
@@ -25,6 +28,9 @@
 	transform: translateY(-50%);
 	z-index: 100;
 	opacity: 0;
+	@include _1000 {
+		display: none;
+	}
 	svg {
 		opacity: 0.5;
 	}

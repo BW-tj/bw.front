@@ -1,0 +1,8 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	position: relative;
+	height: 200vh;
+	background: $background-color;
+}

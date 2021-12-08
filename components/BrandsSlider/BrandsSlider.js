@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './BrandsSlider.module.scss'
 import Slider from "react-slick"
 import Image from 'next/image'
@@ -7,6 +7,17 @@ import { ArrowForward as ArrowForwardIcon } from '../../icons'
 import classNames from 'classnames'
 
 const BrandsSlider = ({ className }) => {
+
+	const [settings, setSettings] = useState({
+    dots: true,
+    infinite: true,
+    speed: 200,
+    slidesToShow: 5,
+		draggable: false,
+    slidesToScroll: 1,
+    initialSlide: 2,
+		arrows: false
+  })
 
 	const mainUrl = '/static/images/brands'
 
@@ -57,19 +68,23 @@ const BrandsSlider = ({ className }) => {
 			alt: 'image9'
 		}
 	] 
-  
-	const settings = {
-    dots: true,
-    infinite: true,
-    speed: 200,
-    slidesToShow: 5,
-		draggable: false,
-    slidesToScroll: 1,
-    initialSlide: 2,
-		arrows: false
-  }
 
 	const slider = useRef(null)
+
+	useEffect(() => {
+
+		const handleWindowResize = () => {
+			if (window.innerWidth < 500) 
+				setSettings(prev => ({...prev, dots: false, slidesToShow: 2}))
+			if (window.innerWidth < 700 && window.innerWidth > 500) 
+				setSettings(prev => ({...prev, dots: false, slidesToShow: 4}))
+		}
+		
+		handleWindowResize()
+
+		window.addEventListener('resize', handleWindowResize)
+		return () => window.removeEventListener('resize', handleWindowResize)
+	}, [])
 	
 	return (
 		<div className={classNames(styles.root, className)}>

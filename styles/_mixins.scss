@@ -5,7 +5,7 @@
 }
 @mixin container-large {
 	max-width: 1340px;
-	padding: 0 50px;
+	padding: 0 40px;
 	margin: 0 auto;
 }
 @mixin container-medium {
@@ -15,7 +15,7 @@
 }
 @mixin container-small {
 	max-width: 699px;
-	padding: 0 50px;
+	padding: 0 30px;
 	margin: 0 auto;
 }
 @mixin container-xs {
@@ -24,8 +24,42 @@
 	margin: 0 auto;
 }
 
+@mixin _720 {
+	@media (max-width: 720px){
+			@content;
+	}
+}
+
 @mixin _1000 {
 	@media (max-width: 1000px){
 			@content;
+	}
+}
+
+@mixin _1300 {
+	@media (max-width: 1300px){
+			@content;
+	}
+}
+
+@mixin _1500 {
+	@media (max-width: 1500px){
+			@content;
+	}
+}
+
+@mixin container {
+	@include container-xl;
+	@include _1500 {
+		@include container-xl;
+	}
+	@include _1300 {
+		@include container-large;
+	}
+	@include _1000 {
+		@include container-medium;
+	}
+	@include _720 {
+		@include container-small;
 	}
 }

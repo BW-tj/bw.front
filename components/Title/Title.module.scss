@@ -2,7 +2,7 @@
 @import '../../styles/mixins';
 
 .root {
-	@include container-xl;
+	@include container;
 }
 
 .wrap {

@@ -2,7 +2,7 @@
 @import '../../styles/colors';
 
 .root {
-	@include container-xl;
+	@include container;
 }
 
 .wrap {
@@ -15,7 +15,7 @@
 	position: absolute;
 	background: rgba(#fff, .3);
 	width: 50px;
-	height: calc(100% - 4px);
+	height: calc(100% - 5px);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -34,6 +34,15 @@
 	border: 1px solid rgba(#0000, 0.1);
 	border-right: none;
 	padding: 0 60px;
+	@include _1300 {
+		padding: 0 40px;
+	}
+	@include _1000 {
+		padding: 0 20px;
+	}
+	@include _720 {
+		padding: 0 10px;
+	}
 }
 
 .arrow_button_next {

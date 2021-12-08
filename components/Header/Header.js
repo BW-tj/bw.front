@@ -4,9 +4,9 @@ import Logo from "../Logo/Logo"
 import Link from "next/link"
 import classNames from 'classnames'
 
-const Header = ({ focused }) => {
+const Header = () => {
 	return (
-		<div className={classNames(styles.root, focused && styles.focused)}>
+		<div className={styles.root}>
 			<div className={styles.container}>
 				<Link href="/">
 					<a className={styles.link}>
