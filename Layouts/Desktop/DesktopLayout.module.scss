@@ -3,8 +3,8 @@
 
 .root {
 	position: relative;
-	height: 200vh;
 	background: $background-color;
+	min-height: 200vh;
 }
 
 .category_cover, .search_cover {

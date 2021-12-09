@@ -1,7 +1,7 @@
 import BannerSlider from '../components/BannerSlider/BannerSlider'
 import BrandsSlider from '../components/BrandsSlider/BrandsSlider'
 import Title from '../components/Title/Title'
-import LayoutController from "../Layouts/LayoutController"
+import LayoutController from "../layouts/LayoutController"
 import styles from "../styles/Home.module.scss"
 
 const Home = () => {

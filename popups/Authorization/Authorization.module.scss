@@ -1,0 +1,107 @@
+@import "../../styles/_colors.scss";
+
+.root {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.wrap {
+	width: 450px;
+	background: $secondary-color;
+	padding: 30px 20px;
+	border-radius: 3px;
+}
+
+.title {
+	font-size: 1.75rem;
+	font-weight: 900;
+	color: $primary-color;
+	text-align: center;
+	letter-spacing: 0.06rem;
+	margin-bottom: 30px;
+}
+
+.sub_title {
+	font-weight: 600;
+	margin-bottom: 10px;
+	opacity: 0.4;
+}
+
+.label {
+	margin-bottom: 20px;
+}		
+
+.input_wrap {
+	display: flex;
+	align-items: center;
+	border-radius: 3px;
+	border: 1px solid $grey-color;
+}
+
+.country_number {
+	padding: 0 10px;
+	font-size: 0.9rem;
+	font-weight: 600;
+	border-right: 1px solid $grey-color;
+	opacity: 0.6;
+}
+
+.input {
+	width: 100%;
+	padding: 10px 14px;
+	font-weight: 600;
+	letter-spacing: 0.04rem;
+	transition: 100ms linear;
+	&:focus {
+		border-color: $search-placeholder-color;
+	}
+	&::placeholder {
+		color: $grey-color;
+	}
+}
+
+.button_group {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 30px;
+}
+
+.btn {
+	padding: 10px 12px;
+	border-radius: 3px;
+	letter-spacing: 0.03rem;
+	transition: 100ms linear;
+	border: 1px solid transparent;
+}
+
+.contained_btn {
+	background: $primary-color;
+	color: $secondary-color;
+	font-weight: 600;
+	&:hover {
+		background: $primary-color-d1;
+	}
+	&:active {
+		background: $primary-color-d2;
+	}
+}
+
+.contained_btn.loading {
+	pointer-events: none;
+	background: $primary-color-d2;
+	&:hover {
+		background: $primary-color-d2;
+	}
+}
+
+.text_btn {
+	&:hover {
+		color: $primary-color-d1;
+	}
+	&:active {
+		color: $primary-color-d2;
+	}
+}

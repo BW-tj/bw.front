@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
-import If from "../If/If"
-import styles from "./DesktopNavigationTools.module.scss"
+import { useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { 
 	FavoriteBorder as FavoriteBorderIcon,
@@ -8,11 +7,17 @@ import {
 	PersonOutline as PersonOutlineIcon,
 	SaveAlt as SaveAltIcon
 } from "../../icons"
+import { openPopup } from '../../redux/actions/popup.actions'
+import Authorization from '../../popups/Authorization/Authorization.popup'
+import If from "../If/If"
+import styles from "./DesktopNavigationTools.module.scss"
 
 const DesktopNavigationTools = ({ user }) => {
 
 	const [favoriteNotification, setFavoriteNotification] = useState(0)
 	const [cartNotification, setCartNotification] = useState(0)
+
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		setFavoriteNotification(24)
@@ -22,39 +27,45 @@ const DesktopNavigationTools = ({ user }) => {
 	return (
 		<div className={styles.root}>
 			
-			<ButtonComponent
+			<LinkComponent
 				link='/'
 				icon={FavoriteBorderIcon}
 				notification={favoriteNotification}
 			/>
 			
-			<ButtonComponent
+			<LinkComponent
 				link='/'
 				icon={ShoppingCartIcon}
 				notification={cartNotification}
 			/>
 			
 			<ButtonComponent
-				link={!user ? '/login' : '/'}
 				icon={!user ? SaveAltIcon : PersonOutlineIcon}
+				onClick={() => dispatch(openPopup(props => <Authorization {...props} />))}
 			/>
 
 		</div>
 	)
 }
 
-const ButtonComponent = ({ 
-	link,
-	icon,
-	notification=0,
-	isSmall={isSmall}
-}) => {
+const ButtonComponent = ({ icon, onClick }) => {
+	const Icon = icon
+	return (
+		<button className={styles.button} onClick={onClick}>
+			<span className={styles.icon}>
+				<Icon size={36} />
+			</span>
+		</button>
+	)
+}
+
+const LinkComponent = ({ link, icon, notification=0 }) => {
 	const Icon = icon
 	return (
 		<Link href={link}>
 			<a className={styles.button}>
 				<span className={styles.icon}>
-					<Icon size={isSmall ? 30 : 36} />
+					<Icon size={36} />
 				</span>
 				<If condition={notification !== 0}>
 					<span className={styles.notification}>
