@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { 
@@ -6,11 +6,11 @@ import {
 	ShoppingCart as ShoppingCartIcon,
 	PersonOutline as PersonOutlineIcon,
 	SaveAlt as SaveAltIcon
-} from "../../icons"
+} from '../../icons'
 import { openPopup } from '../../redux/actions/popup.actions'
 import Authorization from '../../popups/Authorization/Authorization.popup'
-import If from "../If/If"
-import styles from "./DesktopNavigationTools.module.scss"
+import If from '../If/If'
+import styles from './DesktopNavigationTools.module.scss'
 
 const DesktopNavigationTools = ({ user }) => {
 

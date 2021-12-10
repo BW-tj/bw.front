@@ -1,6 +1,6 @@
-import * as t from "../types"
+import * as t from '../types'
 
-const initialState = ""
+const initialState = ''
 
 const templateReducer = (state = initialState, action) => {
 	switch (action.type) {

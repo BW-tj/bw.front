@@ -1,14 +1,14 @@
-import React from "react"
-import styles from "./Header.module.scss"
-import Logo from "../Logo/Logo"
-import Link from "next/link"
+import React from 'react'
+import styles from './Header.module.scss'
+import Logo from '../Logo/Logo'
+import Link from 'next/link'
 import classNames from 'classnames'
 
 const Header = () => {
 	return (
 		<div className={styles.root}>
 			<div className={styles.container}>
-				<Link href="/">
+				<Link href='/'>
 					<a className={styles.link}>
 						<Logo />
 						<div className={styles.description}>

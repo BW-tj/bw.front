@@ -1,11 +1,11 @@
 import classNames from 'classnames'
-import React, { useState } from "react"
+import React, { useState } from 'react'
 import CategoryList from '../../components/CategoryList/CategoryList'
-import DesktopNavigation from "../../components/DesktopNavigation/DesktopNavigation"
-import Header from "../../components/Header/Header"
+import DesktopNavigation from '../../components/DesktopNavigation/DesktopNavigation'
+import Header from '../../components/Header/Header'
 import If from '../../components/If/If'
 import Popup from '../../components/Popup/Popup'
-import styles from "./DesktopLayout.module.scss"
+import styles from './DesktopLayout.module.scss'
 
 const DesktopLayout = ({
 	children

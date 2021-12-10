@@ -2,11 +2,13 @@ import { combineReducers } from 'redux'
 import templateReducer from './template.reducer'
 import userReducer from './user.reducer'
 import popupReducer from './popup.reducer'
+import cartReducer from './cart.reducer'
 
 const rootReducer = combineReducers({
 	template: templateReducer,
 	user: userReducer,
-	popup: popupReducer
+	popup: popupReducer,
+	cart: cartReducer
 })
 
 export default rootReducer

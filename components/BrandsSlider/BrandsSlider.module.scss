@@ -3,27 +3,32 @@
 
 .root {
 	@include container;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 30px;
 }
 
 .wrap {
 	display: inline-block;
-	width: calc(100% - 50px);
+	width: calc(100% - 100px);
 	position: relative;
+	margin: 0 auto;
 }
 
 .arrow_button {
-	position: absolute;
 	background: rgba(#fff, .3);
-	width: 50px;
-	height: calc(100% - 5px);
+	width: 40px;
+	height: 40px;
+	border-radius: 50px;
+	margin-bottom: 4px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	transition: 100ms linear;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
 	top: 0;
-	z-index: 100;
 	background: #fff;
-	border: 1px solid rgba(#0000, 0.1);
 }
 
 .image {
@@ -31,9 +36,12 @@
 	height: 100%;
 	display: inline-block;
 	overflow: hidden;
-	border: 1px solid rgba(#0000, 0.1);
 	border-right: none;
 	padding: 0 60px;
+	transition: 100ms linear;
+	&:hover {
+		opacity: 0.7;
+	}
 	@include _1300 {
 		padding: 0 40px;
 	}
@@ -43,8 +51,4 @@
 	@include _720 {
 		padding: 0 10px;
 	}
-}
-
-.arrow_button_next {
-	left: 100%;
 }

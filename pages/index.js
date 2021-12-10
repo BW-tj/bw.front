@@ -1,8 +1,9 @@
+import LayoutController from '../layouts/LayoutController'
+import styles from '../styles/Home.module.scss'
 import BannerSlider from '../components/BannerSlider/BannerSlider'
 import BrandsSlider from '../components/BrandsSlider/BrandsSlider'
+import ProductCart from '../components/ProductCart/ProductCart'
 import Title from '../components/Title/Title'
-import LayoutController from "../layouts/LayoutController"
-import styles from "../styles/Home.module.scss"
 
 const Home = () => {
   return (
@@ -15,6 +16,8 @@ const Home = () => {
           <Title className={styles.title}>Бренды</Title>
 
           <BrandsSlider className={styles.brand_slider} />
+
+          <ProductCart />
           
         </div>
       </LayoutController>

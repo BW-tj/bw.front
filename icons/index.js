@@ -1,11 +1,14 @@
-import Menu from "./Menu"
-import Search from "./Search"
-import FavoriteBorder from "./FavoriteBorder"
-import PersonOutline from "./PersonOutline"
-import ShoppingCart from "./ShoppingCart"
-import ArrowBack from "./ArrowBack"
-import ArrowForward from "./ArrowForward"
-import SaveAlt from "./SaveAlt"
+import Menu from './Menu'
+import Search from './Search'
+import FavoriteBorder from './FavoriteBorder'
+import PersonOutline from './PersonOutline'
+import ShoppingCart from './ShoppingCart'
+import ArrowBack from './ArrowBack'
+import ArrowForward from './ArrowForward'
+import SaveAlt from './SaveAlt'
+import StarBorder from './StarBorder'
+import Star from './Star'
+import Favorite from './Favorite'
 
 export {
 	Menu,
@@ -15,5 +18,8 @@ export {
 	ShoppingCart,
 	ArrowBack,
 	ArrowForward,
-	SaveAlt
+	SaveAlt,
+	StarBorder,
+	Star,
+	Favorite
 }

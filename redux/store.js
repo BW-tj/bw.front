@@ -18,7 +18,7 @@ const saveToLocalStorage = state => {
 
 const loadFromLocalStorage = () => {
   try {
-    if (localStorage.getItem("username") === null) return
+    if (localStorage.getItem('username') === null) return
     const serializedState = localStorage.getItem(localStorageItemName)
     if (serializedState === null) return undefined
     return JSON.parse(serializedState)

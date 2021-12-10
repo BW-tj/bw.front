@@ -9,7 +9,6 @@
 
 .button {
 	position: relative;
-	padding: 8px;
 	border-radius: 50px;
 	transition: 150ms linear;
 }
@@ -29,8 +28,8 @@
 
 .notification {
 	position: absolute;
-	top: 5px;
-	left: calc(100% - 20px);
+	top: -3px;
+	left: calc(100% - 12px);
 	font-size: 0.625rem;
 	color: $secondary-color;
 	background: $primary-color;

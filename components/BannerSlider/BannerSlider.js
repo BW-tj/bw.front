@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import Slider from "react-slick"
+import Slider from 'react-slick'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './BannerSlider.module.scss'
@@ -33,7 +33,7 @@ const BannerSlider = ({ className }) => {
     infinite: true,
 		autoplay: true,
 		autoplaySpeed: 5000,
-		cssEase: "linear",
+		cssEase: 'linear',
     speed: 300,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -67,7 +67,7 @@ const SliderItem = ({ src, href }) => (
 		<a>
 			<Image 
 				src={src} 
-				alt="image1" 
+				alt='image1' 
 				width={2880} 
 				height={600} 
 			/>

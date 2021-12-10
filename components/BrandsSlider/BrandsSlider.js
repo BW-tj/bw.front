@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './BrandsSlider.module.scss'
-import Slider from "react-slick"
+import Slider from 'react-slick'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowForward as ArrowForwardIcon } from '../../icons'
+import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon } from '../../icons'
 import classNames from 'classnames'
 
 const BrandsSlider = ({ className }) => {
@@ -88,6 +88,7 @@ const BrandsSlider = ({ className }) => {
 	
 	return (
 		<div className={classNames(styles.root, className)}>
+				<ArrowButtonPrev onClick={() => slider.slickPrev()} />
 			<div className={styles.wrap}>
 				<Slider {...settings} ref={c => slider = c}>
 					{imageList.map(({ src, alt, href }) => 
@@ -99,8 +100,8 @@ const BrandsSlider = ({ className }) => {
 						/>
 					)}
 				</Slider>
-				<ArrowButtonNext onClick={() => slider.slickNext()} />
 			</div>
+				<ArrowButtonNext onClick={() => slider.slickNext()} />
 		</div>
 	)
 }
@@ -110,10 +111,10 @@ const SliderItem = ({ src, href }) => (
 		<a className={styles.image}>
 			<Image 
 				src={src} 
-				alt="image1" 
+				alt='image1' 
 				width='100%'
 				height='100%'
-				layout="responsive" objectFit="contain"
+				layout='responsive' objectFit='contain'
 			/>
 		</a>
 	</Link>
@@ -125,7 +126,18 @@ const ArrowButtonNext = ({ onClick }) => {
 			onClick={onClick} 
 			className={classNames(styles.arrow_button, styles.arrow_button_next)}
 		>
-			<ArrowForwardIcon />
+			<ArrowForwardIcon size={20} />
+		</button>
+	)
+}
+
+const ArrowButtonPrev = ({ onClick }) => {
+	return (
+		<button 
+			onClick={onClick} 
+			className={classNames(styles.arrow_button, styles.arrow_button_prev)}
+		>
+			<ArrowBackIcon size={20} />
 		</button>
 	)
 }
