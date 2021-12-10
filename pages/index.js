@@ -16,8 +16,6 @@ const Home = () => {
           <Title className={styles.title}>Бренды</Title>
 
           <BrandsSlider className={styles.brand_slider} />
-
-          <ProductCart />
           
         </div>
       </LayoutController>

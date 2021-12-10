@@ -34,6 +34,15 @@
 	margin-bottom: 20px;
 }		
 
+.labelError {
+	.input_wrap {
+		display: flex;
+		align-items: center;
+		border-radius: 3px;
+		border: 1px solid $red;
+	}
+}
+
 .input_wrap {
 	display: flex;
 	align-items: center;
@@ -65,8 +74,9 @@
 
 .button_group {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
 	margin-top: 30px;
+	gap: 10px;
 }
 
 .btn {
@@ -98,10 +108,17 @@
 }
 
 .text_btn {
+	font-size: 0.9rem;
 	&:hover {
 		color: $primary-color-d1;
 	}
 	&:active {
 		color: $primary-color-d2;
 	}
+}
+
+.error_info {
+	color: $red;
+	font-size: 0.875rem;
+	margin-top: 4px;
 }

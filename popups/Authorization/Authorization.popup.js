@@ -7,18 +7,29 @@ const Authorization = ({ onClose }) => {
 
 	const [phoneInput, setPhoneInput] = useState('')
 	const [passwordInput, setPasswordInput] = useState('')
+	const [errors, setErrors] = useState({ phone: '', passowrd: '' })
 
 	const loginButton = useRef(null)
+
+	const clearErrors = () => {
+		setErrors({ phone: '', password: '' })
+	}
 
 	const handleRegister = () => {
 		
 	}
 
 	const checkValidation = () => {
-		if (phoneInput.trim().replaceAll(' ', '').length !== 9)
+		clearErrors()
+		const phoneLength = phoneInput.trim().replaceAll(' ', '').length
+		if (phoneLength < 7 || phoneLength > 9) {
+			setErrors(prev => ({...prev, phone: 'Введите корректный номер телефона'}))
 			return false
-		if (passwordInput.trim().length < 8)
+		}
+		if (passwordInput.trim().length < 8) {
+			setErrors(prev => ({...prev, password: 'Минимальная длина пароля – 8 занков'}))
 			return false
+		}
 		return true 
 	}
 
@@ -31,7 +42,7 @@ const Authorization = ({ onClose }) => {
 		setTimeout(() => {
 			loginButton.current.classList.remove(styles.loading)
 			onClose()
-		}, 5000)
+		}, 2000)
 	}
 
 	useEffect(() => {
@@ -60,6 +71,7 @@ const Authorization = ({ onClose }) => {
 					type='tel'
 					name='phone'
 					sub_title='Введите номер телефона'
+					error={errors.phone}
 					value={phoneInput}
 					onChange={e => {
 						if (isNaN(e.target.value.replaceAll(' ', ''))) return
@@ -72,6 +84,7 @@ const Authorization = ({ onClose }) => {
 					type='password'
 					name='password'
 					sub_title='Введите пароль'
+					error={errors.password}
 					value={passwordInput}
 					placeholder='********'
 					onChange={e => setPasswordInput(e.target.value)}
@@ -79,17 +92,17 @@ const Authorization = ({ onClose }) => {
 
 				<div className={styles.button_group}>
 					<button 
-						onClick={() => handleRegister()}
-						className={classNames(styles.btn, styles.text_btn)}
-					>
-						Зарегистрироваться
-					</button>
-					<button 
 						ref={loginButton}
 						onClick={() => handleLogin()}
 						className={classNames(styles.btn, styles.contained_btn)}
 					>
 						Войти
+					</button>
+					<button 
+						onClick={() => handleRegister()}
+						className={classNames(styles.btn, styles.text_btn)}
+					>
+						Зарегистрироваться
 					</button>
 				</div>
 
@@ -99,9 +112,18 @@ const Authorization = ({ onClose }) => {
 	)
 }
 
-const Label = ({ value, sub_title, type, name, placeholder, onChange, onFocus=()=>{} }) => {
+const Label = ({ 
+	value, 
+	sub_title, 
+	type, 
+	name, 
+	placeholder,
+	error='', 
+	onChange=()=>{}, 
+	onFocus=()=>{} 
+}) => {
 	return (
-		<div className={styles.label}>
+		<div className={classNames(styles.label, error !== '' && styles.labelError)}>
 			<div className={styles.sub_title}>
 				{sub_title}
 			</div>
@@ -121,6 +143,11 @@ const Label = ({ value, sub_title, type, name, placeholder, onChange, onFocus=()
 					placeholder={placeholder}
 				/>
 			</div>
+			<If condition={error.trim() !== ''}>
+				<div className={styles.error_info}>
+					{error}
+				</div>
+			</If>
 		</div>
 	)
 }
