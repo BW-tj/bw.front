@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Image from 'next/image' 
 import Link from 'next/link' 
 import classNames from 'classnames'
+import Slider from 'react-slick'
 import { 
 	Favorite as FavoriteIcon,
 	FavoriteBorder as FavoriteBorderIcon, 
 	Star as StarIcon, 
-	StarBorder as StarBorderIcon 
+	StarBorder as StarBorderIcon,
+	ArrowBack as ArrowBackIcon,
+	ArrowForward as ArrowForwardIcon
 } from '../../icons'
 import If from '../If/If'
 import styles from './ProductCart.module.scss'
@@ -17,6 +20,28 @@ const ProductCart = () => {
 	const [isFavorite, setIsFavorite] = useState(false)
 	const [promotionPercent, setPromotionPercent] = useState(17)
 	const [rating, setRating] = useState(4)
+	const [inStock, setInStock] = useState(24)
+
+	const slider = useRef(null)
+
+	const mainUrl = '/static/images/stocks'
+
+	const imageList = [
+		`${mainUrl}/tolstovka.png`,
+		`${mainUrl}/tolstovka.png`,
+		`${mainUrl}/tolstovka.png`
+	] 
+  
+	const settings = {
+		infinite: false,
+		autoplaySpeed: 5000,
+		cssEase: 'linear',
+    speed: 200,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+		arrows: false,
+		afterChange: current => console.log(current)
+  }
 
 	return (
 		<div className={styles.root}>
@@ -34,21 +59,33 @@ const ProductCart = () => {
 				</If>
 			</div>
 
-			<Link href='/'>
-				<a className={styles.image}>
-					<Image 
-						src='/static/images/stocks/tolstovka.png' 
-						width='100%' 
-						height='100%'
-						layout='responsive' objectFit='contain'
-						alt={'tolstovka'} 
-					/>
-				</a>
-			</Link>
+			<div className={styles.image_wrap}>
+				<Link href='/'>
+					<a className={styles.image_link}>
+						<Slider {...settings} ref={c => slider = c}>
+							{imageList.map((src, index) => 
+								<SliderItem 
+									src={src}
+									key={index}
+								/>
+							)}
+						</Slider>
+					</a>
+				</Link>
+				<div className={styles.button_group}>
+					<button className={styles.arrow_btn} onClick={() => slider.slickPrev()} >
+						<ArrowBackIcon />
+					</button>
+					<button className={styles.arrow_btn} onClick={() => slider.slickNext()} >
+						<ArrowForwardIcon />
+					</button>
+				</div>
+			</div>
+
 			<div className={styles.title}>
 				<Link href='/'>
 					<a className={styles.title_text}>
-						Синяя толстовка
+						Синяя толстовка на распродажуна распродажуна распродажу
 					</a>
 				</Link>
 				<button className={styles.title_favorites_btn}>
@@ -58,6 +95,10 @@ const ProductCart = () => {
 
 			<div className={styles.price}>
 				90.00 c
+			</div>
+
+			<div className={styles.inStock}>
+				{inStock} в наличии
 			</div>
 
 			<Stars rating={rating} />
@@ -89,7 +130,7 @@ const Stars = ({ rating }) => {
 
 const Star = ({ filled }) => {
 
-	const size = 20
+	const size = 18
 
 	return (
 		<div className={classNames(styles.star, filled && styles.filled)}>
@@ -105,6 +146,21 @@ const Label = ({ className, text, link }) => {
 				{text}
 			</a>
 		</Link>
+	)
+}
+
+const SliderItem = ({ src }) => {
+	return (
+		<div className={styles.image}>
+			<Image 
+				className={styles.img}
+				src={src} 
+				width='100%' 
+				height='100%'
+				layout='responsive' objectFit='contain'
+				alt='image' 
+			/>
+		</div>
 	)
 }
 

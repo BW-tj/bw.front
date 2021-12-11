@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styles from './BrandsSlider.module.scss'
+import classNames from 'classnames'
 import Slider from 'react-slick'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon } from '../../icons'
-import classNames from 'classnames'
+import styles from './BrandsSlider.module.scss'
 
 const BrandsSlider = ({ className }) => {
 
