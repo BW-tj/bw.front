@@ -4,7 +4,6 @@
 .root {
 	position: relative;
 	background: $background-color;
-	@include container;
 	padding-top: 20px;
 }
 
@@ -12,6 +11,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	@include container;
 }
 
 .root.focus {

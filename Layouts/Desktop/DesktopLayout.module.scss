@@ -14,12 +14,12 @@
 	left: 0;
 	width: 100vw;
 	height: 100%;
-	animation: fadeIn 0.2s ease-in-out;
+	animation: fadeIn 0.2s ease-in-out forwards;
 }
 
 .category_cover {
 	z-index: 999;
-	animation-duration: 0.5s;
+	animation-duration: 0.5s forwards;
 }
 
 .search_cover {

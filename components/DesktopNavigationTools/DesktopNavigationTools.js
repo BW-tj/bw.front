@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import Link from 'next/link'
+import { useDispatch } from 'react-redux'
 import { 
 	FavoriteBorder as FavoriteBorderIcon,
 	ShoppingCart as ShoppingCartIcon,
