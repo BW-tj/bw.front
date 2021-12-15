@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image' 
 import Link from 'next/link' 
 import classNames from 'classnames'
-import Slider from 'react-slick'
+import SliderConstructor from 'react-slick'
 import { 
 	Favorite as FavoriteIcon,
 	FavoriteBorder as FavoriteBorderIcon, 
@@ -21,10 +21,77 @@ const ProductCart = () => {
 	const [promotionPercent, setPromotionPercent] = useState(17)
 	const [rating, setRating] = useState(4)
 	const [inStock, setInStock] = useState(24)
+	const [name, setName] = useState('')
+	const [price, setPrice] = useState('90.00 c')
+
+	useEffect(() => {
+		const text = 'Синяя толстовка на распродажу'
+		if (text.length > 30)
+			setName(text.slice(0, 30)+'...')
+		else
+			setName(text)
+	}, [])
+
+	return (
+		<div className={styles.root}>
+
+			<LabelList 
+				isNew={isNew} 
+				promotionPercent={promotionPercent} 
+			/>
+
+			<MySlider />
+
+			<Title 
+				name={name} 
+				isFavorite={isFavorite} 
+			/>
+
+			<Price price={price} />
+
+			<InStock inStock={inStock} />
+
+			<Stars rating={rating} />
+
+			<button className={styles.add_to_cart_btn} onClick={() => {}}>
+				В корзину
+			</button>
+
+		</div>
+	)
+}
+
+const LabelList = ({ promotionPercent, isNew }) => (
+	<div className={styles.label_list}>
+		<If condition={isNew}>
+			<Label link='/' text='Новинка' className={styles.label_new_product} />
+		</If>
+
+		<If condition={promotionPercent !== 0}>
+			<Label 
+				link='/' text={'Акция -' + promotionPercent + '%'} 
+				className={styles.label_promotion} 
+			/>
+		</If>
+	</div>
+)
+
+const Label = ({ className, text, link }) => (
+	<Link href={link}>
+		<a className={classNames(styles.label, className)}>
+			{text}
+		</a>
+	</Link>
+)
+
+const MySlider = () => {
+
+	const mainUrl = '/static/images/stocks'
 
 	const slider = useRef(null)
 
-	const mainUrl = '/static/images/stocks'
+	const [currentSlide, setCurrentSlide] = useState(0)
+	const [settings, setSettings] = useState({})
 
 	const imageList = [
 		`${mainUrl}/tolstovka.png`,
@@ -32,84 +99,90 @@ const ProductCart = () => {
 		`${mainUrl}/tolstovka.png`
 	] 
   
-	const settings = {
-		infinite: false,
-		autoplaySpeed: 5000,
-		cssEase: 'linear',
-    speed: 200,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-		arrows: false,
-		afterChange: current => console.log(current)
-  }
+	useMemo(() => {
+		setSettings({
+			infinite: false,
+			autoplaySpeed: 5000,
+			cssEase: 'linear',
+			speed: 200,
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			arrows: false,
+			afterChange: current => setCurrentSlide(current)
+		})
+	}, [])
 
 	return (
-		<div className={styles.root}>
-
-			<div className={styles.label_list}>
-				<If condition={isNew}>
-					<Label link='/' text='Новинка' className={styles.label_new_product} />
-				</If>
-
-				<If condition={promotionPercent !== 0}>
-					<Label 
-						link='/' text={'Акция -' + promotionPercent + '%'} 
-						className={styles.label_promotion} 
-					/>
-				</If>
-			</div>
-
-			<div className={styles.image_wrap}>
-				<Link href='/'>
-					<a className={styles.image_link}>
-						<Slider {...settings} ref={c => slider = c}>
-							{imageList.map((src, index) => 
-								<SliderItem 
-									src={src}
-									key={index}
-								/>
-							)}
-						</Slider>
-					</a>
-				</Link>
-				<div className={styles.button_group}>
-					<button className={styles.arrow_btn} onClick={() => slider.slickPrev()} >
-						<ArrowBackIcon />
-					</button>
-					<button className={styles.arrow_btn} onClick={() => slider.slickNext()} >
-						<ArrowForwardIcon />
-					</button>
-				</div>
-			</div>
-
-			<div className={styles.title}>
-				<Link href='/'>
-					<a className={styles.title_text}>
-						Синяя толстовка на распродажуна распродажуна распродажу
-					</a>
-				</Link>
-				<button className={styles.title_favorites_btn}>
-					{isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
+		<div className={styles.image_wrap}>
+			<Link href='/'>
+				<a className={styles.image_link}>
+					<SliderConstructor {...settings} ref={c => slider = c}>
+						{imageList.map((src, index) => 
+							<SliderItem 
+								src={src}
+								key={index}
+							/>
+						)}
+					</SliderConstructor>
+				</a>
+			</Link>
+			<div className={styles.button_group}>
+				<button 
+					className={classNames(styles.arrow_btn, currentSlide === 0 && styles.disabled)} 
+					onClick={() => slider.slickPrev()} 
+				>
+					<ArrowBackIcon />
+				</button>
+				<button 
+					className={classNames(styles.arrow_btn, currentSlide === imageList.length-1 && styles.disabled)}  
+					onClick={() => slider.slickNext()} 
+				>
+					<ArrowForwardIcon />
 				</button>
 			</div>
-
-			<div className={styles.price}>
-				90.00 c
-			</div>
-
-			<div className={styles.inStock}>
-				{inStock} в наличии
-			</div>
-
-			<Stars rating={rating} />
-
-			<button className={styles.add_to_cart_btn}>
-				В корзину
-			</button>
-
 		</div>
 	)
 }
+
+const SliderItem = ({ src }) => (
+	<div className={styles.image}>
+		<Image 
+			className={styles.img}
+			src={src} 
+			width='100%' 
+			height='100%'
+			layout='responsive' objectFit='contain'
+			alt='image' 
+		/>
+	</div>
+)
+
+const Title = ({ name, isFavorite }) => {
+	return (
+		<div className={styles.title}>
+			<Link href='/'>
+				<a className={styles.title_text}>
+					{name}
+				</a>
+			</Link>
+			<button className={styles.title_favorites_btn}>
+				{isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
+			</button>
+		</div>
+	)
+}
+
+const Price = ({ price }) => (
+	<div className={styles.price}>
+		{price}
+	</div>
+)
+
+const InStock = ({ inStock }) => (
+	<div className={styles.inStock}>
+		{inStock} в наличии
+	</div>
+)
 
 const Stars = ({ rating }) => {
 
@@ -135,31 +208,6 @@ const Star = ({ filled }) => {
 	return (
 		<div className={classNames(styles.star, filled && styles.filled)}>
 			{filled ? <StarIcon size={size} /> : <StarBorderIcon size={size} />}
-		</div>
-	)
-}
-
-const Label = ({ className, text, link }) => {
-	return (
-		<Link href={link}>
-			<a className={classNames(styles.label, className)}>
-				{text}
-			</a>
-		</Link>
-	)
-}
-
-const SliderItem = ({ src }) => {
-	return (
-		<div className={styles.image}>
-			<Image 
-				className={styles.img}
-				src={src} 
-				width='100%' 
-				height='100%'
-				layout='responsive' objectFit='contain'
-				alt='image' 
-			/>
 		</div>
 	)
 }

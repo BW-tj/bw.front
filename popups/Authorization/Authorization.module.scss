@@ -109,11 +109,12 @@
 
 .text_btn {
 	font-size: 0.9rem;
+	font-weight: 500;
 	&:hover {
-		color: $primary-color-d1;
+		text-decoration: underline;
 	}
 	&:active {
-		color: $primary-color-d2;
+		text-decoration: underline;
 	}
 }
 

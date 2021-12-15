@@ -5,7 +5,7 @@ import styles from './Authorization.module.scss'
 
 const Authorization = ({ onClose }) => {
 
-	const [phoneInput, setPhoneInput] = useState('')
+	const [emailInput, setEmailInput] = useState('')
 	const [passwordInput, setPasswordInput] = useState('')
 	const [errors, setErrors] = useState({ phone: '', passowrd: '' })
 
@@ -21,7 +21,7 @@ const Authorization = ({ onClose }) => {
 
 	const checkValidation = () => {
 		clearErrors()
-		const phoneLength = phoneInput.trim().replaceAll(' ', '').length
+		const phoneLength = emailInput.trim().replaceAll(' ', '').length
 		if (phoneLength < 7 || phoneLength > 9) {
 			setErrors(prev => ({...prev, phone: 'Введите корректный номер телефона'}))
 			return false
@@ -70,14 +70,14 @@ const Authorization = ({ onClose }) => {
 				<Label 
 					type='tel'
 					name='phone'
-					sub_title='Введите номер телефона'
+					sub_title='Введите эл.почту'
 					error={errors.phone}
-					value={phoneInput}
+					value={emailInput}
 					onChange={e => {
 						if (isNaN(e.target.value.replaceAll(' ', ''))) return
-						setPhoneInput(e.target.value)
+						setEmailInput(e.target.value)
 					}}
-					placeholder='XXX XXX XXX'
+					placeholder='name@company.example'
 				/>
 
 				<Label 

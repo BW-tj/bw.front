@@ -97,6 +97,11 @@
 	}
 }
 
+.arrow_btn.disabled {
+	visibility: hidden;
+	pointer-events: none;
+}
+
 .title {
 	width: 100%;
 	font-weight: 600;
@@ -110,6 +115,10 @@
 		display: inline-block;
 		color: #000;
 		overflow: hidden;
+		transition: 100ms linear;
+		&:hover {
+			color: darken($primary-color-d2, 5%);
+		}
 	}
 }
 
@@ -163,3 +172,4 @@
 	font-weight: 500;
 	opacity: 0.5;
 }
+

@@ -5,6 +5,7 @@ import DesktopNavigation from '../../components/DesktopNavigation/DesktopNavigat
 import Header from '../../components/Header/Header'
 import If from '../../components/If/If'
 import Popup from '../../components/Popup/Popup'
+import SubNavigation from '../../components/SubNavigation/SubNavigation'
 import styles from './DesktopLayout.module.scss'
 
 const DesktopLayout = ({
@@ -37,6 +38,8 @@ const DesktopLayout = ({
 				/>
 
 				<CategoryList open={isCatergoryOpen} />
+
+				<SubNavigation />
 				
 				<div className={styles.content}>
 					{children}

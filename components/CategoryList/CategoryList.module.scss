@@ -19,6 +19,95 @@
 .container {
 	@include container-xl;
 	height: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	display: flex;
+}
+
+.left_bar {
+	width: 300px;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	padding-right: 10px;
+	border-right: 1px solid rgba($search-placeholder-color, 0.4);
+}
+
+.category_group_link {
+	display: flex;
+	align-items: center;
+	padding: 8px 11px;
+	border-radius: 4px;
+	transition: 20ms linear;
+}
+
+.category_group_link.active {
+	background: rgba($grey-color, 0.4);
+}
+
+.category_icon {
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 10px;
+}
+
+.category_name {
+	display: inline-block;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: $text-color;
+}
+
+.title {
+	display: block;
+	font-size: 1.45rem;
+	font-weight: 700;
+	color: $text-color;
+	transition: 50ms linear;
+	&:hover {
+		color: $primary-color-d2;
+	}
+}
+
+.category {
+	padding: 20px 30px;
+}
+
+.sub_category_list {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 20px;
+	gap: 50px;
+}
+
+.sub_title {
+	font-size: 1rem;
+	font-weight: 700;
+	color: $text-color;
+	transition: 50ms linear;
+	&:hover {
+		color: $primary-color-d2;	
+	}
+}
+
+.sub_sub_category_list { 
+	margin-top: 7px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px
+}
+
+.sub_sub_title {
+	font-size: 1rem;
+	font-weight: 500;
+	color: $text-color;
+	transition: 50ms linear;
+	&:hover {
+		color: $primary-color-d2;	
+	}
 }
 
 @keyframes fadeIn {
