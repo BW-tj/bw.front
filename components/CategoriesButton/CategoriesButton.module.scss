@@ -28,6 +28,8 @@
 }
 
 .button.active {
+	background: $primary-color-d2;
+	
 	.line1 {
 		transform: rotate(45deg);
 		top: 5px;

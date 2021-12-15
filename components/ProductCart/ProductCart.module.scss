@@ -136,6 +136,10 @@
 	align-items: center;
 	justify-content: center;
 	color: $search-placeholder-color;
+	transition: 100ms linear;
+	&:active {
+		transform: scale(0.95);
+	}
 }
 
 .title_favorites_btn.favorite {

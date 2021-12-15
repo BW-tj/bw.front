@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './CategoriesButton.module.scss'
 
 const CategoriesButton = ({ active, onClick }) => (
