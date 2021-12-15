@@ -3,15 +3,16 @@
 
 .root {
 	width: 100%;
-	background: $background-color;
+	background: $primary-color;
 	position: relative;
+	z-index: 1000;
 	@include container;
 }
 
 .container {
 	display: flex;
 	align-items: center;
-	height: 105px;
+	height: 50px;
 }
 
 .link {

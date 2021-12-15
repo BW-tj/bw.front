@@ -37,7 +37,7 @@ const Home = ({ categories }) => {
 
           <BrandsSlider className={styles.brand_slider} />
 
-          <Title className={styles.title}>Продукты</Title>
+          <Title className={styles.title}>Хиты продаж</Title>
 
           <div className="container">
             <ProductCart />

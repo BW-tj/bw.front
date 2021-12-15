@@ -10,9 +10,6 @@ const Header = () => {
 				<Link href='/'>
 					<a className={styles.link}>
 						<Logo />
-						<div className={styles.description}>
-							Стирайте вещи с удовольствием
-						</div>
 					</a>
 				</Link>
 			</div>
