@@ -24,16 +24,11 @@ const DesktopNavigationTools = ({ user }) => {
 	const favorites = useSelector(state => state.favorites)
 
 	useEffect(() => {
-		setFavoriteNotification(24)
-		setCartNotification(4)
-	}, [])
-
-	useEffect(() => {
 		setCartNotification(cart.reduce((acc, product) => acc + product.count, 0))
 	}, [cart])
 
 	useEffect(() => {
-		setCartNotification(favorites.length)
+		setFavoriteNotification(favorites.length)
 	}, [favorites])
 
 	return (

@@ -1,4 +1,5 @@
 @import '../../styles/colors';
+@import '../../styles/mixins';
 
 .root {
 	display: inline-block;
@@ -8,6 +9,12 @@
 
 	&:hover {
 		box-shadow: 0px 0px 18px rgba(#7a7a7a, 0.2);
+	}
+
+	@include _720 {
+		&:hover {
+			box-shadow: none;
+		}
 	}
 }
 
@@ -80,6 +87,9 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+	@include _720 {
+		opacity: 1;
+	}
 }
 
 .arrow_btn {
@@ -109,12 +119,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	overflow: hidden;
 	a {
 		width: 170px;
-		height: 38px;
 		display: inline-block;
 		color: #000;
-		overflow: hidden;
 		transition: 100ms linear;
 		&:hover {
 			color: darken($primary-color-d2, 5%);

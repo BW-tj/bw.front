@@ -1,10 +1,10 @@
+import classNames from 'classnames'
 import React, { useRef } from 'react'
 import Slider from 'react-slick'
 import Image from 'next/image'
 import Link from 'next/link'
-import styles from './BannerSlider.module.scss'
 import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon } from '../../icons'
-import classNames from 'classnames'
+import styles from './BannerSlider.module.scss'
 
 const BannerSlider = ({ className }) => {
 
@@ -69,7 +69,7 @@ const SliderItem = ({ src, href }) => (
 				src={src} 
 				alt='image1' 
 				width={2880} 
-				height={600} 
+				height={700} 
 			/>
 		</a>
 	</Link>

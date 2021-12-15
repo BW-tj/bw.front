@@ -2,7 +2,7 @@
   "name": "bw.front",
   "private": true,
   "scripts": {
-    "localDev": "next dev --hostname 192.168.194.249",
+    "localDev": "next dev --hostname 192.168.194.148",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

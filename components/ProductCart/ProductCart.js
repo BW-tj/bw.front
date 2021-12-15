@@ -36,7 +36,7 @@ const ProductCart = ({ id=1 }) => {
 	useEffect(() => {
 		const text = 'Синяя толстовка на распродажу'
 		if (text.length > 30)
-			setName(text.slice(0, 30)+'...')
+			setName(text.slice(0, 30).trim()+'...')
 		else
 			setName(text)
 	}, [])
