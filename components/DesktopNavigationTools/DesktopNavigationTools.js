@@ -11,6 +11,7 @@ import { openPopup } from '../../redux/actions/popup.actions'
 import Authorization from '../../popups/Authorization/Authorization.popup'
 import If from '../If/If'
 import styles from './DesktopNavigationTools.module.scss'
+import { useSelector } from 'react-redux'
 
 const DesktopNavigationTools = ({ user }) => {
 
@@ -19,10 +20,21 @@ const DesktopNavigationTools = ({ user }) => {
 
 	const dispatch = useDispatch()
 
+	const cart = useSelector(state => state.cart)
+	const favorites = useSelector(state => state.favorites)
+
 	useEffect(() => {
 		setFavoriteNotification(24)
 		setCartNotification(4)
 	}, [])
+
+	useEffect(() => {
+		setCartNotification(cart.reduce((acc, product) => acc + product.count, 0))
+	}, [cart])
+
+	useEffect(() => {
+		setCartNotification(favorites.length)
+	}, [favorites])
 
 	return (
 		<div className={styles.root}>

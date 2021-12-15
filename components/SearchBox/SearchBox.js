@@ -59,6 +59,16 @@ const SearchBox = ({ value, setValue, onSearch, onChangeSearchFocus, isFocused }
 									className={styles.category_menu_item}
 									onClick={() => {
 										setCategoryMenuIsOpen(false)
+										setSelectedCategory('Все продукты')
+										setSelectedCategoryId(null)
+									}}
+								>
+									Все продукты
+								</button>
+								<button  
+									className={styles.category_menu_item}
+									onClick={() => {
+										setCategoryMenuIsOpen(false)
 										setSelectedCategory(category.name)
 										setSelectedCategoryId(category.id)
 									}}

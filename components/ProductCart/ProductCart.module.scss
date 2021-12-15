@@ -129,6 +129,10 @@
 	color: $search-placeholder-color;
 }
 
+.title_favorites_btn.favorite {
+	color: $red;
+}
+
 .price {
 	font-weight: 500;
 	color: #4b4b4b;
@@ -156,7 +160,7 @@
 	transition: 100ms linear;
 	border-radius: 3px;
 	font-weight: 600;
-	padding: 8px 0;
+	height: 40px;
 	background: $primary-color;
 	&:hover {
 		background: $primary-color-d1;
@@ -164,6 +168,33 @@
 	&:active {
 		background: $primary-color-d2;
 	}
+}
+
+.cart_controll_buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 40px;
+	border-radius: 3px;
+}
+
+.cart_controll_button {
+	height: 40px;
+	font-size: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 30px;
+	border: 1px solid $grey-color;
+	font-weight: 600;
+	transition: 100ms linear;
+	&:hover {
+		color: $primary-color-d1;
+	}
+}
+
+.count_in_cart {
+	font-weight: 600;
 }
 
 .inStock {

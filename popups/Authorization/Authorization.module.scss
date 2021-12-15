@@ -107,8 +107,20 @@
 	}
 }
 
-.text_btn {
+.outlined_btn {
 	font-size: 0.9rem;
+	font-weight: 500;
+	border: 1px solid $grey-color;
+	&:hover {
+		background: rgba(#000, .07);
+	}
+	&:active {
+		background: rgba(#000, .10);
+	}
+}
+
+.text_btn {
+	font-size: 0.875rem;
 	font-weight: 500;
 	&:hover {
 		text-decoration: underline;

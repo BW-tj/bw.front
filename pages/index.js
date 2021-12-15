@@ -37,7 +37,11 @@ const Home = ({ categories }) => {
 
           <BrandsSlider className={styles.brand_slider} />
 
-          <ProductCart />
+          <Title className={styles.title}>Продукты</Title>
+
+          <div className="container">
+            <ProductCart />
+          </div>
           
         </div>
       </LayoutController>

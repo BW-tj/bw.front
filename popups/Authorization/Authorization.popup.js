@@ -7,23 +7,19 @@ const Authorization = ({ onClose }) => {
 
 	const [emailInput, setEmailInput] = useState('')
 	const [passwordInput, setPasswordInput] = useState('')
-	const [errors, setErrors] = useState({ phone: '', passowrd: '' })
+	const [errors, setErrors] = useState({ email: '', passowrd: '' })
 
 	const loginButton = useRef(null)
 
-	const clearErrors = () => {
-		setErrors({ phone: '', password: '' })
-	}
 
-	const handleRegister = () => {
-		
+	const clearErrors = () => {
+		setErrors({ email: '', password: '' })
 	}
 
 	const checkValidation = () => {
 		clearErrors()
-		const phoneLength = emailInput.trim().replaceAll(' ', '').length
-		if (phoneLength < 7 || phoneLength > 9) {
-			setErrors(prev => ({...prev, phone: 'Введите корректный номер телефона'}))
+		if (emailInput.indexOf('@') === -1) {
+			setErrors(prev => ({...prev, email: 'Введите корректную почту'}))
 			return false
 		}
 		if (passwordInput.trim().length < 8) {
@@ -31,6 +27,15 @@ const Authorization = ({ onClose }) => {
 			return false
 		}
 		return true 
+	}
+
+
+	const handleRegister = () => {
+		
+	}
+
+	const handleForgotPassword = () => {
+		
 	}
 
 	const handleLogin = async () => {
@@ -45,6 +50,7 @@ const Authorization = ({ onClose }) => {
 		}, 2000)
 	}
 
+
 	useEffect(() => {
 		const handleWindowClick = e => {
 			if (!e.target.closest('.' + styles.wrap))
@@ -53,6 +59,7 @@ const Authorization = ({ onClose }) => {
 		window.addEventListener('click', handleWindowClick)
 		return () => window.removeEventListener('click', handleWindowClick)
 	}, [onClose])
+
 
 	return (
 		<div className={styles.root}>
@@ -68,15 +75,12 @@ const Authorization = ({ onClose }) => {
 				</div>
 
 				<Label 
-					type='tel'
-					name='phone'
+					type='email'
+					name='email'
 					sub_title='Введите эл.почту'
-					error={errors.phone}
+					error={errors.email}
 					value={emailInput}
-					onChange={e => {
-						if (isNaN(e.target.value.replaceAll(' ', ''))) return
-						setEmailInput(e.target.value)
-					}}
+					onChange={e => setEmailInput(e.target.value)}
 					placeholder='name@company.example'
 				/>
 
@@ -100,9 +104,15 @@ const Authorization = ({ onClose }) => {
 					</button>
 					<button 
 						onClick={() => handleRegister()}
+						className={classNames(styles.btn, styles.outlined_btn)}
+					>
+						Регистрация
+					</button>
+					<button 
+						onClick={() => handleForgotPassword()}
 						className={classNames(styles.btn, styles.text_btn)}
 					>
-						Зарегистрироваться
+						Забыли пароль?
 					</button>
 				</div>
 
@@ -128,11 +138,6 @@ const Label = ({
 				{sub_title}
 			</div>
 			<div className={styles.input_wrap}>
-				<If condition={name==='phone'}>
-					<div className={styles.country_number}>
-						+992
-					</div>
-				</If>
 				<input 
 					type={type} 
 					className={styles.input} 

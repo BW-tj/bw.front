@@ -18,7 +18,6 @@ const saveToLocalStorage = state => {
 
 const loadFromLocalStorage = () => {
   try {
-    if (localStorage.getItem('username') === null) return
     const serializedState = localStorage.getItem(localStorageItemName)
     if (serializedState === null) return undefined
     return JSON.parse(serializedState)
@@ -37,7 +36,9 @@ const store = createStore(
 )
 
 store.subscribe(() => saveToLocalStorage({
-  user: store.getState().user
+  user: store.getState().user,
+  cart: store.getState().cart,
+  favorites: store.getState().favorites
 }))
 
 const makeStore = () => store

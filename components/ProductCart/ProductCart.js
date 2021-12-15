@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link' 
 import classNames from 'classnames'
 import SliderConstructor from 'react-slick'
+import { useSelector, useDispatch } from 'react-redux'
 import { 
 	Favorite as FavoriteIcon,
 	FavoriteBorder as FavoriteBorderIcon, 
@@ -13,8 +14,10 @@ import {
 } from '../../icons'
 import If from '../If/If'
 import styles from './ProductCart.module.scss'
+import { addToCart, decreaseProductCount, increaseProductCount } from '../../redux/actions/cart.actions'
+import { addToFavorites, removeFromFavorites } from '../../redux/actions/favorites.actions'
 
-const ProductCart = () => {
+const ProductCart = ({ id=1 }) => {
 
 	const [isNew, setIsNew] = useState(true)
 	const [isFavorite, setIsFavorite] = useState(false)
@@ -23,6 +26,12 @@ const ProductCart = () => {
 	const [inStock, setInStock] = useState(24)
 	const [name, setName] = useState('')
 	const [price, setPrice] = useState('90.00 c')
+	const [countInCart, setCountInCart] = useState(0)
+
+	const dispatch = useDispatch()
+
+	const cart = useSelector(state => state.cart)
+	const favorites = useSelector(state => state.favorites)
 
 	useEffect(() => {
 		const text = 'Синяя толстовка на распродажу'
@@ -31,6 +40,18 @@ const ProductCart = () => {
 		else
 			setName(text)
 	}, [])
+
+	useEffect(() => {
+		const itemInCart = cart.find(item => item.id === id)
+		if (!itemInCart) return setCountInCart(0)
+		setCountInCart(itemInCart.count)
+	}, [cart, id])
+
+	useEffect(() => {
+		const itemInFavorites = favorites.find(_id => _id === id)
+		if (!itemInFavorites) return setIsFavorite(false)
+		setIsFavorite(true)
+	}, [favorites, id])
 
 	return (
 		<div className={styles.root}>
@@ -43,6 +64,8 @@ const ProductCart = () => {
 			<MySlider />
 
 			<Title 
+				id={id}
+				dispatch={dispatch}
 				name={name} 
 				isFavorite={isFavorite} 
 			/>
@@ -53,9 +76,23 @@ const ProductCart = () => {
 
 			<Stars rating={rating} />
 
-			<button className={styles.add_to_cart_btn} onClick={() => {}}>
-				В корзину
-			</button>
+			<If 
+				condition={countInCart === 0} 
+				altContent={
+					<CartControllButtons 
+						count={countInCart} 
+						dispatch={dispatch} 
+						id={id} 
+					/>
+				}
+			>
+				<button 
+					className={styles.add_to_cart_btn} 
+					onClick={() => dispatch(addToCart({ id, count: 1 }))}
+				>
+					В корзину
+				</button>
+			</If>
 
 		</div>
 	)
@@ -157,7 +194,7 @@ const SliderItem = ({ src }) => (
 	</div>
 )
 
-const Title = ({ name, isFavorite }) => {
+const Title = ({ name, isFavorite, dispatch, id }) => {
 	return (
 		<div className={styles.title}>
 			<Link href='/'>
@@ -165,7 +202,18 @@ const Title = ({ name, isFavorite }) => {
 					{name}
 				</a>
 			</Link>
-			<button className={styles.title_favorites_btn}>
+			<button 
+				className={classNames(
+					styles.title_favorites_btn, 
+					isFavorite && styles.favorite
+				)}
+				onClick={() => {
+					if (!isFavorite)
+						dispatch(addToFavorites(id))
+					else
+						dispatch(removeFromFavorites(id))
+				}}
+			>
 				{isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
 			</button>
 		</div>
@@ -208,6 +256,32 @@ const Star = ({ filled }) => {
 	return (
 		<div className={classNames(styles.star, filled && styles.filled)}>
 			{filled ? <StarIcon size={size} /> : <StarBorderIcon size={size} />}
+		</div>
+	)
+}
+
+const CartControllButtons = ({ id, count, dispatch }) => {
+	return (
+		<div className={styles.cart_controll_buttons}>
+
+			<button 
+				className={styles.cart_controll_button} 
+				onClick={() => dispatch(decreaseProductCount(id))}
+			>
+				-
+			</button>
+
+			<div className={styles.count_in_cart}>
+				{count}
+			</div>
+
+			<button 
+				className={styles.cart_controll_button} 
+				onClick={() => dispatch(increaseProductCount(id))}
+			>
+				+
+			</button>
+
 		</div>
 	)
 }
