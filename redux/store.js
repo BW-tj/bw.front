@@ -38,7 +38,8 @@ const store = createStore(
 store.subscribe(() => saveToLocalStorage({
   user: store.getState().user,
   cart: store.getState().cart,
-  favorites: store.getState().favorites
+  favorites: store.getState().favorites,
+  categories: store.getState().categories
 }))
 
 const makeStore = () => store

@@ -4,7 +4,6 @@ import CategoryList from '../../components/CategoryList/CategoryList'
 import DesktopNavigation from '../../components/DesktopNavigation/DesktopNavigation'
 import Header from '../../components/Header/Header'
 import If from '../../components/If/If'
-import Popup from '../../components/Popup/Popup'
 import SubNavigation from '../../components/SubNavigation/SubNavigation'
 import styles from './DesktopLayout.module.scss'
 
@@ -17,8 +16,6 @@ const DesktopLayout = ({
 
 	return (
 		<>
-			<Popup />
-
 			<If condition={isSearchFocused}>
 				<span className={styles.search_cover} onClick={() => setSearchFocued(false)}></span>
 			</If>

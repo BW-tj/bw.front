@@ -255,7 +255,7 @@ const Star = ({ filled }) => {
 
 	return (
 		<div className={classNames(styles.star, filled && styles.filled)}>
-			{filled ? <StarIcon size={size} /> : <StarBorderIcon size={size} />}
+			<StarIcon size={size} />
 		</div>
 	)
 }

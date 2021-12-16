@@ -1,6 +1,3 @@
-import { useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import { setCategories } from '../redux/actions/categories.actions'
 import BannerSlider from '../components/BannerSlider/BannerSlider'
 import BrandsSlider from '../components/BrandsSlider/BrandsSlider'
 import ProductCart from '../components/ProductCart/ProductCart'
@@ -19,33 +16,24 @@ export const getStaticProps = async () => {
 }
 
 const Home = ({ categories }) => {
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(setCategories(categories))
-  }, [dispatch, categories])
-
   return (
-    <>
-      <LayoutController>
-        <div className={styles.root}>
-          
-          <BannerSlider className={styles.banner_slider} />
+    <LayoutController categories={categories}>
+      <div className={styles.root}>
+        
+        <BannerSlider className={styles.banner_slider} />
 
-          <Title className={styles.title}>Бренды</Title>
+        <Title className={styles.title}>Бренды</Title>
 
-          <BrandsSlider className={styles.brand_slider} />
+        <BrandsSlider className={styles.brand_slider} />
 
-          <Title className={styles.title}>Хиты продаж</Title>
+        <Title className={styles.title}>Хиты продаж</Title>
 
-          <div className="container">
-            <ProductCart />
-          </div>
-          
+        <div className="container">
+          <ProductCart />
         </div>
-      </LayoutController>
-    </>
+        
+      </div>
+    </LayoutController>
   )
 }
 

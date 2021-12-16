@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import Popup from '../components/Popup/Popup'
+import { setCategories } from '../redux/actions/categories.actions'
 import DesktopLayout from './Desktop/DesktopLayout'
 import MobileLayout from './Mobile/MobileLayout'
 
 const LayoutController = ({
-	children
+	children, categories=[]
 }) => {
 
+  const dispatch = useDispatch()
+
 	const [windowSize, setWindowSize] = useState(0)
+
+  useEffect(() => {
+    dispatch(setCategories(categories))
+  }, [dispatch, categories])
 
 	useEffect(() => {
 
@@ -25,9 +34,12 @@ const LayoutController = ({
 	const Layout = windowSize < 1000 ? MobileLayout : DesktopLayout
 
 	return (
-		<Layout>
-			{children}
-		</Layout>
+		<>
+			<Popup />
+			<Layout>
+				{children}
+			</Layout>
+		</>
 	)
 }
 

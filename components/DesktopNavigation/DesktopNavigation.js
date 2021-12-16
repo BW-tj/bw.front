@@ -12,12 +12,6 @@ const DesktopNavigation = ({
 	onChangeCategoryOpen
 }) => {
 
-	const [searchValue, setSearchValue] = useState('')
-
-	const handleSearchButtonClick = () => {
-		onChangeSearchFocus(false)
-	}
-
 	const handleCategoryButtonClick = () => {
 		onChangeCategoryOpen(!isCatergoryOpen)
 	}
@@ -33,10 +27,7 @@ const DesktopNavigation = ({
 				/>
 
 				<SearchBox 
-					value={searchValue} 
-					setValue={setSearchValue} 
 					isFocused={isSearchFocused}
-					onSearch={() => handleSearchButtonClick()} 
 					onChangeSearchFocus={(value => onChangeSearchFocus(value))}
 				/>
 

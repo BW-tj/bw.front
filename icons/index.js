@@ -12,6 +12,7 @@ import Favorite from './Favorite'
 import Grade from './Grade'
 import LocalHospital from './LocalHospital'
 import LocalOffer from './LocalOffer'
+import UnfoldMore from './UnfoldMore'
 
 export {
 	Menu,
@@ -27,5 +28,6 @@ export {
 	Favorite,
 	Grade,
 	LocalHospital,
-	LocalOffer
+	LocalOffer,
+	UnfoldMore
 }
