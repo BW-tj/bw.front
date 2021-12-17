@@ -3,7 +3,7 @@ import styles from './InStock.module.scss'
 
 const InStock = ({ inStock }) => (
 	<div className={styles.root}>
-		{inStock} в наличии
+		В наличии: {inStock} шт.
 	</div>
 )
 

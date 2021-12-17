@@ -28,7 +28,7 @@ const ProductCart = ({ id=1 }) => {
 			isNew: true,
 			promotionPercent: 17,
 			rating: 4,
-			inStock: 24,
+			count: 24,
 			price: 90.00
 		})
 	}, [id])
@@ -65,7 +65,7 @@ const ProductCart = ({ id=1 }) => {
 
 			<Price price={product.price} />
 
-			<InStock inStock={product.inStock} />
+			<InStock inStock={product.count} />
 
 			<Stars rating={product.rating} />
 
@@ -74,6 +74,7 @@ const ProductCart = ({ id=1 }) => {
 				altContent={
 					<CartControllButtons 
 						count={countInCart} 
+						inStock={product.count}
 						dispatch={dispatch} 
 						id={id} 
 					/>

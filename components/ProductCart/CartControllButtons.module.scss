@@ -10,18 +10,27 @@
 }
 
 .cart_controll_button {
+	width: 70px;
 	height: 40px;
 	font-size: 2rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0 30px;
 	border: 1px solid $grey-color;
 	font-weight: 600;
 	transition: 100ms linear;
 	&:hover {
 		color: $primary-color-d1;
 	}
+}
+
+.emptyBox {
+	width: 70px;
+	height: 40px;
+}
+
+.cart_controll_button.disabled {
+	visibility: hidden;
 }
 
 .count_in_cart {

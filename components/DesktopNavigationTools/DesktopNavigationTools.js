@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { 
 	FavoriteBorder as FavoriteBorderIcon,
 	ShoppingCart as ShoppingCartIcon,
@@ -11,7 +11,6 @@ import { openPopup } from '../../redux/actions/popup.actions'
 import Authorization from '../../popups/Authorization/Authorization.popup'
 import If from '../If/If'
 import styles from './DesktopNavigationTools.module.scss'
-import { useSelector } from 'react-redux'
 
 const DesktopNavigationTools = ({ user }) => {
 
