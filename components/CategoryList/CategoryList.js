@@ -62,6 +62,7 @@ const LeftBar = ({ categories, onMouseOver, activeCategory }) => {
 							styles.category_group_link, 
 							activeCategory.id === category.id && styles.active
 						)} 
+						draggable={false}
 						onMouseOver={() => onMouseOver(category)}
 					>
 						<div className={styles.category_icon}>
@@ -89,7 +90,7 @@ const SubCategoryList = ({ activeCategory }) => {
 				href={`/category/${activeCategory.id}`}
 				key={activeCategory.id}
 			>
-				<a className={styles.title}>
+				<a className={styles.title} draggable={false}>
 					{activeCategory.name}
 				</a>
 			</Link>
@@ -112,7 +113,7 @@ const SubSubCategoryList = ({ subCategory }) => {
 				href={`/category/${subCategory.id}`}
 				key={subCategory.id}
 			>
-				<a className={styles.sub_title}>
+				<a className={styles.sub_title} draggable={false}>
 					{subCategory.name}
 				</a>
 			</Link>
@@ -122,7 +123,7 @@ const SubSubCategoryList = ({ subCategory }) => {
 						href={`/category/${subSubCategory.id}`}
 						key={subSubCategory.id}
 					>
-						<a className={styles.sub_sub_title}>
+						<a className={styles.sub_sub_title} draggable={false}>
 							{subSubCategory.name}
 						</a>
 					</Link>

@@ -6,7 +6,7 @@ import DesktopLayout from './Desktop/DesktopLayout'
 import MobileLayout from './Mobile/MobileLayout'
 
 const LayoutController = ({
-	children, categories=[]
+	children, categories=[], products=null
 }) => {
 
   const dispatch = useDispatch()

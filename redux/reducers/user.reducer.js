@@ -1,6 +1,8 @@
 import * as t from '../types'
 
-const initialState = null
+const initialState = {
+	token: '51t3gw35tyhern'
+}
 
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {

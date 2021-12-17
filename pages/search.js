@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import LayoutController from '../layouts/LayoutController'
-import styles from '../styles/Search.module.scss'
-import Title from '../components/Title/Title'
 import { useRouter } from 'next/router'
+import LayoutController from '../layouts/LayoutController'
+import Title from '../components/Title/Title'
+import styles from '../styles/Search.module.scss'
 
 export const getStaticProps = async () => {
 
@@ -49,13 +49,11 @@ const Search = ({ categories }) => {
   }, [router.query])
 
 	return (
-		<>
-			<LayoutController products={products} categories={categories}>
-        <div className={styles.root}>
-          <Title className={styles.title}>Результаты поиска</Title>
-				</div>
-			</LayoutController>
-		</>
+    <LayoutController products={products} categories={categories}>
+      <div className={styles.root}>
+        <Title className={styles.title}>Результаты поиска</Title>
+      </div>
+    </LayoutController>
 	)
 }
 

@@ -69,7 +69,7 @@ const LinkComponent = ({ link, icon, notification=0 }) => {
 	const Icon = icon
 	return (
 		<Link href={link}>
-			<a className={styles.button}>
+			<a className={styles.button} draggable={false}>
 				<span className={styles.icon}>
 					<Icon size={36} />
 				</span>

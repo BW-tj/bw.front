@@ -76,5 +76,12 @@
 				}
 			]
 		}
-	]
+	],
+	"user": {
+		"name": "Daler",
+		"lastname": "Alyamov",
+		"phone": "+992 (926) 789-78-78",
+		"email": "developer.daler@gmail.com",
+		"address": "Tajikistan, Dushanbe, 82-md, Shamsi-2"
+	} 
 }

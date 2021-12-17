@@ -40,7 +40,7 @@ const Button = ({ button }) => {
 	const IconTag = button.icon
 	return (
 		<Link href={button.link}>
-			<a className={styles.button}>
+			<a className={styles.button} draggable={false}>
 				<span className={styles.button_icon}>
 					<IconTag size={18} /> 
 				</span>
