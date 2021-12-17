@@ -1,0 +1,10 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	color: $grey-color;
+}
+
+.root.filled {
+	color: #eee131;
+}

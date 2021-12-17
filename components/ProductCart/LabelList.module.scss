@@ -1,0 +1,33 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	display: flex;
+	z-index: 100;
+	gap: 10px;
+}
+
+.label_new_product {
+	background: $red;
+	color: $secondary-color;
+	&:hover {
+		background: $red-d1;
+	}
+	&:active {
+		background: $red-d2;
+	}
+}
+
+.label_promotion {
+	background: $blue;
+	color: $secondary-color;
+	&:hover {
+		background: $blue-d1;
+	}
+	&:active {
+		background: $blue-d2;
+	}
+}

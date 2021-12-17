@@ -1,0 +1,20 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	display: inline-block;
+	padding: 20px;
+	border-radius: 4px;
+	position: relative;
+
+	&:hover {
+		box-shadow: 0px 0px 18px rgba(#7a7a7a, 0.2);
+	}
+
+	@include _720 {
+		&:hover {
+			box-shadow: none;
+		}
+	}
+}
+

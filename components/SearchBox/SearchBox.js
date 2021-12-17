@@ -25,7 +25,8 @@ const SearchBox = ({ onChangeSearchFocus, isFocused }) => {
 	}
 
 	const handleSearch = () => {
-		if (value.trim() === '') return
+		if (value.trim() === '') 
+			return onChangeSearchFocus(false)
 
 		let query = '/search?q=' + value
 
@@ -54,6 +55,24 @@ const SearchBox = ({ onChangeSearchFocus, isFocused }) => {
 		if (router.query.q)
 			setValue(router.query.q)
 	}, [router.query])
+
+	useEffect(() => {
+		if (router.query.categoryId) {
+			setSelectedCategoryId(router.query.categoryId)
+			categories.forEach(category => {
+				if (category.id === router.query.categoryId)
+					return setSelectedCategory(category.name)
+				category.subcategories.forEach(subcategory => {
+					if (subcategory.id === router.query.categoryId)
+						return setSelectedCategory(subcategory.name)
+					subcategory.subcategories.forEach(subsubcategory => {
+						if (subsubcategory.id === router.query.categoryId)
+							return setSelectedCategory(subsubcategory.name)
+					})
+				})
+			})
+		}
+	}, [categories, router.query])
 
 	return (
 		<div className={classNames(styles.root, isFocused && styles.focus)}>

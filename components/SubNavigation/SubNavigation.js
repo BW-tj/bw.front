@@ -36,17 +36,20 @@ const SubNavigation = () => {
 	)
 }
 
-const Button = ({ button }) => (
-	<Link href={button.link}>
-		<a className={styles.button}>
-			<span className={styles.button_icon}>
-				<LocalOfferIcon size={18} /> 
-			</span>
-			<span className={styles.button_text}>
-				{button.text}
-			</span>
-		</a>
-	</Link>
-)
+const Button = ({ button }) => {
+	const IconTag = button.icon
+	return (
+		<Link href={button.link}>
+			<a className={styles.button}>
+				<span className={styles.button_icon}>
+					<IconTag size={18} /> 
+				</span>
+				<span className={styles.button_text}>
+					{button.text}
+				</span>
+			</a>
+		</Link>
+	)
+}
 
 export default SubNavigation

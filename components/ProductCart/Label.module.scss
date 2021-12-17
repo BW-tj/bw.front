@@ -1,0 +1,16 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	border-radius: 15px;
+	height: 20px;
+	padding: 0 8px;
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+	font-size: 0.675rem;
+	transition: 100ms linear;
+	&:hover {
+		text-decoration: underline;
+	}
+}

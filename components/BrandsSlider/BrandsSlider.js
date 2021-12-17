@@ -108,7 +108,7 @@ const BrandsSlider = ({ className }) => {
 
 const SliderItem = ({ src, href }) => (
 	<Link href={href}>
-		<a className={styles.image}>
+		<a className={styles.image} draggable={false}>
 			<Image 
 				src={src} 
 				alt='image1' 

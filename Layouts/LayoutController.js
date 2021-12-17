@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import Popup from '../components/Popup/Popup'
+import Popup from '../components/Popup'
 import { setCategories } from '../redux/actions/categories.actions'
 import DesktopLayout from './Desktop/DesktopLayout'
 import MobileLayout from './Mobile/MobileLayout'

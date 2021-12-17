@@ -1,0 +1,36 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	width: 100%;
+	font-weight: 600;
+	margin: 7px 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	overflow: hidden;
+	.text {
+		width: 170px;
+		display: inline-block;
+		color: #000;
+		transition: 100ms linear;
+		&:hover {
+			color: darken($primary-color-d2, 5%);
+		}
+	}
+}
+
+.like_btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: $search-placeholder-color;
+	transition: 100ms linear;
+	&:active {
+		transform: scale(0.95);
+	}
+}
+
+.like_btn.active {
+	color: $red;
+}

@@ -1,6 +1,6 @@
 import BannerSlider from '../components/BannerSlider/BannerSlider'
 import BrandsSlider from '../components/BrandsSlider/BrandsSlider'
-import ProductCart from '../components/ProductCart/ProductCart'
+import ProductCart from '../components/ProductCart'
 import Title from '../components/Title/Title'
 import LayoutController from '../layouts/LayoutController'
 import styles from '../styles/Home.module.scss'

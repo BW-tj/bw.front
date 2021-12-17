@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
 import { closePopup } from '../../redux/actions/popup.actions'
-import styles from './Popup.module.scss'
+import styles from './index.module.scss'
 
 const Popup = () => {
 

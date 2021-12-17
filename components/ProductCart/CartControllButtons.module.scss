@@ -1,0 +1,29 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 40px;
+	border-radius: 3px;
+}
+
+.cart_controll_button {
+	height: 40px;
+	font-size: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 30px;
+	border: 1px solid $grey-color;
+	font-weight: 600;
+	transition: 100ms linear;
+	&:hover {
+		color: $primary-color-d1;
+	}
+}
+
+.count_in_cart {
+	font-weight: 600;
+}
