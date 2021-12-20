@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
+import Title from '../../components/Title/Title'
 import LayoutController from '../../layouts/LayoutController'
 import styles from '../../styles/Category.module.scss'
 
@@ -24,8 +24,6 @@ export const getStaticPaths = async () => {
 		})
 	})
 
-	console.log(JSON.stringify(paths))
-
 	return {
 		paths,
 		fallback: false
@@ -39,16 +37,37 @@ export const getStaticProps = async context => {
 
   const responseCategories = await fetch(process.env.NEXT_PUBLIC_HOST+'/categories')
   const categories = await responseCategories.json()
+	console.log(id)
 
-	return { props: { products, categories } }
+	let category = []
+
+	categories.forEach(_category => {
+		if (_category.id === id)
+			category.push(_category)
+		else _category.subcategories.forEach(_subcategory => {
+			if (_subcategory.id === id) {
+				category.push(_category)
+				category.push(_subcategory)
+			}
+			else _subcategory.subcategories.forEach(_subsubcategory => {
+				if (_subsubcategory.id === id) {
+					category.push(_category)
+					category.push(_subcategory)
+					category.push(_subsubcategory)
+				}
+			})
+		})
+	})
+
+	return { props: { products, categories, category } }
 }
 
-const Category = ({ products, categories }) => {
+const Category = ({ products, categories, category }) => {
 
 	return (
 		<LayoutController categories={categories}>
 			<div className={styles.root}>
-				{products.length && products.map(product => product.name)}
+        <Title className={styles.title}>{category[category.length-1].name}</Title>
 			</div>
 		</LayoutController>
 	)

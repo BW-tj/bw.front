@@ -249,7 +249,7 @@ const CategoryMenuSubItem = ({
 			</button>	
 			{subcategory.subcategories.map(subsubcategory =>
 				<CategoryMenuSubSubItem 
-					key={subsubcategory} 
+					key={subsubcategory.id} 
 					subsubcategory={subsubcategory} 
 					selectedCategory={selectedCategory}
 					setCategoryMenuIsOpen={setCategoryMenuIsOpen}
@@ -270,7 +270,6 @@ const CategoryMenuSubSubItem = ({
 }) => {
 	return (
 		<button 
-			key={subsubcategory.id}
 			className={classNames(
 				styles.category_menu_subsubitem,
 				selectedCategory === subsubcategory.name && styles.selected
