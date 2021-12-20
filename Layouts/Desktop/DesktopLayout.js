@@ -34,7 +34,7 @@ const DesktopLayout = ({
 					onChangeCategoryOpen={value => setCatergoryOpen(value)} 
 				/>
 
-				<CategoryList open={isCatergoryOpen} />
+				<CategoryList open={isCatergoryOpen} onClose={() => setCatergoryOpen(false)} />
 
 				<SubNavigation />
 				

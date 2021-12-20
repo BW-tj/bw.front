@@ -10,7 +10,7 @@
 .button {
 	position: relative;
 	border-radius: 50px;
-	transition: 150ms linear;
+	transition: 50ms linear;
 
 	&:active {
 		transform: scale(0.95);
@@ -27,7 +27,7 @@
 	color: $text-color;
 	
 	svg {
-		transition: 100ms linear;	
+		transition: 50ms linear;	
 	}
 }
 

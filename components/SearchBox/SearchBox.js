@@ -57,16 +57,25 @@ const SearchBox = ({ onChangeSearchFocus, isFocused }) => {
 	}, [router.query])
 
 	useEffect(() => {
-		if (router.query.categoryId) {
-			setSelectedCategoryId(router.query.categoryId)
+		const locationPathname = window.location.pathname.split('/').slice(1)
+
+		let id = null
+		
+		if (locationPathname[0] === 'category')
+			id = locationPathname[1]
+		else if (router.query.categoryId)
+			id = router.query.categoryId
+			
+		if (id) {
+			setSelectedCategoryId(id)
 			categories.forEach(category => {
-				if (category.id === router.query.categoryId)
+				if (category.id === id)
 					return setSelectedCategory(category.name)
 				category.subcategories.forEach(subcategory => {
-					if (subcategory.id === router.query.categoryId)
+					if (subcategory.id === id)
 						return setSelectedCategory(subcategory.name)
 					subcategory.subcategories.forEach(subsubcategory => {
-						if (subsubcategory.id === router.query.categoryId)
+						if (subsubcategory.id === id)
 							return setSelectedCategory(subsubcategory.name)
 					})
 				})
@@ -91,60 +100,14 @@ const SearchBox = ({ onChangeSearchFocus, isFocused }) => {
 				placeholder='Найти нужный вам товар...'
 			/>
 
-			<div className={styles.category}>
-				<button 
-					className={styles.category_label} 
-					onClick={() => setCategoryMenuIsOpen(!categoryMenuIsOpen)}
-				>
-					<div className={styles.category_label_text}>
-						{selectedCategory.slice(0, 20) + (selectedCategory.length > 20 ? '...' : '')}
-					</div>
-					<div className={styles.category_label_icon}>
-						<UnfoldMore size={16} />
-					</div>
-				</button>
-				<If condition={categoryMenuIsOpen}>
-					<div className={styles.category_menu}>
-						<button  
-							className={styles.category_menu_item}
-							onClick={() => {
-								setCategoryMenuIsOpen(false)
-								setSelectedCategory('Все продукты')
-								setSelectedCategoryId(null)
-							}}
-						>
-							Все продукты
-						</button>
-						{categories.map(category => 
-							<React.Fragment key={category.id}>
-								<button  
-									className={styles.category_menu_item}
-									onClick={() => {
-										setCategoryMenuIsOpen(false)
-										setSelectedCategory(category.name)
-										setSelectedCategoryId(category.id)
-									}}
-								>
-									{category.name}
-								</button>
-								{category.subcategories.map(subcategory =>
-									<button 
-										key={subcategory.id} 
-										className={styles.category_menu_subitem}
-										onClick={() => {
-											setCategoryMenuIsOpen(false)
-											setSelectedCategory(subcategory.name)
-											setSelectedCategoryId(subcategory.id)
-										}}
-									>
-										{subcategory.name}
-									</button>	
-								)}
-							</React.Fragment>
-						)}
-					</div>
-				</If>
-			</div>
+			<CategoryWrap 
+				categoryMenuIsOpen={categoryMenuIsOpen}
+				categories={categories}
+				selectedCategory={selectedCategory}
+				setCategoryMenuIsOpen={setCategoryMenuIsOpen}
+				setSelectedCategory={setSelectedCategory}
+				setSelectedCategoryId={setSelectedCategoryId}
+			/>
 
 			<button onClick={() => handleSearch()} className={styles.button}>
 				<span className={styles.button_wrap}>
@@ -153,6 +116,173 @@ const SearchBox = ({ onChangeSearchFocus, isFocused }) => {
 			</button>
 
 		</div>
+	)
+}
+
+const CategoryWrap = ({ 
+	categoryMenuIsOpen, 
+	categories,
+	selectedCategory,
+	setSelectedCategory,
+	setCategoryMenuIsOpen,
+	setSelectedCategoryId
+}) => {
+	return (
+		<div className={styles.category}>
+			<button 
+				className={styles.category_label} 
+				onClick={() => setCategoryMenuIsOpen(!categoryMenuIsOpen)}
+			>
+				<div className={styles.category_label_text}>
+					{selectedCategory.slice(0, 20) + (selectedCategory.length > 20 ? '...' : '')}
+				</div>
+				<div className={styles.category_label_icon}>
+					<UnfoldMore size={16} />
+				</div>
+			</button>
+			<If condition={categoryMenuIsOpen}>
+				<CategoryMenu 
+					categories={categories} 
+					selectedCategory={selectedCategory}
+					setSelectedCategory={setSelectedCategory}
+					setCategoryMenuIsOpen={setCategoryMenuIsOpen}
+					setSelectedCategoryId={setSelectedCategoryId}
+				/>
+			</If>
+		</div>
+	)
+}
+
+const CategoryMenu = ({
+	categories,
+	selectedCategory,
+	setCategoryMenuIsOpen,
+	setSelectedCategory,
+	setSelectedCategoryId,
+}) => {
+	return (
+		<div className={styles.category_menu}>
+			<button  
+				className={classNames(
+					styles.category_menu_item, 
+					selectedCategory === 'Все продукты' && styles.selected
+				)}
+				onClick={() => {
+					setCategoryMenuIsOpen(false)
+					setSelectedCategory('Все продукты')
+					setSelectedCategoryId(null)
+				}}
+			>
+				Все продукты
+			</button>
+			{categories.map(category => 
+				<CategoryMenuItem 
+					key={category.id}
+					category={category} 
+					selectedCategory={selectedCategory} 
+					setCategoryMenuIsOpen={setCategoryMenuIsOpen} 
+					setSelectedCategory={setSelectedCategory} 
+					setSelectedCategoryId={setSelectedCategoryId} 
+				/>
+			)}
+		</div>
+	)
+}
+
+const CategoryMenuItem = ({
+	category,
+	selectedCategory,
+	setCategoryMenuIsOpen,
+	setSelectedCategoryId,
+	setSelectedCategory
+}) => {
+	return (
+		<>
+			<button  
+				className={classNames(
+					styles.category_menu_item,
+					selectedCategory === category.name && styles.selected
+				)}
+				onClick={() => {
+					setCategoryMenuIsOpen(false)
+					setSelectedCategory(category.name)
+					setSelectedCategoryId(category.id)
+				}}
+			>
+				{category.name}
+			</button>
+			{category.subcategories.map(subcategory =>
+				<CategoryMenuSubItem 
+					key={subcategory.id}
+					subcategory={subcategory} 
+					selectedCategory={selectedCategory}
+					setCategoryMenuIsOpen={setCategoryMenuIsOpen}
+					setSelectedCategoryId={setSelectedCategoryId}
+					setSelectedCategory={setSelectedCategory}
+				/>
+			)}
+		</>
+	)
+}
+
+const CategoryMenuSubItem = ({
+	subcategory,
+	selectedCategory,
+	setCategoryMenuIsOpen,
+	setSelectedCategoryId,
+	setSelectedCategory
+}) => {
+	return (
+		<>
+			<button 
+				className={classNames(
+					styles.category_menu_subitem,
+					selectedCategory === subcategory.name && styles.selected
+				)}
+				onClick={() => {
+					setCategoryMenuIsOpen(false)
+					setSelectedCategory(subcategory.name)
+					setSelectedCategoryId(subcategory.id)
+				}}
+			>
+				{subcategory.name}
+			</button>	
+			{subcategory.subcategories.map(subsubcategory =>
+				<CategoryMenuSubSubItem 
+					key={subsubcategory} 
+					subsubcategory={subsubcategory} 
+					selectedCategory={selectedCategory}
+					setCategoryMenuIsOpen={setCategoryMenuIsOpen}
+					setSelectedCategoryId={setSelectedCategoryId}
+					setSelectedCategory={setSelectedCategory}
+				/>	
+			)}
+		</>
+	)
+}
+
+const CategoryMenuSubSubItem = ({ 
+	subsubcategory,
+	selectedCategory,
+	setCategoryMenuIsOpen,
+	setSelectedCategoryId,
+	setSelectedCategory
+}) => {
+	return (
+		<button 
+			key={subsubcategory.id}
+			className={classNames(
+				styles.category_menu_subsubitem,
+				selectedCategory === subsubcategory.name && styles.selected
+			)}
+			onClick={() => {
+				setCategoryMenuIsOpen(false)
+				setSelectedCategory(subsubcategory.name)
+				setSelectedCategoryId(subsubcategory.id)
+			}}
+		>
+			{subsubcategory.name}
+		</button>	
 	)
 }
 

@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
 	popup: popupReducer,
 	cart: cartReducer,
 	categories: categoriesReducer,
-	favorites: favoritesReducer
+	favorites: favoritesReducer,
 })
 
 export default rootReducer

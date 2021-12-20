@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import LayoutController from '../../layouts/LayoutController'
+import styles from '../../styles/Category.module.scss'
 
 export const getStaticPaths = async () => {
   const res = await fetch(process.env.NEXT_PUBLIC_HOST+'/categories')
@@ -31,17 +34,23 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async context => {
 	const { id } = context.params
-	const response = await fetch(process.env.NEXT_PUBLIC_HOST+'/products?categoryId='+id)
-	const products = await response.json()
+	const responseProducts = await fetch(process.env.NEXT_PUBLIC_HOST+'/products?categoryId='+id)
+	const products = await responseProducts.json()
 
-	return { props: { products } }
+  const responseCategories = await fetch(process.env.NEXT_PUBLIC_HOST+'/categories')
+  const categories = await responseCategories.json()
+
+	return { props: { products, categories } }
 }
 
-const Category = ({ products }) => {
+const Category = ({ products, categories }) => {
+
 	return (
-		<div>
-			{products.length && products.map(product => product.name)}
-		</div>
+		<LayoutController categories={categories}>
+			<div className={styles.root}>
+				{products.length && products.map(product => product.name)}
+			</div>
+		</LayoutController>
 	)
 }
 

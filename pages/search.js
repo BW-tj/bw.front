@@ -12,7 +12,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      categories,
+      categories
     }
   }
 }
@@ -49,7 +49,7 @@ const Search = ({ categories }) => {
   }, [router.query])
 
 	return (
-    <LayoutController products={products} categories={categories}>
+    <LayoutController categories={categories}>
       <div className={styles.root}>
         <Title className={styles.title}>Результаты поиска</Title>
       </div>

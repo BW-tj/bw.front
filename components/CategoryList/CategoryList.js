@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import styles from './CategoryList.module.scss' 
 import Link from 'next/link'
 
-const CategoryList = ({ open }) => {
+const CategoryList = ({ open, onClose }) => {
 
 	const [middleWare_Open, setmiddleWare_Open] = useState(false)
 	const [activeCategory, setActiveCategory] = useState(null)
@@ -39,9 +39,10 @@ const CategoryList = ({ open }) => {
 					activeCategory={activeCategory}
 					categories={categories} 
 					onMouseOver={category => setActiveCategory(category)} 
+					onClose={onClose}
 				/>
 
-				<SubCategoryList activeCategory={activeCategory} />
+				<SubCategoryList activeCategory={activeCategory} onClose={onClose} />
 
 			</div>
 
@@ -49,7 +50,7 @@ const CategoryList = ({ open }) => {
 	)
 }
 
-const LeftBar = ({ categories, onMouseOver, activeCategory }) => {
+const LeftBar = ({ categories, onMouseOver, activeCategory, onClose }) => {
 	return (
 		<div className={styles.left_bar}>
 			{categories.map(category =>
@@ -64,6 +65,7 @@ const LeftBar = ({ categories, onMouseOver, activeCategory }) => {
 						)} 
 						draggable={false}
 						onMouseOver={() => onMouseOver(category)}
+						onClick={onClose}
 					>
 						<div className={styles.category_icon}>
 							<Image 
@@ -83,14 +85,14 @@ const LeftBar = ({ categories, onMouseOver, activeCategory }) => {
 	)
 }
 
-const SubCategoryList = ({ activeCategory }) => {
+const SubCategoryList = ({ activeCategory, onClose }) => {
 	return (
 		<div className={styles.category}>
 			<Link
 				href={`/category/${activeCategory.id}`}
 				key={activeCategory.id}
 			>
-				<a className={styles.title} draggable={false}>
+				<a className={styles.title} draggable={false} onClick={onClose}>
 					{activeCategory.name}
 				</a>
 			</Link>
@@ -99,6 +101,7 @@ const SubCategoryList = ({ activeCategory }) => {
 					<SubSubCategoryList 	
 						key={subCategory.id}
 						subCategory={subCategory}
+						onClose={onClose}
 					/>
 				)}
 			</div>
@@ -106,14 +109,14 @@ const SubCategoryList = ({ activeCategory }) => {
 	)
 }
 
-const SubSubCategoryList = ({ subCategory }) => {
+const SubSubCategoryList = ({ subCategory, onClose }) => {
 	return (
 		<div className={styles.sub_category}>
 			<Link
 				href={`/category/${subCategory.id}`}
 				key={subCategory.id}
 			>
-				<a className={styles.sub_title} draggable={false}>
+				<a className={styles.sub_title} draggable={false} onClick={onClose}>
 					{subCategory.name}
 				</a>
 			</Link>
@@ -123,7 +126,7 @@ const SubSubCategoryList = ({ subCategory }) => {
 						href={`/category/${subSubCategory.id}`}
 						key={subSubCategory.id}
 					>
-						<a className={styles.sub_sub_title} draggable={false}>
+						<a className={styles.sub_sub_title} draggable={false} onClick={onClose}>
 							{subSubCategory.name}
 						</a>
 					</Link>
