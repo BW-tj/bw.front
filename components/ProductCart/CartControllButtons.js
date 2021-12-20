@@ -3,7 +3,12 @@ import { decreaseProductCount, increaseProductCount } from '../../redux/actions/
 import If from '../If/If'
 import styles from './CartControllButtons.module.scss'
 
-const CartControllButtons = ({ id, count, dispatch, inStock }) => (
+const CartControllButtons = ({ 
+	id, 
+	count, 
+	dispatch, 
+	// inStock 
+}) => (
 	<div className={styles.root}>
 
 		<button 
@@ -17,17 +22,17 @@ const CartControllButtons = ({ id, count, dispatch, inStock }) => (
 			{count}
 		</div>
 
-		<If 
+		{/* <If 
 			condition={count < inStock}
 			altContent={<span className={styles.emptyBox} />}
+		> */}
+		<button 
+			className={styles.cart_controll_button} 
+			onClick={() => dispatch(increaseProductCount(id))}
 		>
-			<button 
-				className={styles.cart_controll_button} 
-				onClick={() => dispatch(increaseProductCount(id))}
-			>
-				+
-			</button>
-		</If>
+			+
+		</button>
+		{/* </If> */}
 
 	</div>
 )

@@ -1,16 +1,20 @@
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import If from '../../components/If/If'
+import { openPopup } from '../../redux/actions/popup.actions'
+import Registration from './Registration.popup'
 import styles from './Authorization.module.scss'
 
 const Authorization = ({ onClose }) => {
 
-	const [emailInput, setEmailInput] = useState('')
-	const [passwordInput, setPasswordInput] = useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 	const [errors, setErrors] = useState({ email: '', passowrd: '' })
 
 	const loginButton = useRef(null)
 
+	const dispatch = useDispatch()
 
 	const clearErrors = () => {
 		setErrors({ email: '', password: '' })
@@ -18,12 +22,12 @@ const Authorization = ({ onClose }) => {
 
 	const checkValidation = () => {
 		clearErrors()
-		if (emailInput.indexOf('@') === -1) {
+		if (email.indexOf('@') === -1) {
 			setErrors(prev => ({...prev, email: 'Введите корректную почту'}))
 			return false
 		}
-		if (passwordInput.trim().length < 8) {
-			setErrors(prev => ({...prev, password: 'Минимальная длина пароля – 8 занков'}))
+		if (password.trim().length < 8) {
+			setErrors(prev => ({...prev, password: 'Минимальная длина пароля – 8 знаков'}))
 			return false
 		}
 		return true 
@@ -31,11 +35,10 @@ const Authorization = ({ onClose }) => {
 
 
 	const handleRegister = () => {
-		
+		dispatch(openPopup(props => <Registration {...props} email={email} password={password} />))
 	}
 
 	const handleForgotPassword = () => {
-		
 	}
 
 	const handleLogin = async () => {
@@ -79,8 +82,8 @@ const Authorization = ({ onClose }) => {
 					name='email'
 					sub_title='Введите эл.почту'
 					error={errors.email}
-					value={emailInput}
-					onChange={e => setEmailInput(e.target.value)}
+					value={email}
+					onChange={e => setEmail(e.target.value)}
 					placeholder='name@company.example'
 				/>
 
@@ -89,9 +92,9 @@ const Authorization = ({ onClose }) => {
 					name='password'
 					sub_title='Введите пароль'
 					error={errors.password}
-					value={passwordInput}
+					value={password}
 					placeholder='********'
-					onChange={e => setPasswordInput(e.target.value)}
+					onChange={e => setPassword(e.target.value)}
 				/>
 
 				<div className={styles.button_group}>

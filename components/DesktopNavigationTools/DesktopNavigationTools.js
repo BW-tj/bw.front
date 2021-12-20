@@ -71,7 +71,7 @@ const LinkComponent = ({ link, icon, notification=0 }) => {
 		<Link href={link}>
 			<a className={styles.button} draggable={false}>
 				<span className={styles.icon}>
-					<Icon size={36} />
+					<Icon size={30} />
 				</span>
 				<If condition={notification !== 0}>
 					<span className={styles.notification}>

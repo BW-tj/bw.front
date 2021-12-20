@@ -22,12 +22,12 @@
 }
 
 .label_promotion {
-	background: $blue;
-	color: $secondary-color;
+	background: $yellow;
+	color: $text-color;
 	&:hover {
-		background: $blue-d1;
+		background: $yellow-d1;
 	}
 	&:active {
-		background: $blue-d2;
+		background: $yellow-d2;
 	}
 }

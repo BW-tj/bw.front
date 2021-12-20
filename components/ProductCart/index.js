@@ -4,7 +4,7 @@ import If from '../If/If'
 import AddToCartButton from './AddToCartButton'
 import CartControllButtons from './CartControllButtons'
 import styles from './index.module.scss'
-import InStock from './InStock'
+// import InStock from './InStock'
 import LabelList from './LabelList'
 import Price from './Price'
 import Slider from './Slider'
@@ -28,7 +28,7 @@ const ProductCart = ({ id=1 }) => {
 			isNew: true,
 			promotionPercent: 17,
 			rating: 4,
-			count: 24,
+			// count: 24,
 			price: 90.00
 		})
 	}, [id])
@@ -65,7 +65,7 @@ const ProductCart = ({ id=1 }) => {
 
 			<Price price={product.price} />
 
-			<InStock inStock={product.count} />
+			{/* <InStock inStock={product.count} /> */}
 
 			<Stars rating={product.rating} />
 
@@ -74,7 +74,7 @@ const ProductCart = ({ id=1 }) => {
 				altContent={
 					<CartControllButtons 
 						count={countInCart} 
-						inStock={product.count}
+						// inStock={product.count}
 						dispatch={dispatch} 
 						id={id} 
 					/>

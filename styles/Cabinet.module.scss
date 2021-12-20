@@ -85,6 +85,7 @@
 
 .button.contained {
 	background: $primary-color;
+	color: $secondary-color;
 
 	&:hover {
 		background: $primary-color-d1;
@@ -104,6 +105,7 @@
 	}
 	&:active {
 		background: darken($red, 14%);
+		color: $secondary-color;
 	}
 }
 

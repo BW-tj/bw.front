@@ -22,15 +22,15 @@ const Home = ({ categories }) => {
         
         <BannerSlider className={styles.banner_slider} />
 
-        <Title className={styles.title}>Бренды</Title>
-
-        <BrandsSlider className={styles.brand_slider} />
-
         <Title className={styles.title}>Хиты продаж</Title>
 
         <div className="container">
           <ProductCart />
         </div>
+
+        <Title className={styles.title}>Бренды</Title>
+
+        <BrandsSlider className={styles.brand_slider} />
         
       </div>
     </LayoutController>

@@ -8,6 +8,14 @@
 	justify-content: center;
 }
 
+.container {
+	padding: 50px 0;
+}
+
+.root.start {
+	align-items: flex-start;
+}
+
 .wrap {
 	width: 450px;
 	background: $secondary-color;
@@ -132,6 +140,7 @@
 
 .error_info {
 	color: $red;
+	font-weight: 500;
 	font-size: 0.875rem;
 	margin-top: 4px;
 }

@@ -5,7 +5,7 @@ import styles from './Label.module.scss'
 
 const Label = ({ className, text, link }) => (
 	<Link href={link}>
-		<a className={classNames(styles.root, className)}>
+		<a className={classNames(styles.root, className)} draggable={false}>
 			{text}
 		</a>
 	</Link>
