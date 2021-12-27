@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import If from '../../components/If/If'
 import { openPopup } from '../../redux/actions/popup.actions'
+import If from '../../components/If/If'
 import Registration from './Registration.popup'
 import styles from './Authorization.module.scss'
 

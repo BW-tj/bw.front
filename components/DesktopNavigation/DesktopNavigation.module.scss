@@ -7,6 +7,14 @@
 	padding-top: 20px;
 }
 
+.logo {
+	margin-right: 45px;
+
+	@include _1300 {
+		display: none;
+	}
+}
+
 .container {
 	display: flex;
 	justify-content: space-between;

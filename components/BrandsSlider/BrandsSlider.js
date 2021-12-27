@@ -19,6 +19,8 @@ const BrandsSlider = ({ className }) => {
 		arrows: false
   })
 
+	const [slider, setSlider] = useState(null)
+
 	const mainUrl = '/static/images/brands'
 
 	const imageList = [
@@ -69,8 +71,6 @@ const BrandsSlider = ({ className }) => {
 		}
 	] 
 
-	const slider = useRef(null)
-
 	useEffect(() => {
 
 		const handleWindowResize = () => {
@@ -88,9 +88,9 @@ const BrandsSlider = ({ className }) => {
 	
 	return (
 		<div className={classNames(styles.root, className)}>
-				<ArrowButtonPrev onClick={() => slider.slickPrev()} />
+			<ArrowButtonPrev onClick={() => slider.slickPrev()} />
 			<div className={styles.wrap}>
-				<Slider {...settings} ref={c => slider = c}>
+				<Slider {...settings} ref={c => setSlider(c)}>
 					{imageList.map(({ src, alt, href }) => 
 						<SliderItem 
 							src={src}
@@ -101,7 +101,7 @@ const BrandsSlider = ({ className }) => {
 					)}
 				</Slider>
 			</div>
-				<ArrowButtonNext onClick={() => slider.slickNext()} />
+			<ArrowButtonNext onClick={() => slider.slickNext()} />
 		</div>
 	)
 }

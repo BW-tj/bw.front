@@ -5,7 +5,12 @@
 	width: 100%;
 	background: $primary-color;
 	position: relative;
+	display: none;
 	@include container;
+
+	@include _1300 {
+		display: block;
+	}
 }
 
 .container {
@@ -18,6 +23,10 @@
 	display: flex;
 	flex-direction: column;
 	display: inline-block;
+	h1 {
+		color: $secondary-color !important;
+		font-size: 1.125rem;
+	}
 }
 
 .description {
