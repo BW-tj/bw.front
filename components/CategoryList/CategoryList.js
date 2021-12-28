@@ -18,7 +18,7 @@ const CategoryList = ({ open, onClose }) => {
 		if (!open) 
 			timeout = setTimeout(() => {
 				setmiddleWare_Open(false)
-			}, 500)
+			}, 300)
 		else 
 			setmiddleWare_Open(true)
 

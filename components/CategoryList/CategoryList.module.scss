@@ -7,7 +7,7 @@
 	width: 100%;
 	height: 400px;
 	background: $categories-background-color;
-	animation: fadeIn 0.2s ease-out forwards;
+	animation: fadeIn 0.1s ease-out forwards;
 	opacity: 0;
 	top: 60px;
 
@@ -108,7 +108,7 @@
 	font-size: 1rem;
 	font-weight: 500;
 	color: $text-color;
-	transition: 50ms linear;
+	transition: 100ms linear;
 	&:hover {
 		color: $primary-color-d2;	
 	}

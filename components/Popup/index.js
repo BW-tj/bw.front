@@ -14,7 +14,7 @@ const Popup = () => {
 
 	useEffect(() => {
 		
-		const animationDuration = 200
+		const animationDuration = 150
 		
 		if (popup.open) {
 			document.querySelector('body').classList.add('popup-open')
