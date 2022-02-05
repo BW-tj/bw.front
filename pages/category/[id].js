@@ -12,11 +12,11 @@ export const getStaticPaths = async () => {
 		paths.push({ 
 			params: { id: category.id.toString() }
 		})
-		category.subcategories.forEach(subcategory => {
+		category.subCategories.forEach(subcategory => {
 			paths.push({ 
 				params: { id: subcategory.id.toString() }
 			})
-			subcategory.subcategories.forEach(subsubcategory => {
+			subcategory.subCategories.forEach(subsubcategory => {
 				paths.push({ 
 					params: { id: subsubcategory.id.toString() }
 				})
@@ -32,24 +32,23 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async context => {
 	const { id } = context.params
-	const responseProducts = await fetch(process.env.NEXT_PUBLIC_HOST+'/products?categoryId='+id)
+	const responseProducts = await fetch(process.env.NEXT_PUBLIC_DEVHOST+'/products?categoryId='+id)
 	const products = await responseProducts.json()
 
   const responseCategories = await fetch(process.env.NEXT_PUBLIC_HOST+'/categories')
   const categories = await responseCategories.json()
-	console.log(id)
 
 	let category = []
 
 	categories.forEach(_category => {
 		if (_category.id === id)
 			category.push(_category)
-		else _category.subcategories.forEach(_subcategory => {
+		else _category.subCategories.forEach(_subcategory => {
 			if (_subcategory.id === id) {
 				category.push(_category)
 				category.push(_subcategory)
 			}
-			else _subcategory.subcategories.forEach(_subsubcategory => {
+			else _subcategory.subCategories.forEach(_subsubcategory => {
 				if (_subsubcategory.id === id) {
 					category.push(_category)
 					category.push(_subcategory)
@@ -67,7 +66,7 @@ const Category = ({ products, categories, category }) => {
 	return (
 		<LayoutController categories={categories}>
 			<div className={styles.root}>
-        <Title className={styles.title}>{category[category.length-1].name}</Title>
+        <Title className={styles.title}>{category[category.length-1]?.name}</Title>
 			</div>
 		</LayoutController>
 	)

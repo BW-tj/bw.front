@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
 import Slider from 'react-slick'
 import Image from 'next/image'
-import Link from 'next/link'
 import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon } from '../../icons'
 import styles from './BrandsSlider.module.scss'
 
-const BrandsSlider = ({ className }) => {
+const BrandsSlider = ({ brands, className }) => {
 
 	const [settings, setSettings] = useState({
     dots: true,
@@ -20,56 +19,7 @@ const BrandsSlider = ({ className }) => {
   })
 
 	const [slider, setSlider] = useState(null)
-
-	const mainUrl = '/static/images/brands'
-
-	const imageList = [
-		{
-			src: `${mainUrl}/adidas.png`,
-			href: '/',
-			alt: 'image1'
-		},
-		{
-			src: `${mainUrl}/biotherm.png`,
-			href: '/',
-			alt: 'image2'
-		},
-		{
-			src: `${mainUrl}/chanel.png`,
-			href: '/',
-			alt: 'image3'
-		},
-		{
-			src: `${mainUrl}/dior.png`,
-			href: '/',
-			alt: 'image4'
-		},
-		{
-			src: `${mainUrl}/henderson.png`,
-			href: '/',
-			alt: 'image5'
-		},
-		{
-			src: `${mainUrl}/honor.png`,
-			href: '/',
-			alt: 'image6'
-		},
-		{
-			src: `${mainUrl}/lancome.png`,
-			href: '/',
-			alt: 'image7'
-		},
-		{
-			src: `${mainUrl}/samsung.png`,
-			href: '/',
-			alt: 'image8'
-		},
-		{
-			src: `${mainUrl}/vivo.png`,
-			href: '/',
-			alt: 'image9'
-		}
-	] 
+	const [imageList, setImageList] = useState([])
 
 	useEffect(() => {
 
@@ -85,39 +35,45 @@ const BrandsSlider = ({ className }) => {
 		window.addEventListener('resize', handleWindowResize)
 		return () => window.removeEventListener('resize', handleWindowResize)
 	}, [])
+
+	useEffect(() => {
+    setImageList(brands.map(item => ({ 
+			id: item.id, 
+			src: process.env.NEXT_PUBLIC_HOST + item.imagePath, 
+			alt: item.name 
+		})))
+		return () => setImageList([])
+	}, [brands]);
 	
 	return (
 		<div className={classNames(styles.root, className)}>
-			<ArrowButtonPrev onClick={() => slider.slickPrev()} />
+		{imageList.length > 5 && <ArrowButtonPrev onClick={() => slider.slickPrev()} />}
 			<div className={styles.wrap}>
 				<Slider {...settings} ref={c => setSlider(c)}>
-					{imageList.map(({ src, alt, href }) => 
+					{imageList.map(({ src, alt }) => 
 						<SliderItem 
 							src={src}
-							href={href}
 							alt={alt}
 							key={alt}
 						/>
 					)}
 				</Slider>
 			</div>
-			<ArrowButtonNext onClick={() => slider.slickNext()} />
+			{imageList.length > 5 && <ArrowButtonNext onClick={() => slider.slickNext()} />}
 		</div>
 	)
 }
 
-const SliderItem = ({ src, href }) => (
-	<Link href={href}>
-		<a className={styles.image} draggable={false}>
-			<Image 
-				src={src} 
-				alt='image1' 
-				width='100%'
-				height='100%'
-				layout='responsive' objectFit='contain'
-			/>
-		</a>
-	</Link>
+const SliderItem = ({ src }) => (
+	<div className={styles.image} >
+		<Image 
+			src={src} 
+			alt='image1' 
+			width='100%'
+			height='100%'
+			layout='responsive' objectFit='contain'
+		/>
+	</div>
 )
 
 const ArrowButtonNext = ({ onClick }) => {

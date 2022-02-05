@@ -71,10 +71,10 @@ const SearchBox = ({ onChangeSearchFocus, isFocused }) => {
 			categories.forEach(category => {
 				if (category.id === id)
 					return setSelectedCategory(category.name)
-				category.subcategories.forEach(subcategory => {
+				category.subCategories.forEach(subcategory => {
 					if (subcategory.id === id)
 						return setSelectedCategory(subcategory.name)
-					subcategory.subcategories.forEach(subsubcategory => {
+					subcategory.subCategories.forEach(subsubcategory => {
 						if (subsubcategory.id === id)
 							return setSelectedCategory(subsubcategory.name)
 					})
@@ -211,7 +211,7 @@ const CategoryMenuItem = ({
 			>
 				{category.name}
 			</button>
-			{category.subcategories.map(subcategory =>
+			{category.subCategories.map(subcategory =>
 				<CategoryMenuSubItem 
 					key={subcategory.id}
 					subcategory={subcategory} 
@@ -247,7 +247,7 @@ const CategoryMenuSubItem = ({
 			>
 				{subcategory.name}
 			</button>	
-			{subcategory.subcategories.map(subsubcategory =>
+			{subcategory.subCategories.map(subsubcategory =>
 				<CategoryMenuSubSubItem 
 					key={subsubcategory.id} 
 					subsubcategory={subsubcategory} 

@@ -5,13 +5,9 @@ import {
 	Favorite as FavoriteIcon,
 	FavoriteBorder as FavoriteBorderIcon
 } from '../../icons'
-import { 
-	addToFavorites, 
-	removeFromFavorites 
-} from '../../redux/actions/favorites.actions'
 import styles from './Title.module.scss'
 
-const Title = ({ name, isFavorite, dispatch, id }) => (
+const Title = ({ name, isFavorite, dispatch, id, setIsFavorite }) => (
 	<div className={styles.root}>
 		<Link href='/'>
 			<a className={styles.text}>
@@ -23,12 +19,7 @@ const Title = ({ name, isFavorite, dispatch, id }) => (
 				styles.like_btn, 
 				isFavorite && styles.active
 			)}
-			onClick={() => {
-				if (!isFavorite)
-					dispatch(addToFavorites(id))
-				else
-					dispatch(removeFromFavorites(id))
-			}}
+			onClick={() => setIsFavorite(!isFavorite)}
 		>
 			{isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
 		</button>

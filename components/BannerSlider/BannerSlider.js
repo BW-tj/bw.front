@@ -1,32 +1,15 @@
 import classNames from 'classnames'
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect, useCallback } from 'react'
 import Slider from 'react-slick'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon } from '../../icons'
 import styles from './BannerSlider.module.scss'
 
-const BannerSlider = ({ className }) => {
+const BannerSlider = ({ banners, className }) => {
 
-	const mainUrl = '/static/images/banner'
-
-	const imageList = [
-		{
-			src: `${mainUrl}/optimize.webp`,
-			href: '/',
-			alt: 'image1'
-		},
-		{
-			src: `${mainUrl}/optimize2.webp`,
-			href: '/',
-			alt: 'image2'
-		},
-		{
-			src: `${mainUrl}/optimize3.webp`,
-			href: '/',
-			alt: 'image3'
-		}
-	] 
+	const [imageList, setImageList] = useState([]);
+  const [dragging, setDragging] = useState(false)
   
 	const settings = {
     dots: true,
@@ -39,32 +22,66 @@ const BannerSlider = ({ className }) => {
     slidesToScroll: 1,
     initialSlide: 2,
 		arrows: false,
-		pauseOnHover: true
+		pauseOnHover: true,
   }
+
+	const handleBeforeChange = useCallback(() => {
+		setDragging(true)
+	}, [setDragging])
+
+	const handleAfterChange = useCallback(() => {
+		setDragging(false)
+	}, [setDragging])
+
+	const handleOnItemClick = useCallback(
+		e => {
+			if (dragging) {
+				e.preventDefault()
+			}
+		},
+		[dragging]
+	) 
+
+	useEffect(() => {
+    setImageList(banners.map(item => ({ 
+			id: item.id, 
+			src: process.env.NEXT_PUBLIC_HOST + item.imagePath, 
+			href: item.href,
+			alt: item.name 
+		})))
+		return () => setImageList([])
+	}, [banners]);
 
 	const slider = useRef(null)
 	
 	return (
 		<div className={classNames(styles.root, className)}>
-			<ArrowButtonPrev onClick={() => slider.slickPrev()} />
-			<Slider {...settings} ref={c => slider = c}>
-				{imageList.map(({ src, alt, href }) => 
+			{imageList.length > 1 && <ArrowButtonPrev onClick={() => slider.slickPrev()} />}
+			<Slider 
+				beforeChange={handleBeforeChange}
+				afterChange={handleAfterChange}
+				onEdge={() => console.log(1)}
+				{...settings} 
+				ref={c => slider = c}
+			>
+				{imageList.map(({ id, src, alt, href }) => 
 					<SliderItem 
 						src={src}
 						href={href}
 						alt={alt}
-						key={alt}
+						key={id}
+						onClick={handleOnItemClick}
 					/>
 				)}
 			</Slider>
-			<ArrowButtonNext onClick={() => slider.slickNext()} />
+			{imageList.length > 1 && <ArrowButtonNext onClick={() => slider.slickNext()} />}
 		</div>
 	)
 }
 
-const SliderItem = ({ src, href }) => (
+const SliderItem = ({ src, href, onClick }) => (
 	<Link href={href}>
-		<a>
+		<a onClick={onClick}>
 			<Image 
 				src={src} 
 				alt='image1' 

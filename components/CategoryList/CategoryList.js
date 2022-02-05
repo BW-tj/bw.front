@@ -67,14 +67,16 @@ const LeftBar = ({ categories, onMouseOver, activeCategory, onClose }) => {
 						onMouseOver={() => onMouseOver(category)}
 						onClick={onClose}
 					>
-						<div className={styles.category_icon}>
-							<Image 
-								src={category.iconpath} 
-								alt='icon' 
-								width={20}
-								height={20}
-							/>
-						</div>
+						{category.iconPath && 
+							<div className={styles.category_icon}>
+								<Image 
+									src={process.env.NEXT_PUBLIC_HOST + category.iconPath} 
+									alt='icon' 
+									width={20}
+									height={20}
+								/>
+							</div>
+						}
 						<div className={styles.category_name}>
 							{category.name}
 						</div>
@@ -97,7 +99,7 @@ const SubCategoryList = ({ activeCategory, onClose }) => {
 				</a>
 			</Link>
 			<div className={styles.sub_category_list}>
-				{activeCategory.subcategories.map(subCategory => 
+				{activeCategory.subCategories.map(subCategory => 
 					<SubSubCategoryList 	
 						key={subCategory.id}
 						subCategory={subCategory}
@@ -121,7 +123,7 @@ const SubSubCategoryList = ({ subCategory, onClose }) => {
 				</a>
 			</Link>
 			<div className={styles.sub_sub_category_list}>
-				{subCategory.subcategories.map(subSubCategory =>
+				{subCategory.subCategories.map(subSubCategory =>
 					<Link
 						href={`/category/${subSubCategory.id}`}
 						key={subSubCategory.id}

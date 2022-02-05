@@ -3,6 +3,11 @@
 
 .root {
 	position: relative;
+	border-radius: 8px;
+	overflow: hidden;
+	img {
+		border-radius: 8px;
+	}
 	&:hover {
 		.arrow_button {
 			opacity: 1;

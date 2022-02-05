@@ -3,15 +3,19 @@ import { useSelector, useDispatch } from 'react-redux'
 import If from '../If/If'
 import AddToCartButton from './AddToCartButton'
 import CartControllButtons from './CartControllButtons'
-import styles from './index.module.scss'
 // import InStock from './InStock'
 import LabelList from './LabelList'
 import Price from './Price'
 import Slider from './Slider'
 import Stars from './Stars'
 import Title from './Title'
+import styles from './index.module.scss'
+import { addToFavorites, removeFromFavorites } from '../../redux/actions/favorites.actions'
 
-const ProductCart = ({ id=1 }) => {
+const ProductCart = ({ 
+	id = 1,
+	data = null
+}) => {
 
 	const [product, setProduct] = useState(null)
 	const [isFavorite, setIsFavorite] = useState(false)
@@ -20,30 +24,31 @@ const ProductCart = ({ id=1 }) => {
 	const dispatch = useDispatch()
 
 	const cart = useSelector(state => state.cart)
-	const favorites = useSelector(state => state.favorites)
 
 	useEffect(() => {
+		if (!data) return
+		setIsFavorite(data.isFavorite)
 		setProduct({
-			name: 'Синяя толстовка на распродажу',
-			isNew: true,
-			promotionPercent: 17,
-			rating: 4,
-			// count: 24,
-			price: 90.00
+			name: data.name,
+			isNew: data.isNew,
+			promotionPercent: data.discount,
+			rating: data.rating,
+			price: data.price
 		})
-	}, [id])
+	}, [data])
+
+	useEffect(() => {
+		if (isFavorite)
+			dispatch(addToFavorites(id))
+		else
+			dispatch(removeFromFavorites(id))
+	}, [id, dispatch, isFavorite]);
 
 	useEffect(() => {
 		const itemInCart = cart.find(item => item.id === id)
 		if (!itemInCart) return setCountInCart(0)
 		setCountInCart(itemInCart.count)
 	}, [cart, id])
-
-	useEffect(() => {
-		const itemInFavorites = favorites.find(_id => _id === id)
-		if (!itemInFavorites) return setIsFavorite(false)
-		setIsFavorite(true)
-	}, [favorites, id])
 
 	if (!product) return <></>
 	return (
@@ -54,13 +59,14 @@ const ProductCart = ({ id=1 }) => {
 				promotionPercent={product.promotionPercent} 
 			/>
 
-			<Slider />
+			<Slider images={data.images} />
 
 			<Title 
 				id={id}
 				dispatch={dispatch}
 				name={product.name.slice(0, 30) + (product.name.length > 30 ? '...' : '')} 
 				isFavorite={isFavorite} 
+				setIsFavorite={setIsFavorite}
 			/>
 
 			<Price price={product.price} />

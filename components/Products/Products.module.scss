@@ -1,0 +1,8 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 30px;
+}

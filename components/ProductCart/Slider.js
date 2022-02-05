@@ -9,20 +9,14 @@ import {
 } from '../../icons'
 import SliderItem from './SliderItem'
 
-const Slider = () => {
+const Slider = ({ images = null }) => {
 
-	const mainUrl = '/static/images/stocks'
+	const mainUrl = process.env.NEXT_PUBLIC_HOST
 
 	const slider = useRef(null)
 
 	const [currentSlide, setCurrentSlide] = useState(0)
 	const [settings, setSettings] = useState({})
-
-	const imageList = [
-		`${mainUrl}/tolstovka.png`,
-		`${mainUrl}/tolstovka.png`,
-		`${mainUrl}/tolstovka.png`
-	] 
   
 	useMemo(() => {
 		setSettings({
@@ -43,9 +37,9 @@ const Slider = () => {
 			<Link href='/'>
 				<a className={styles.image_link}>
 					<SliderConstructor {...settings} ref={c => slider = c}>
-						{imageList.map((src, index) => 
+						{images && images.map((src, index) => 
 							<SliderItem 
-								src={src}
+								src={mainUrl + src}
 								key={index}
 							/>
 						)}
@@ -60,7 +54,7 @@ const Slider = () => {
 					<ArrowBackIcon />
 				</button>
 				<button 
-					className={classNames(styles.arrow_btn, currentSlide === imageList.length-1 && styles.disabled)}  
+					className={classNames(styles.arrow_btn, currentSlide === images.length-1 && styles.disabled)}  
 					onClick={() => slider.slickNext()} 
 				>
 					<ArrowForwardIcon />

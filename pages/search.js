@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import LayoutController from '../layouts/LayoutController'
@@ -20,6 +21,7 @@ export const getStaticProps = async () => {
 const Search = ({ categories }) => {
 
   const [products, setProducts] = useState(null)
+  const [search, setSearch] = useState('')
 
   const router = useRouter()
 
@@ -28,6 +30,8 @@ const Search = ({ categories }) => {
     const params = Object.fromEntries(urlSearchParams.entries())
 
     if (!params.q) return window.location.replace('/')
+
+    setSearch(params.q);
 
     let url = process.env.NEXT_PUBLIC_HOST+'/products?q='+params.q
 
@@ -50,6 +54,9 @@ const Search = ({ categories }) => {
 
 	return (
     <LayoutController categories={categories}>
+      <Head>
+        <title>{search} – купить в большой стирке</title>
+      </Head>
       <div className={styles.root}>
         <Title className={styles.title}>Результаты поиска</Title>
       </div>
