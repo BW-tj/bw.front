@@ -88,7 +88,7 @@
 	box-shadow: 0 0 14px rgba(0,0,0,0.2);
 	max-height: 400px;
 	overflow-y: auto;
-	animation: fadeIn 0.2s ease-in-out;
+	animation: fadeIn 0.1s ease-out forwards;
 }
 
 .category_menu_item, .category_menu_subitem, .category_menu_subsubitem {

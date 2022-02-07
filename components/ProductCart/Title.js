@@ -7,7 +7,7 @@ import {
 } from '../../icons'
 import styles from './Title.module.scss'
 
-const Title = ({ name, isFavorite, dispatch, id, setIsFavorite }) => (
+const Title = ({ name, isFavorite, setIsFavorite }) => (
 	<div className={styles.root}>
 		<Link href='/'>
 			<a className={styles.text}>

@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Search as SearchIcon, UnfoldMore } from '../../icons'
 import If from '../If/If'
@@ -8,9 +8,7 @@ import styles from './SearchBox.module.scss'
 
 const SearchBox = ({ onChangeSearchFocus, isFocused }) => {
 
-	const [value, setValue] = useState('')
-
-	// const inputRef = useRef(null)
+	const [value, setValue] = useState("")
 
 	const [selectedCategory, setSelectedCategory] = useState('Все продукты')
 	const [selectedCategoryId, setSelectedCategoryId] = useState(null)
@@ -25,8 +23,6 @@ const SearchBox = ({ onChangeSearchFocus, isFocused }) => {
 	}
 
 	const handleSearch = () => {
-		if (value.trim() === '') 
-			return onChangeSearchFocus(false)
 
 		let query = '/search?q=' + value
 
@@ -51,7 +47,7 @@ const SearchBox = ({ onChangeSearchFocus, isFocused }) => {
 
 	}, [])
 
-	useEffect(() => {
+	React.useMemo(() => {
 		if (router.query.q)
 			setValue(router.query.q)
 	}, [router.query])
@@ -89,7 +85,6 @@ const SearchBox = ({ onChangeSearchFocus, isFocused }) => {
 			<input
 				type='text'
 				value={value}
-				// ref={inputRef}
 				onChange={e => setValue(e.target.value)}
 				onFocus={() => handleFocusInput()}
 				onKeyPress={e => {
@@ -285,4 +280,4 @@ const CategoryMenuSubSubItem = ({
 	)
 }
 
-export default SearchBox
+export default React.memo(SearchBox);

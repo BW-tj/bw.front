@@ -12,7 +12,10 @@ import Favorite from './Favorite'
 import Grade from './Grade'
 import LocalHospital from './LocalHospital'
 import LocalOffer from './LocalOffer'
+import KeyboardArrowDown from './KeyboardArrowDown'
 import UnfoldMore from './UnfoldMore'
+import CheckBoxOutlineBlank from './CheckBoxOutlineBlank'
+import CheckBox from './CheckBox'
 
 export {
 	Menu,
@@ -29,5 +32,8 @@ export {
 	Grade,
 	LocalHospital,
 	LocalOffer,
-	UnfoldMore
+	KeyboardArrowDown,
+	UnfoldMore,
+	CheckBoxOutlineBlank,
+	CheckBox
 }

@@ -6,6 +6,7 @@ import Products from '../components/Products/Products'
 import Title from '../components/Title/Title'
 import LayoutController from '../layouts/LayoutController'
 import styles from '../styles/Home.module.scss'
+import * as skeletons from '../skeletons'
 
 export const getStaticProps = async () => {
 
@@ -30,12 +31,19 @@ export const getStaticProps = async () => {
 const Home = ({ categories, brands, banners }) => {
 
   const [products, setProducts] = React.useState(null)
+  const [pending, setPending] = React.useState(true)
 
   React.useEffect(() => {
     const getProducts = async () => {
-      const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration')
-      const products = await productsRes.json()
-      setProducts(products)
+      try {
+        setPending(true);
+        const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration')
+        const products = await productsRes.json()
+        setProducts(products)
+      }
+      finally {
+        setPending(false)
+      }
     }
     getProducts()
   }, [])
@@ -46,17 +54,18 @@ const Home = ({ categories, brands, banners }) => {
         
         <BannerSlider className={styles.banner_slider} banners={banners} />
 
-        {/* <Title className={styles.title}>Хиты продаж</Title> */}
-
         <div className="container">
           <Products>
-            {products && products.data.map(product => 
-              <ProductCart 
-                id={product.id}
-                key={product.id}
-                data={product}
-              />
-            )}
+            {pending ? 
+              <skeletons.ProductsSkeleton /> :
+              products.data.map(product => 
+                <ProductCart 
+                  id={product.id}
+                  key={product.id}
+                  data={product}
+                />
+              )
+            }
           </Products>
         </div>
 
