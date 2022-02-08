@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { QueryToString } from '../functions/query';
-import LayoutController from "../layouts/LayoutController";
+import { Pagination } from '../components/Pagination';
 import Title from "../components/Title/Title";
 import ProductCart from '../components/ProductCart'
 import Products from '../components/Products/Products'
 import FilterSidebar from './../components/FilterSidebar';
+import LayoutController from "../layouts/LayoutController";
+import Tools from '../components/Tools';
 import * as skeletons from '../skeletons';
 import styles from "../styles/Search.module.scss";
-import { Pagination } from '../components/Pagination';
-import Tools from '../components/Tools';
 
 export const getStaticProps = async () => {
   const categories = await fetch(
@@ -60,6 +60,7 @@ const Search = ({ categories }) => {
       process.env.NEXT_PUBLIC_HOST + "/product/filtration?" + QueryToString(params);
     const config = {
       method: "GET",
+      credentials: 'include',
     };
     const getData = async () => {
       try {
@@ -80,7 +81,7 @@ const Search = ({ categories }) => {
   return (
     <LayoutController categories={categories}>
       <Head>
-        <title>{params?.query || "Запрос"} – купить в большой стирке</title>
+        <title>{params?.query || '""'} – купить в большой стирке</title>
       </Head>
       <div className={styles.root}>
         <Title className={styles.title}>

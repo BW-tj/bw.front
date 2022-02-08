@@ -45,7 +45,7 @@ const BannerSlider = ({ banners, className }) => {
 	useEffect(() => {
     setImageList(banners.map(item => ({ 
 			id: item.id, 
-			src: process.env.NEXT_PUBLIC_HOST + item.imagePath, 
+			src: process.env.NEXT_PUBLIC_HOST_WITHOUT_API + item.imagePath, 
 			href: item.href,
 			alt: item.name 
 		})))
@@ -81,7 +81,7 @@ const BannerSlider = ({ banners, className }) => {
 
 const SliderItem = ({ src, href, onClick }) => (
 	<Link href={href}>
-		<a onClick={onClick}>
+		<a onClick={onClick} target="_blank" referrerPolicy='no-referrer'>
 			<Image 
 				src={src} 
 				alt='image1' 

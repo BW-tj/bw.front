@@ -11,10 +11,10 @@ const BrandsSlider = ({ brands, className }) => {
     dots: true,
     infinite: true,
     speed: 200,
-    slidesToShow: 5,
+    slidesToShow: brands.length < 5 ? brands.length : 5,
 		draggable: false,
     slidesToScroll: 1,
-    initialSlide: 2,
+    initialSlide: 1,
 		arrows: false
   })
 
@@ -39,12 +39,12 @@ const BrandsSlider = ({ brands, className }) => {
 	useEffect(() => {
     setImageList(brands.map(item => ({ 
 			id: item.id, 
-			src: process.env.NEXT_PUBLIC_HOST + item.imagePath, 
+			src: process.env.NEXT_PUBLIC_HOST_WITHOUT_API + item.imagePath, 
 			alt: item.name 
 		})))
 		return () => setImageList([])
 	}, [brands]);
-	
+
 	return (
 		<div className={classNames(styles.root, className)}>
 		{imageList.length > 5 && <ArrowButtonPrev onClick={() => slider.slickPrev()} />}

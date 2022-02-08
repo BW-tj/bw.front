@@ -1,7 +1,8 @@
 import * as t from '../types'
 
 const initialState = {
-	token: '51t3gw35tyhern'
+	token: '51t3gw35tyhern',
+	isAuth: false
 }
 
 const userReducer = (state = initialState, action) => {

@@ -6,8 +6,9 @@ import {
 	FavoriteBorder as FavoriteBorderIcon
 } from '../../icons'
 import styles from './Title.module.scss'
+import { useSelector } from 'react-redux'
 
-const Title = ({ name, isFavorite, setIsFavorite }) => (
+const Title = ({ name, isFavorite, onToggleFavorite }) => (
 	<div className={styles.root}>
 		<Link href='/'>
 			<a className={styles.text}>
@@ -19,11 +20,11 @@ const Title = ({ name, isFavorite, setIsFavorite }) => (
 				styles.like_btn, 
 				isFavorite && styles.active
 			)}
-			onClick={() => setIsFavorite(!isFavorite)}
+			onClick={() => onToggleFavorite(!isFavorite)}
 		>
 			{isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
 		</button>
 	</div>
 )
-
+	
 export default Title

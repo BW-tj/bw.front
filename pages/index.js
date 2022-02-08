@@ -7,6 +7,7 @@ import Title from '../components/Title/Title'
 import LayoutController from '../layouts/LayoutController'
 import styles from '../styles/Home.module.scss'
 import * as skeletons from '../skeletons'
+import { useSelector } from 'react-redux';
 
 export const getStaticProps = async () => {
 
@@ -33,6 +34,9 @@ const Home = ({ categories, brands, banners }) => {
   const [products, setProducts] = React.useState(null)
   const [pending, setPending] = React.useState(true)
 
+  const favorites = useSelector(state => state.favorites)
+  const user = useSelector(state => state.user)
+
   React.useEffect(() => {
     const getProducts = async () => {
       try {
@@ -58,13 +62,25 @@ const Home = ({ categories, brands, banners }) => {
           <Products>
             {pending ? 
               <skeletons.ProductsSkeleton /> :
-              products.data.map(product => 
-                <ProductCart 
-                  id={product.id}
-                  key={product.id}
-                  data={product}
-                />
-              )
+              products.data.map(product => {
+                let initialFavorite = false;
+                if (!user.isAuth)
+                  favorites.forEach(favorite => {
+                    if (favorite.id === product.id) {
+                      initialFavorite = true;
+                    }
+                  })
+                else 
+                  initialFavorite = product.isFavorite
+                return (
+                  <ProductCart
+                    id={product.id}
+                    key={product.id}
+                    data={product}
+                    initialFavorite={initialFavorite}
+                  />
+                )
+              })
             }
           </Products>
         </div>

@@ -2,8 +2,7 @@
 @import '../../styles/mixins';
 
 .root {
-	width: 230px;
-	height: 230px;
+	overflow: hidden;
 	position: relative;
 	&:hover {
 		.button_group {

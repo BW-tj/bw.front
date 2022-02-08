@@ -32,7 +32,11 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async context => {
 	const { id } = context.params
-	const responseProducts = await fetch(process.env.NEXT_PUBLIC_DEVHOST+'/products?categoryId='+id)
+	const url = process.env.NEXT_PUBLIC_DEVHOST+'/products?categoryId='+id
+	const responseProducts = await fetch(url, {
+		method: 'GET',
+		credentials: 'include'
+	})
 	const products = await responseProducts.json()
 
   const responseCategories = await fetch(process.env.NEXT_PUBLIC_HOST+'/categories')
