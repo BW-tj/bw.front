@@ -35,7 +35,6 @@ export const getStaticProps = async context => {
 	const url = process.env.NEXT_PUBLIC_DEVHOST+'/products?categoryId='+id
 	const responseProducts = await fetch(url, {
 		method: 'GET',
-		credentials: 'include'
 	})
 	const products = await responseProducts.json()
 

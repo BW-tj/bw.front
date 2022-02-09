@@ -60,7 +60,6 @@ const Search = ({ categories }) => {
       process.env.NEXT_PUBLIC_HOST + "/product/filtration?" + QueryToString(params);
     const config = {
       method: "GET",
-      credentials: 'include',
     };
     const getData = async () => {
       try {

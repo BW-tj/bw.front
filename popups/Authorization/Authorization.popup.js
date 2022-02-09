@@ -1,20 +1,25 @@
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { openPopup } from '../../redux/actions/popup.actions'
 import If from '../../components/If/If'
 import Registration from './Registration.popup'
 import styles from './Authorization.module.scss'
+import { login } from '../../redux/actions/user.actions'
+import { pullCart, pushCart } from '../../redux/actions/cart.actions'
 
 const Authorization = ({ onClose }) => {
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [errors, setErrors] = useState({ email: '', passowrd: '' })
+	const [mainError, setMainError] = useState('')
 
 	const loginButton = useRef(null)
 
 	const dispatch = useDispatch()
+	const cart = useSelector(state => state.cart)
+	const user = useSelector(state => state.user)
 
 	const clearErrors = () => {
 		setErrors({ email: '', password: '' })
@@ -24,10 +29,6 @@ const Authorization = ({ onClose }) => {
 		clearErrors()
 		if (email.indexOf('@') === -1) {
 			setErrors(prev => ({...prev, email: 'Введите корректную почту'}))
-			return false
-		}
-		if (password.trim().length < 8) {
-			setErrors(prev => ({...prev, password: 'Минимальная длина пароля – 8 знаков'}))
 			return false
 		}
 		return true 
@@ -45,14 +46,41 @@ const Authorization = ({ onClose }) => {
 		if (!checkValidation()) 
 			return
 
-		loginButton.current.classList.add(styles.loading)
+		await loginButton.current.classList.add(styles.loading)
 
-		setTimeout(() => {
+		const response = await fetch(process.env.NEXT_PUBLIC_HOST + '/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email,
+				password
+			})
+		})
+		
+		if (response.status >= 400) {
 			loginButton.current.classList.remove(styles.loading)
-			onClose()
-		}, 2000)
+			return setMainError('Неверный логин или пароль')
+		}
+	
+		const userData = await response.json()
+	
+		localStorage.setItem(process.env.NEXT_PUBLIC_LS_TOKEN, userData.token)
+
+		await dispatch(login(userData))
+
+		if (cart.length)
+			await dispatch(pushCart(cart.map(item => ({ productId: item.productId, count: item.count}))))
+
+		await dispatch(pullCart())
 	}
 
+	useEffect(() => {
+		if (user.token) {
+			onClose()
+		}
+	}, [user.token, onClose])
 
 	useEffect(() => {
 		const handleWindowClick = e => {
@@ -98,6 +126,11 @@ const Authorization = ({ onClose }) => {
 				/>
 
 				<div className={styles.button_group}>
+					{mainError !== '' && 
+						<div className={styles.error}>
+							{mainError}
+						</div>
+					}
 					<button 
 						ref={loginButton}
 						onClick={() => handleLogin()}

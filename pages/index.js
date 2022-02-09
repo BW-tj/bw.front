@@ -41,7 +41,14 @@ const Home = ({ categories, brands, banners }) => {
     const getProducts = async () => {
       try {
         setPending(true);
-        const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration')
+        let config = {}
+        if (user.isAuth)
+          config = {
+            headers: {
+              'Authorization': 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
+            }
+          }
+        const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration', config)
         const products = await productsRes.json()
         setProducts(products)
       }
@@ -50,7 +57,7 @@ const Home = ({ categories, brands, banners }) => {
       }
     }
     getProducts()
-  }, [])
+  }, [user.isAuth])
   
   return (
     <LayoutController categories={categories}>

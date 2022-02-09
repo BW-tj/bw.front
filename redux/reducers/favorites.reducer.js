@@ -10,6 +10,8 @@ const favoritesReducer = (state = initialState, action) => {
 			return [...state, action.payload]
 		case t.REMOVE_FROM_FAVORITES:
 			return state.filter(productsCardData => productsCardData.id !== action.payload)
+		case t.LOGOUT: 
+			return []
 		default:
 			return state
 	}

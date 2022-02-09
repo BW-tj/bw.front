@@ -12,11 +12,11 @@ const cartReducer = (state = initialState, action) => {
 			return [...action.payload]
 
 		case t.REMOVE_FROM_CART:
-			return state.filter(product => product.id !== action.payload)
+			return state.filter(product => product.productId !== action.payload)
 
 		case t.INCREASE_PRODUCT_COUNT:
 			return state.map(product => {
-				if (product.id === action.payload)
+				if (product.productId === action.payload)
 					return {
 						...product,
 						count: product.count+1
@@ -26,7 +26,7 @@ const cartReducer = (state = initialState, action) => {
 
 		case t.DECREASE_PRODUCT_COUNT:
 			return state.map(product => {
-				if (product.id === action.payload)
+				if (product.productId === action.payload)
 					return {
 						...product,
 						count: product.count-1
@@ -36,13 +36,16 @@ const cartReducer = (state = initialState, action) => {
 
 		case t.CHANGE_PRODUCT_COUNT:
 			return state.map(product => {
-				if (product.id === action.payload.id && action.payload.count !== 0)
+				if (product.productId === action.payload.id && action.payload.count !== 0)
 					return {
 						...product,
 						count: action.payload.count
 					}
 				return product
 			})
+
+		case t.LOGOUT: 
+			return []
 			
 		default:
 			return state

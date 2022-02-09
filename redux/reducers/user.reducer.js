@@ -1,12 +1,20 @@
 import * as t from '../types'
 
 const initialState = {
-	token: '51t3gw35tyhern',
 	isAuth: false
 }
 
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case t.LOGIN: 
+			return {
+				...action.payload,
+				isAuth: true
+			}
+		case t.LOGOUT: 
+			return {
+				isAuth: false
+			}
 		default:
 			return state
 	}

@@ -19,3 +19,7 @@ export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES'
 
 /* CATEGORIES TYPES */
 export const SET_CATEGORIES = 'SET_CATEGORIES'
+
+/* USER TYPES */
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { 
 	FavoriteBorder as FavoriteBorderIcon,
@@ -11,16 +12,25 @@ import { openPopup } from '../../redux/actions/popup.actions'
 import Authorization from '../../popups/Authorization/Authorization.popup'
 import If from '../If/If'
 import styles from './DesktopNavigationTools.module.scss'
+import classNames from 'classnames'
+import { logout } from '../../redux/actions/user.actions'
 
-const DesktopNavigationTools = ({ user }) => {
+const DesktopNavigationTools = () => {
 
 	const [favoriteNotification, setFavoriteNotification] = useState(0)
 	const [cartNotification, setCartNotification] = useState(0)
-
+	
 	const dispatch = useDispatch()
-
+	
+	const user = useSelector(state => state.user)
 	const cart = useSelector(state => state.cart)
 	const favorites = useSelector(state => state.favorites)
+
+	const handleLogOut = useCallback(() => {
+		localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+		dispatch(logout())
+		window.location.reload()
+	}, [dispatch])
 
 	useEffect(() => {
 		setCartNotification(cart.reduce((acc, product) => acc + product.count, 0))
@@ -45,10 +55,22 @@ const DesktopNavigationTools = ({ user }) => {
 				notification={cartNotification}
 			/>
 			
-			<ButtonComponent
-				icon={!user ? SaveAltIcon : PersonOutlineIcon}
-				onClick={() => dispatch(openPopup(props => <Authorization {...props} />))}
-			/>
+			{!user.isAuth &&
+				<ButtonComponent
+					icon={SaveAltIcon}
+					onClick={() => dispatch(openPopup(props => <Authorization {...props} />))}
+				/>
+			}
+			
+			{user.isAuth && 
+				<Dropdown id="profile" label={
+					<ButtonComponent icon={PersonOutlineIcon} onClick={() => {}} />
+				}>
+					<button className={classNames(styles.link, styles.warning)} onClick={handleLogOut}>
+						Выйти из аккаунта
+					</button>
+				</Dropdown>
+			}
 
 		</div>
 	)
@@ -59,7 +81,7 @@ const ButtonComponent = ({ icon, onClick }) => {
 	return (
 		<button className={styles.button} onClick={onClick}>
 			<span className={styles.icon}>
-				<Icon size={36} />
+				<Icon size={32} />
 			</span>
 		</button>
 	)
@@ -80,6 +102,34 @@ const LinkComponent = ({ link, icon, notification=0 }) => {
 				</If>
 			</a>
 		</Link>
+	)
+}
+
+const Dropdown = ({ id, children, label }) => {
+
+	const [open, setOpen] = useState(false)
+
+	useEffect(() => {
+		const handleWindowClick = e => {
+			if (!e.target.closest('#nav-dropdown-'+id))
+				setOpen(false)
+		}
+
+		window.addEventListener('click', handleWindowClick)
+		return () => window.removeEventListener('click', handleWindowClick)
+	}, [id])
+
+	return (
+		<div id={'nav-dropdown-'+id} className={styles.dropdown}>
+			<div className={styles.dropdown_label} onClick={() => setOpen(!open)}>
+				{label}
+			</div>
+			{open && 
+				<div className={styles.dropdown_content}>
+					{children}
+				</div>
+			}
+		</div>
 	)
 }
 

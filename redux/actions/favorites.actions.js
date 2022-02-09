@@ -4,7 +4,6 @@ export const updateFavorites = () => async dispatch => {
 	
 	const response = await fetch(process.env.NEXT_PUBLIC_HOST + '/favorite', {
 		method: 'POST',
-		credentials: 'include',
 		headers: {
 			'Content-Type': 'application/json'
 		}
@@ -30,9 +29,9 @@ export const addToFavoritesService = productCardData => async dispatch => {
 	await fetch(process.env.NEXT_PUBLIC_HOST + '/favorite', {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
 		},
-		credentials: 'same-origin/include',
 		body: JSON.stringify({
 			productId: productCardData.id
 		})
