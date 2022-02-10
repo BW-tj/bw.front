@@ -75,13 +75,13 @@ const Cart = ({ onClose }) => {
 								<Image 
 									src={"https://static.vecteezy.com/system/resources/thumbnails/002/487/856/small/banana-fruit-free-vector.jpg"} 
 									// src={process.env.NEXT_PUBLIC_HOST_WITHOUT_API + item.images[0]} 
-									alt={item.name} 
+									alt={item.name || item.productName} 
 									width={100}
 									height={100}
 								/>
 							</div>
 							<div className={styles.item_name}>
-								{item.name}
+								{item.name || item.productName}
 							</div>
 							<div className={styles.item_countController}>
 								<button 
