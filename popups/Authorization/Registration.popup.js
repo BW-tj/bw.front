@@ -5,6 +5,9 @@ import If from '../../components/If/If'
 import { openPopup } from '../../redux/actions/popup.actions'
 import Authorization from './Authorization.popup'
 import styles from './Authorization.module.scss'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/dist/client/router'
+import SuccessCreateUser from './SuccesCreateUser'
 
 const Registration = ({ onClose }) => {
 
@@ -13,13 +16,14 @@ const Registration = ({ onClose }) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [phone, setPhone] = useState('')
+	const router = useRouter()
 
 	const [errors, setErrors] = useState({ email: '', passowrd: '' })
+	const user = useSelector(state => state.user)
 
 	const loginButton = useRef(null)
 
 	const dispatch = useDispatch()
-
 
 	const clearErrors = () => {
 		setErrors({ email: '', password: '' })
@@ -50,33 +54,59 @@ const Registration = ({ onClose }) => {
 		return true 
 	}
 
-
 	const handleLogin = () => {
 		dispatch(openPopup(props => <Authorization {...props} email={email} password={password} />))
+	}
+
+	const handleSuccess = () => {
+		dispatch(openPopup(props => <SuccessCreateUser {...props} />))
 	}
 
 	const handleRegister = async () => {
 		if (!checkValidation()) 
 			return
 
-		loginButton.current.classList.add(styles.loading)
+		await loginButton.current.classList.add(styles.loading)
 
-		setTimeout(() => {
-			loginButton.current.classList.remove(styles.loading)
-			onClose()
-		}, 2000)
+		const response = await fetch(process.env.NEXT_PUBLIC_HOST + '/registration', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email,
+				password,
+				phoneNumber: phone,
+				firstName,
+				lastName
+			})
+		})
+
+		const data = await response.data;
+
+		if (response.status === 409)
+			return setErrors(prev => ({...prev, email: data.Message}));
+
+		await loginButton.current.classList.remove(styles.loading)
+
+		if (response.status === 204)
+			handleSuccess()
 	}
 
+	useEffect(() => {
+		if (user.token) {
+			onClose()
+		}
+	}, [user.token, onClose])
 
 	useEffect(() => {
 		const handleWindowClick = e => {
 			if (!e.target.closest('.' + styles.wrap))
 				onClose()
 		}
-		window.addEventListener('click', handleWindowClick)
-		return () => window.removeEventListener('click', handleWindowClick)
+		window.addEventListener('mousedown', handleWindowClick)
+		return () => window.removeEventListener('mousedown', handleWindowClick)
 	}, [onClose])
-
 
 	return (
 		<div className={classNames(styles.root, styles.start)}>
