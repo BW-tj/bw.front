@@ -87,8 +87,8 @@ const Authorization = ({ onClose }) => {
 			if (!e.target.closest('.' + styles.wrap))
 				onClose()
 		}
-		window.addEventListener('click', handleWindowClick)
-		return () => window.removeEventListener('click', handleWindowClick)
+		window.addEventListener('mousedown', handleWindowClick)
+		return () => window.removeEventListener('mousedown', handleWindowClick)
 	}, [onClose])
 
 

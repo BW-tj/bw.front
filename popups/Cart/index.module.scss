@@ -1,0 +1,162 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	height: 100%;
+	width: 100%;
+	padding: 70px 0;
+	overflow-y: auto;
+}
+
+.wrap {
+	margin: 0 auto;
+	width: 850px;
+	background: $secondary-color;
+	padding: 30px 20px;
+	border-radius: 3px;
+}
+
+.title {
+	font-size: 1.75rem;
+	font-weight: 900;
+	color: $primary-color;
+	text-align: center;
+	letter-spacing: 0.06rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.clearButtonWrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.clearButton {
+	font-size: 0.875rem;
+	color: $search-placeholder-color;
+	letter-spacing: 0.05rem;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.item {
+	display: grid;
+	grid-template-columns: 0.8fr 1fr 1fr 1fr;
+	border-radius: 8px;
+	overflow: hidden;
+	padding: 0 20px;
+	transition: 100ms linear;
+	&:hover {
+		box-shadow: 0 0 14px rgba(rgb(148, 148, 148), 0.2);
+	}
+}
+
+.item_removeButton {
+	font-size: 0.875rem;
+	color: #fff;
+	padding: 8px;
+	border-radius: 4px;
+	background: $red;
+	letter-spacing: 0.05rem;
+	transition: 100ms linear;
+	&:hover {
+		background: darken($red, 9%);
+	}
+	&:active {
+		background: darken($red, 14%);
+	}
+}
+
+.item_name, .item_countController, .item_end {
+	display: flex;
+	align-items: center;
+}
+
+.item_name {
+	font-weight: 600;
+	font-size: 1.125rem;
+}
+
+.item_countController {
+	justify-content: center;
+	gap: 15px;
+	.item_count {
+		width: 20px;
+		text-align: center;
+	}
+	.item_countButton {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
+		border-radius: 50px;
+		border: 1px solid #D9D9D9;
+		transition: 100ms linear;
+		background: #D9D9D9;
+		font-size: 1.125em;
+		&:hover {
+			border-color: $grey-color;
+		}	
+	}
+}
+
+.item_price {
+	font-size: 0.875rem;
+	color: $search-placeholder-color;
+}
+
+.item_end {
+	justify-content: flex-end;
+	gap: 20px;
+}
+
+.totalInfo_wrap {
+	margin-top: 30px;
+	display: grid;
+	grid-template-columns: 0.8fr 3fr;
+}
+
+.totalInfo {
+	padding-top: 20px;
+	border-top: 1px solid #D9D9D9;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.totalInfo_up {
+	text-align: right;
+}
+
+.totalInfo_count {
+	font-size: 0.875rem;
+	color: $search-placeholder-color;
+}
+
+.totalInfo_price {
+	font-weight: 600;
+	font-size: 1.75rem;
+}
+
+.checkoutButton {
+	padding: 12px 20px;
+	border-radius: 30px;
+	margin-top: 20px;
+	background: $primary-color;
+	color: #fff;
+	transition: 100ms linear;
+	&:hover {
+		background-color: darken($primary-color, 8%);
+	}
+	&:active {
+		background-color: darken($primary-color, 13%);
+	}
+}

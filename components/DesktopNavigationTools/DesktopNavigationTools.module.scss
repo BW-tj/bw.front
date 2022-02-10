@@ -12,6 +12,10 @@
 	position: relative;
 	border-radius: 50px;
 	transition: 50ms linear;
+	&.disabled {
+		opacity: 0.5;
+		pointer-events: none;
+	}
 
 	&:active {
 		transform: scale(0.95);

@@ -14,6 +14,7 @@ import If from '../If/If'
 import styles from './DesktopNavigationTools.module.scss'
 import classNames from 'classnames'
 import { logout } from '../../redux/actions/user.actions'
+import Cart from '../../popups/Cart'
 
 const DesktopNavigationTools = () => {
 
@@ -48,11 +49,12 @@ const DesktopNavigationTools = () => {
 				icon={FavoriteBorderIcon}
 				notification={favoriteNotification}
 			/>
-			
-			<LinkComponent
-				link='/'
+
+			<ButtonComponent
+				disabled={cart.length === 0}
 				icon={ShoppingCartIcon}
 				notification={cartNotification}
+				onClick={() => dispatch(openPopup(props => <Cart {...props} />))}
 			/>
 			
 			{!user.isAuth &&
@@ -76,13 +78,18 @@ const DesktopNavigationTools = () => {
 	)
 }
 
-const ButtonComponent = ({ icon, onClick }) => {
+const ButtonComponent = ({ icon, onClick, notification=0, disabled=false }) => {
 	const Icon = icon
 	return (
-		<button className={styles.button} onClick={onClick}>
+		<button className={classNames(styles.button, disabled && styles.disabled)} onClick={onClick} disabled={disabled}>
 			<span className={styles.icon}>
-				<Icon size={32} />
+				<Icon size={30} />
 			</span>
+			<If condition={notification !== 0}>
+				<span className={styles.notification}>
+					{notification}
+				</span>
+			</If>
 		</button>
 	)
 }
