@@ -111,7 +111,6 @@ const ProductCart = ({ id = 1, initialFavorite=false, data = null }) => {
         isNew={product.isNew}
         promotionPercent={product.promotionPercent}
       />
-
       <Slider images={data.images} width={width} height={height} />
 
       <Title

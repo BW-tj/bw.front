@@ -7,6 +7,7 @@ import Registration from './Registration.popup'
 import styles from './Authorization.module.scss'
 import { login } from '../../redux/actions/user.actions'
 import { pullCart, pushCart } from '../../redux/actions/cart.actions'
+import { updateFavorites } from './../../redux/actions/favorites.actions';
 
 const Authorization = ({ onClose }) => {
 
@@ -19,6 +20,7 @@ const Authorization = ({ onClose }) => {
 
 	const dispatch = useDispatch()
 	const cart = useSelector(state => state.cart)
+	const favorites = useSelector(state => state.favorites)
 	const user = useSelector(state => state.user)
 
 	const clearErrors = () => {
@@ -67,6 +69,9 @@ const Authorization = ({ onClose }) => {
 		const userData = await response.json()
 	
 		localStorage.setItem(process.env.NEXT_PUBLIC_LS_TOKEN, userData.token)
+
+		console.log(favorites)
+		await dispatch(updateFavorites(favorites))
 
 		await dispatch(login(userData))
 
@@ -133,7 +138,7 @@ const Authorization = ({ onClose }) => {
 					}
 					<button 
 						ref={loginButton}
-						onClick={() => handleLogin()}
+						type="submit"
 						className={classNames(styles.btn, styles.contained_btn)}
 					>
 						Войти

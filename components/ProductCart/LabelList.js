@@ -8,7 +8,6 @@ const LabelList = ({ promotionPercent, isNew }) => (
 		<If condition={isNew}>
 			<Label link='/' text='Новинка' className={styles.label_new_product} />
 		</If>
-
 		<If condition={promotionPercent !== 0}>
 			<Label 
 				link='/' text={'Акция -' + promotionPercent + '%'} 

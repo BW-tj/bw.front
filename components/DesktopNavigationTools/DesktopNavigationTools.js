@@ -45,7 +45,7 @@ const DesktopNavigationTools = () => {
 		<div className={styles.root}>
 			
 			<LinkComponent
-				link='/'
+				link='/favorites'
 				icon={FavoriteBorderIcon}
 				notification={favoriteNotification}
 			/>

@@ -55,7 +55,7 @@ const Slider = ({ images = null, width=0 }) => {
 					<ArrowBackIcon />
 				</button>
 				<button 
-					className={classNames(styles.arrow_btn, currentSlide === images.length-1 && styles.disabled)}  
+					className={classNames(styles.arrow_btn, images && currentSlide === images.length-1 && styles.disabled)}  
 					onClick={() => slider.slickNext()} 
 				>
 					<ArrowForwardIcon />
