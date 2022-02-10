@@ -25,6 +25,13 @@
 	&:active {
 		transform: scale(0.98);
 	}
+	&.active {
+		box-shadow: 0 0 14px rgba(#000, 0.2);
+		color: $primary-color-d2;
+		.button_text {
+			color: $primary-color-d2;
+		}
+	}
 }
 
 .button_icon {

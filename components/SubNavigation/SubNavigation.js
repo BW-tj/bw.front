@@ -6,22 +6,23 @@ import {
 	LocalOffer as LocalOfferIcon
 } from '../../icons'
 import styles from './SubNavigation.module.scss'
+import { useRouter } from 'next/router'
+import classNames from 'classnames'
 
 const SubNavigation = () => {
-
 	const list = [
 		{
-			link: '/',
+			link: '/discounts',
 			text: 'Скидки',
 			icon: LocalOfferIcon
 		},
 		{
-			link: '/',
+			link: '/new',
 			text: 'Новые товары',
 			icon: LocalHospitalIcon
 		},
 		{
-			link: '/',
+			link: '/bestsellers',
 			text: 'Хит продаж',
 			icon: GradeIcon
 		}
@@ -37,10 +38,14 @@ const SubNavigation = () => {
 }
 
 const Button = ({ button }) => {
+	const router = useRouter()
 	const IconTag = button.icon
 	return (
 		<Link href={button.link}>
-			<a className={styles.button} draggable={false}>
+			<a 
+				className={classNames(styles.button, router.asPath === button.link && styles.active)} 
+				draggable={false}
+			>
 				<span className={styles.button_icon}>
 					<IconTag size={18} /> 
 				</span>

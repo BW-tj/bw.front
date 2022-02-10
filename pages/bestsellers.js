@@ -1,13 +1,11 @@
-import Head from 'next/head'
 import React from 'react';
-import BannerSlider from '../components/BannerSlider/BannerSlider'
-import BrandsSlider from '../components/BrandsSlider/BrandsSlider'
-import ProductCart from '../components/ProductCart'
-import Products from '../components/Products/Products'
-import Title from '../components/Title/Title'
-import LayoutController from '../layouts/LayoutController'
-import styles from '../styles/Home.module.scss'
-import * as skeletons from '../skeletons'
+import Head from 'next/head';
+import Products from '../components/Products/Products';
+import Title from '../components/Title/Title';
+import LayoutController from '../layouts/LayoutController';
+import styles from '../styles/Discounts.module.scss';
+import * as skeletons from '../skeletons';
+import ProductCart from '../components/ProductCart';
 import { useSelector } from 'react-redux';
 
 export const getStaticProps = async () => {
@@ -15,25 +13,17 @@ export const getStaticProps = async () => {
   const categoriesRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/categories')
   const categories = await categoriesRes.json()
 
-  const brandsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/brands')
-  const brands = await brandsRes.json()
-
-  const bannersRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/banner')
-  const banners = await bannersRes.json()
-
   return {
     props: {
       categories,
-      brands,
-      banners
     },
   }
 }
 
-const Home = ({ categories, brands, banners }) => {
+const Bestsellers = ({ categories }) => {
 
   const [products, setProducts] = React.useState(null)
-  const [pending, setPending] = React.useState(true)
+	const [pending, setPending] = React.useState(false);
 
   const favorites = useSelector(state => state.favorites)
   const user = useSelector(state => state.user)
@@ -49,32 +39,34 @@ const Home = ({ categories, brands, banners }) => {
               'Authorization': 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
             }
           }
-        const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration', config)
+        const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration?tag=3', config)
         const products = await productsRes.json()
         setProducts(products)
       }
       finally {
-        setPending(false)
+				setTimeout(() => {
+					setPending(false)
+				}, 200)
       }
     }
     getProducts()
   }, [user.isAuth])
-  
-  return (
+
+	return (
     <LayoutController categories={categories}>
       <Head>
-        <title>Большая стирка</title>
+        <title>Хит продаж большой стирки</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className={styles.root}>
-        
-        <BannerSlider className={styles.banner_slider} banners={banners} />
-
-        <div className="container">
-          <Products>
+			<div className={styles.root}>
+				<Title className={styles.title}>
+					Хит продаж
+				</Title>
+				<div className="container">
+					<Products>
             {pending ? 
               <skeletons.ProductsSkeleton /> :
-              products.data.map(product => {
+              products && products.data.map(product => {
                 let initialFavorite = false;
                 if (!user.isAuth)
                   favorites.forEach(favorite => {
@@ -93,17 +85,12 @@ const Home = ({ categories, brands, banners }) => {
                   />
                 )
               })
-            }
-          </Products>
-        </div>
-
-        <Title className={styles.title}>Бренды</Title>
-
-        <BrandsSlider brands={brands} className={styles.brand_slider} />
-        
-      </div>
-    </LayoutController>
-  )
+            }	
+					</Products>
+				</div>
+			</div>
+		</LayoutController>
+	);
 }
 
-export default Home
+export default Bestsellers;

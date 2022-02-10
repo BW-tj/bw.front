@@ -1,5 +1,6 @@
-import { useRouter } from 'next/router';
 import React from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Products from '../components/Products/Products';
 import Title from '../components/Title/Title';
@@ -31,11 +32,6 @@ const Favorites = ({ categories }) => {
 	const router = useRouter()
 
 	React.useEffect(() => {
-		if (!user.isAuth)
-			router.push('/')
-	}, [user.isAuth, router])
-
-	React.useEffect(() => {
 		if (!user.isAuth) return
 		let timeout 
 		const getData = async () => {
@@ -51,6 +47,10 @@ const Favorites = ({ categories }) => {
 
 	return (
     <LayoutController categories={categories}>
+			<Head>
+				<title>Избранные продукты</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className={styles.root}>
 				<Title className={styles.title}>
 					Избранное

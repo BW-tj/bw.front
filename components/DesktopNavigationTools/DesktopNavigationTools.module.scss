@@ -63,7 +63,7 @@
 
 .dropdown_content {
 	width: 180px;
-	padding: 8px 0;
+	padding: 8px 6px;
 	background: #fff;
 	border-radius: 6px;
 	position: absolute;
@@ -85,9 +85,19 @@
 .link {
 	width: 100%;
 	font-size: 0.875rem;
+	display: flex;
+	justify-content: flex-start;
+	padding: 6px;
+	border-radius: 4px;
+	color: $text-color;
+	&:hover {
+		color: $primary-color;
+		background: rgba($primary-color, 0.1);
+	}
 	&.warning {
 		&:hover {
 			color: $red;
+			background: rgba($red, 0.1);
 		}
 	}
 }

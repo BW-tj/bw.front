@@ -6,11 +6,11 @@ import styles from './LabelList.module.scss'
 const LabelList = ({ promotionPercent, isNew }) => (
 	<div className={styles.root}>
 		<If condition={isNew}>
-			<Label link='/' text='Новинка' className={styles.label_new_product} />
+			<Label link='/new' text='Новинка' className={styles.label_new_product} />
 		</If>
 		<If condition={promotionPercent !== 0}>
 			<Label 
-				link='/' text={'Акция -' + promotionPercent + '%'} 
+				link='/discounts' text={'Акция -' + promotionPercent + '%'} 
 				className={styles.label_promotion} 
 			/>
 		</If>

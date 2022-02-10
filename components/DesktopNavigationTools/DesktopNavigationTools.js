@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { 
 	FavoriteBorder as FavoriteBorderIcon,
@@ -21,17 +21,18 @@ const DesktopNavigationTools = () => {
 	const [favoriteNotification, setFavoriteNotification] = useState(0)
 	const [cartNotification, setCartNotification] = useState(0)
 	
+	const router = useRouter()
 	const dispatch = useDispatch()
 	
 	const user = useSelector(state => state.user)
 	const cart = useSelector(state => state.cart)
 	const favorites = useSelector(state => state.favorites)
 
-	const handleLogOut = useCallback(() => {
+	const handleLogOut = useCallback(async () => {
 		localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
-		dispatch(logout())
-		window.location.reload()
-	}, [dispatch])
+		await dispatch(logout())
+		await router.push('/')
+	}, [dispatch, router])
 
 	useEffect(() => {
 		setCartNotification(cart.reduce((acc, product) => acc + product.count, 0))
@@ -68,6 +69,11 @@ const DesktopNavigationTools = () => {
 				<Dropdown id="profile" label={
 					<ButtonComponent icon={PersonOutlineIcon} onClick={() => {}} />
 				}>
+					<Link href="/cabinet">
+						<a className={classNames(styles.link)}>
+							Профиль
+						</a>
+					</Link>
 					<button className={classNames(styles.link, styles.warning)} onClick={handleLogOut}>
 						Выйти из аккаунта
 					</button>

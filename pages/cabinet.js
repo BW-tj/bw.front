@@ -1,8 +1,11 @@
-import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
+import Head from 'next/head';
+import classNames from 'classnames'
 import If from '../components/If/If'
 import LayoutController from '../layouts/LayoutController'
 import styles from '../styles/Cabinet.module.scss'
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 export const getStaticProps = async () => {
 
@@ -19,7 +22,11 @@ export const getStaticProps = async () => {
 
 const Cabinet = ({ categories }) => {
 
+	const router = useRouter()
+
 	const [loading, setLoading] = useState(true)
+
+	const user = useSelector(state => state.user)
 
 	const [errors, setErrors] = useState({
 		firstname: '', lastname: '', email: '', phone: '', password: ''
@@ -35,22 +42,57 @@ const Cabinet = ({ categories }) => {
 	const [newPassword, setNewPassword] = useState('')
 	const [confirmPassword, setConfirmPassword] = useState('')
 
-	const handleChangeProfile = () => {
-
+	const handleChangeProfile = async () => {
+		try {
+			setLoading(true)
+			const body = JSON.stringify({
+				email,
+				phoneNumber: phone,
+				name: firstname,
+				lastName: lastname,
+				address,
+				password: newPassword,
+				oldPassword
+			})
+	
+			const config = {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+				},
+				body
+			}
+	
+			await fetch(process.env.NEXT_PUBLIC_HOST+'/users/profile', config)
+		}
+		finally {
+			setTimeout(() => {
+				setLoading(false)
+			}, 200) 
+		}
 	}
 
-	useEffect(() => {
-		// const token = JSON.parse(localStorage.getItem(process.env.NEXT_PUBLIC_LS_KEY)).user.token
+	const handleCancel = () => {
+		router.push('/')
+	}
 
+
+	useEffect(() => {
+		if (!user.isAuth)
+			router.push('/')
+	}, [user, router])
+
+	useEffect(() => {
 		const config = {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json",
-				// "Authorization": `Bearer ${token}`
+				"Authorization": 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
 			}	
 		}
 
-		fetch(`${process.env.NEXT_PUBLIC_HOST}/user`, config)
+		fetch(`${process.env.NEXT_PUBLIC_HOST}/users/profile`, config)
 			.then(res => res.json())
 			.then(data => {
 				setLoading(false)
@@ -65,6 +107,10 @@ const Cabinet = ({ categories }) => {
 	if (loading) return <></>
 	return (
 		<LayoutController categories={categories}>
+			<Head>
+				<title>Личный кабинет</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<div className={styles.root}>
 				<div className={styles.form}>
 
@@ -135,7 +181,7 @@ const Cabinet = ({ categories }) => {
 					<div className={styles.buttons_group}>
 						<button 
 							className={classNames(styles.button, styles.outlined)} 
-							onClick={() => handleChangeProfile()}
+							onClick={() => handleCancel()}
 						>
 							Отменить 
 						</button>
