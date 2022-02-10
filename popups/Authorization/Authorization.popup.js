@@ -70,7 +70,6 @@ const Authorization = ({ onClose }) => {
 	
 		localStorage.setItem(process.env.NEXT_PUBLIC_LS_TOKEN, userData.token)
 
-		console.log(favorites)
 		await dispatch(updateFavorites(favorites))
 
 		await dispatch(login(userData))
@@ -103,7 +102,6 @@ const Authorization = ({ onClose }) => {
 			<form 
 				className={styles.wrap} 
 				onSubmit={e => e.preventDefault()}
-				onKeyPress={e => e.key === 'Enter' && handleLogin()}
 			>
 					
 				<div className={styles.title}>
@@ -138,7 +136,7 @@ const Authorization = ({ onClose }) => {
 					}
 					<button 
 						ref={loginButton}
-						type="submit"
+						onClick={handleLogin}
 						className={classNames(styles.btn, styles.contained_btn)}
 					>
 						Войти
