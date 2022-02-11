@@ -79,7 +79,7 @@ const Category = ({ categories, category, subCategories }) => {
   const [products, setProducts] = React.useState(null);
   const [params, setParams] = React.useState({
 		minPrice: 0,
-		maxPrice: 50,
+		maxPrice: 1000,
 		categoryId: category.id,
 		pageNumber: 1,
 		pageSize: 30,

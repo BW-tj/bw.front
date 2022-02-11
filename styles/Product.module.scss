@@ -1,0 +1,158 @@
+@import './colors';
+@import './mixins';
+
+.root {
+	margin-top: 20px;
+	display: grid;
+	grid-template-columns: 3fr 2fr;
+	@include container;
+}
+
+.left {
+
+}
+
+.title {
+	font-size: 2rem;
+	font-weight: 600;
+	color: $text-color;
+}
+
+.subTitle {
+	margin-top: 10px;
+	display: flex;
+	gap: 20px;
+	color: $search-placeholder-color;
+	letter-spacing: 0.03rem;
+}
+
+.right {
+	background: #fff;
+	box-shadow: 0 0 15px rgba(rgb(160, 160, 160), 0.2);
+	border-radius: 8px;
+	padding: 20px;
+}
+
+.price {
+	text-align: center;
+	font-size: 2.5rem;
+	font-weight: 600;
+	color: $text-color;
+}
+
+.cart {
+	display: flex;
+	align-items: stretch;
+	gap: 10px;
+	margin-top: 20px;
+	&_icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+.countForCart {
+	position: relative;
+	border-radius: 6px;
+	width: 100%;
+	height: 50px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	border: 1px solid $grey-color;
+	margin-bottom: 20px;
+}
+
+.countForCart_button {
+	position: absolute;
+	width: 50px;
+	height: 100%;
+	font-size: 1.5rem;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #ffff;
+	color: $search-placeholder-color;
+	transition: 100ms linear;
+	&:hover {
+		background-color: $primary-color;
+		border-color: $primary-color;
+		color: #fff;
+	}
+}
+
+.countForCart_buttonDecrease {
+	left: 0;
+	border-right: 1px solid $grey-color;
+}
+
+.countForCart_buttonIncrease {
+	right: 0;
+	border-left: 1px solid $grey-color;
+}
+
+.countForCart__title {
+	margin-bottom: 7px;
+	font-weight: 600;
+}
+
+.countForCart__wrap {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+}
+
+.countForCart_value {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 0 20px;
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.addToCartButton {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 12px;
+	border-radius: 6px;
+	gap: 7px;
+	background: $primary-color;
+	color: #fff;
+	font-weight: 600;
+	transition: 100ms linear;
+	&:hover {
+		background-color: darken($primary-color, 9%);
+	}
+	&:active {
+		background-color: darken($primary-color, 14%);
+	}
+}
+
+.favor {
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	transition: 100ms linear;
+	gap: 10px;
+	&.active {
+		color: $red;
+	}
+}
+
+.favor_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 100ms linear;
+	border-radius: 6px;
+	&.active {
+		color: $red;
+	}
+}

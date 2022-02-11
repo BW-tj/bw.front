@@ -32,7 +32,6 @@ const Cart = ({ onClose }) => {
 	}, [dispatch, user])
 
 	const handleRemove = React.useCallback((id) => {
-		console.log(1)
 		if (user.isAuth)
 			dispatch(removeFromCartService(id));
 		else
@@ -86,7 +85,7 @@ const Cart = ({ onClose }) => {
 							<div className={styles.item_countController}>
 								<button 
 									className={classNames(styles.item_countButton, styles.item_increase)}
-									onClick={() => handleIncrease(item.productId, item.count)}
+									onClick={() => handleIncrease(item.id || item.productId, item.count)}
 								>
 									+
 								</button>
@@ -95,7 +94,7 @@ const Cart = ({ onClose }) => {
 								</div>
 								<button 
 									className={classNames(styles.item_countButton, styles.item_increase)}
-									onClick={() => handleDecrease(item.id, item.count)}
+									onClick={() => handleDecrease(item.id || item.productId, item.count)}
 								>
 									-
 								</button>
@@ -107,7 +106,7 @@ const Cart = ({ onClose }) => {
 								<div className={styles.item_commonPrice}>
 									{item.price*item.count} с.
 								</div>
-								<button className={styles.item_removeButton} onClick={() => handleRemove(item.id)}>
+								<button className={styles.item_removeButton} onClick={() => handleRemove(item.id || item.productId)}>
 									Удалить
 								</button>
 							</div>
