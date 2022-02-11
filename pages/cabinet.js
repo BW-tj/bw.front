@@ -75,6 +75,7 @@ const Cabinet = ({ categories }) => {
 
 	const handleCancel = () => {
 		router.push('/')
+		window.location.reload()
 	}
 
 
@@ -97,7 +98,7 @@ const Cabinet = ({ categories }) => {
 			.then(data => {
 				setLoading(false)
 				setFirstname(data.name)
-				setLastname(data.lastname)
+				setLastname(data.lastName)
 				setPhone(data.phone)
 				setEmail(data.email)
 				setAddress(data.address)

@@ -1,0 +1,98 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	width: 100%;
+	box-shadow: 0 0 24px rgba(rgb(94, 94, 94), 0.2);
+	padding: 20px 25px;
+	border-radius: 4px;
+	animation: fadeIn 500ms ease-out forwards;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 1.125rem;
+	color: $text-color;
+}
+
+.subCategories {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.subCategory {
+	&_label {
+		font-size: 1rem;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-weight: 500;
+		&_link{
+			flex-grow: 1;
+			color: $text-color;
+			&:hover {
+				color: $primary-color;
+			}
+			&.active {
+				color: $primary-color;
+			}
+		}
+	}
+	&_menu_wrap {
+		transition: 100ms linear;
+		overflow: hidden;
+	}
+	&_menu {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		padding: 8px 0;
+		gap: 10px;
+	}
+	&_value {
+		text-align: left;
+		font-size: 0.875rem;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		&_icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}
+
+.subCategoryArrow {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 100ms linear;
+	&:hover {
+		color: $primary-color;
+	}
+	&.open {
+		transform: rotate(180deg);
+	}
+}
+
+.subSubCategory {
+	font-size: 0.875rem;
+	color: $text-color;
+	transition: 100ms linear;
+	&:hover {
+		color: $primary-color;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
