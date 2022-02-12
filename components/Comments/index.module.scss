@@ -1,0 +1,77 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.title {
+	font-size: 2rem;
+	font-weight: 600;
+	color: $text-color;
+}
+
+.stars {
+	display: flex;
+	align-items: center;
+}
+
+.star {
+	color: $grey-color;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	&.filled {
+		color: $yellow;
+	}
+}
+
+.label {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.author {
+	font-size: 1rem;
+	font-weight: 600;
+	color: $text-color;
+}
+
+.text {
+	margin-top: 9px;
+	font-weight: 500;
+	color: $text-color;
+}
+
+.date {
+	font-size: 0.85rem;
+	font-weight: 500;
+	letter-spacing: 0.03rem;
+	margin-top: 9px;
+	color: $search-placeholder-color;
+}
+
+.addButton {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 12px;
+	border-radius: 6px;
+	gap: 7px;
+	background: #fff;
+	color: $primary-color;
+	font-weight: 600;
+	transition: 100ms linear;
+	border: 2px solid $primary-color;
+	&:hover {
+		background-color: lighten($primary-color, 37%);
+	}
+	&:active {
+		background-color: lighten($primary-color, 32%);
+	}
+}

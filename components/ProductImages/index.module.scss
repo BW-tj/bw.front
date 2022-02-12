@@ -1,0 +1,27 @@
+@import '../../styles/mixins';
+@import '../../styles/colors';
+
+.root {
+	margin-top: 30px;
+	height: 700px;
+	display: grid;
+	grid-gap: 10px;
+}
+
+.image {
+	height: 700px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 6px;
+}
+
+.pagination {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.paging {
+	overflow: hidden;
+	border-radius: 6px;
+}

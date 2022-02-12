@@ -1,15 +1,16 @@
 @import './colors';
 @import './mixins';
 
+.rightWrap {
+	position: relative;	
+}
+
 .root {
 	margin-top: 20px;
 	display: grid;
 	grid-template-columns: 3fr 2fr;
+	gap: 20px;
 	@include container;
-}
-
-.left {
-
 }
 
 .title {
@@ -27,10 +28,13 @@
 }
 
 .right {
+	position: sticky;
+	top: 30px;
 	background: #fff;
 	box-shadow: 0 0 15px rgba(rgb(160, 160, 160), 0.2);
 	border-radius: 8px;
-	padding: 20px;
+	padding: 30px 20px;
+	align-self: start;
 }
 
 .price {
@@ -126,23 +130,55 @@
 	color: #fff;
 	font-weight: 600;
 	transition: 100ms linear;
+	border: 2px solid transparent;
 	&:hover {
 		background-color: darken($primary-color, 9%);
 	}
 	&:active {
 		background-color: darken($primary-color, 14%);
 	}
+	&.active {
+		background: #fff;
+		color: $primary-color;
+		border-color: $primary-color;
+		&:hover {
+			background-color: lighten($primary-color, 37%);
+		}
+		&:active {
+			background-color: lighten($primary-color, 32%);
+		}
+	}
 }
 
 .favor {
+	justify-content: center;
 	width: 100%;
 	margin-top: 20px;
 	display: flex;
 	align-items: center;
 	transition: 100ms linear;
 	gap: 10px;
+	height: 50px;
+	background: $red;
+	border: 2px solid transparent;
+	color: #fff;
+	border-radius: 6px;
+	&:hover {
+		background-color: darken($red, 9%);
+	}
+	&:active {
+		background-color: darken($red, 14%);
+	}
 	&.active {
+		border-color: $red;
+		background: #fff;
 		color: $red;
+		&:hover {
+			background-color: lighten($red, 37%);
+		}
+		&:active {
+			background-color: lighten($red, 32%);
+		}
 	}
 }
 
@@ -155,4 +191,42 @@
 	&.active {
 		color: $red;
 	}
+}
+
+.stars {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.star {
+	color: $grey-color;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	&.filled {
+		color: $yellow;
+	}
+}
+
+.result {
+	font-size: 0.875rem;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+
+.discount {
+	font-size: 1rem;
+	font-weight: 500;
+	color: $red;
+}
+
+.characteristics {
+	margin-bottom: 30px;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
 }

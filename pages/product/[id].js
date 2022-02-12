@@ -7,6 +7,12 @@ import { Favorite, FavoriteBorder, ShoppingCart } from "../../icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addToCartService, changeProductCount, changeProductCountService, removeFromCart, removeFromCartService } from '../../redux/actions/cart.actions';
 import { addToFavorites, addToFavoritesService, removeFromFavorites, removeFromFavoritesService } from '../../redux/actions/favorites.actions';
+import { 
+	Star as StarIcon
+} from '../../icons'
+import ProductImages from '../../components/ProductImages';
+import Comments from '../../components/Comments';
+import Characteristics from '../../components/Characteristics';
 
 export const getStaticPaths = async () => {
   const res = await fetch(process.env.NEXT_PUBLIC_HOST + "/product/filtration");
@@ -33,15 +39,23 @@ export const getStaticProps = async (context) => {
   );
   const product = await responseProduct.json();
 
+  const responseComments = await fetch(
+    process.env.NEXT_PUBLIC_HOST + "/comment/?productId=" + id
+  );
+  const comments = await responseComments.json();
+
   const categoriesRes = await fetch(
     process.env.NEXT_PUBLIC_HOST + "/categories"
   );
   const categories = await categoriesRes.json();
 
-  return { props: { product, categories } };
+  return { props: { product, categories, comments } };
 };
 
-const Product = ({ product, categories }) => {
+const Product = ({ product, categories, comments }) => {
+  
+  const [width, setWidth] = React.useState(0);
+  const leftRef = React.useRef(null);
 
   const [countForCartValue, setCountForCartValue] = React.useState(1);
   const [isFavorite, setIsFavorite] = React.useState(false);
@@ -111,14 +125,20 @@ const Product = ({ product, categories }) => {
     if (user.isAuth) setIsFavorite(product.isFavorite);
   }, [product.isFavorite, user.isAuth]);
 
+  React.useEffect(() => {
+    if (!leftRef || !leftRef.current) return
+    setWidth(leftRef.current.offsetWidth) 
+  }, []);
+
   return (
     <LayoutController categories={categories}>
       <Head>
         <title>{product.name}</title>
       </Head>
       <div className={styles.root}>
-        <div className={styles.left}>
+        <div className={styles.left} ref={leftRef}>
           <div className={styles.title}>{product.name}</div>
+          <Stars rating={product.rating} />
           <div className={styles.subTitle}>
             <div className={styles.commentCount}>
               {product.comment.length} отзывов
@@ -127,83 +147,128 @@ const Product = ({ product, categories }) => {
               Артикуль {product.vendorCode}
             </div>
           </div>
+          <ProductImages 
+            width={width} 
+            product={product} 
+          />
+          <div className={styles.info}>
+            <Characteristics characteristics={product.characteristics} />
+            <Comments comments={comments} />
+          </div>
         </div>
 
-        <div className={styles.right}>
-          <div className={styles.price}>{product.price} с.</div>
-
-          <div className={styles.cart}>
-            {countForCartValue !== 0 && (
-              <div className={styles.countForCart__wrap}>
-                <div className={styles.countForCart__title}>В корзине</div>
-                <div className={styles.countForCart}>
-                  <button
-                    className={classNames(
-                      styles.countForCart_button,
-                      styles.countForCart_buttonDecrease
-                    )}
-                    onClick={handleDeacreaseCountForCart}
-                  >
-                    -
-                  </button>
-
-                  <input
-                    value={countForCartValue}
-                    onChange={(e) => handleSetCountForCart(e.target.value)}
-                    className={styles.countForCart_value}
-                    onBlur={(e) => handleSetCountForCart(e.target.value || 1)}
-                  />
-
-                  <button
-                    className={classNames(
-                      styles.countForCart_button,
-                      styles.countForCart_buttonIncrease
-                    )}
-                    onClick={handleIncreaseCountForCart}
-                  >
-                    +
-                  </button>
-                </div>
-								<button className={styles.addToCartButton}>
-									Перейти к оплате
-								</button>
+        <div className={styles.rightWrap}>
+          <div className={styles.right}>
+            <div className={styles.price}>
+              {product.price} с.
+              <div className={styles.discount}>
+                {product.discount && ('акция '+ product.discount + '%')}
               </div>
-            )}
-            {!countForCartValue && countForCartValue !== "" && (
-							<button
-								className={styles.addToCartButton}
-								onClick={handleAddToCart}
-							>
-								<div className={styles.cart_icon}>
-									<ShoppingCart size={20} />
-								</div>
-								Добавить в корзину
-							</button>
-            )}
-          </div>
+            </div>
 
-          <button className={classNames(styles.favor, isFavorite && styles.active)} onClick={() => handleToggleFavorite(!isFavorite)}>
-            {isFavorite && 
-              <>
-                <div className={classNames(styles.favor_icon, styles.active)}>
-                  <Favorite size={22} />
+            <div className={styles.description}>
+              {product.description}
+            </div>
+
+            <button className={classNames(styles.favor, isFavorite && styles.active)} onClick={() => handleToggleFavorite(!isFavorite)}>
+              {isFavorite && 
+                <>
+                  <div className={classNames(styles.favor_icon, styles.active)}>
+                    <Favorite size={22} />
+                  </div>
+                  Убрать из избранного
+                </>
+              }
+              {!isFavorite && 
+                <>
+                  <div className={styles.favor_icon}>
+                    <FavoriteBorder size={22} />
+                  </div>
+                  Добавить в избранное
+                </>
+              }
+            </button>
+
+            <div className={styles.cart}>
+              {countForCartValue !== 0 && (
+                <div className={styles.countForCart__wrap}>
+                  <div className={styles.countForCart__title}>В корзине</div>
+                  <div className={styles.countForCart}>
+                    <button
+                      className={classNames(
+                        styles.countForCart_button,
+                        styles.countForCart_buttonDecrease
+                      )}
+                      onClick={handleDeacreaseCountForCart}
+                    >
+                      -
+                    </button>
+
+                    <input
+                      value={countForCartValue}
+                      onChange={(e) => handleSetCountForCart(e.target.value)}
+                      className={styles.countForCart_value}
+                      onBlur={(e) => handleSetCountForCart(e.target.value || 1)}
+                    />
+
+                    <button
+                      className={classNames(
+                        styles.countForCart_button,
+                        styles.countForCart_buttonIncrease
+                      )}
+                      onClick={handleIncreaseCountForCart}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div className={styles.result}>
+                    Итого: {countForCartValue * product.price} с.
+                  </div>
+                  <button className={classNames(styles.addToCartButton, styles.active)}>
+                    Перейти к оплате
+                  </button>
                 </div>
-                Убрать из избранного
-              </>
-            }
-            {!isFavorite && 
-              <>
-                <div className={styles.favor_icon}>
-                  <FavoriteBorder size={22} />
-                </div>
-                Добавить в избранное
-              </>
-            }
-					</button>
+              )}
+              {!countForCartValue && countForCartValue !== "" && (
+                <button
+                  className={styles.addToCartButton}
+                  onClick={handleAddToCart}
+                >
+                  <div className={styles.cart_icon}>
+                    <ShoppingCart size={20} />
+                  </div>
+                  Добавить в корзину
+                </button>
+              )}
+            </div>
+
+          </div>
         </div>
       </div>
     </LayoutController>
   );
 };
+
+const Stars = ({ rating }) => {
+	const stars = []
+	
+	for(let i = 1; i <= 5; i++)
+		if (i <= rating)
+			stars.push({ key: i, filled: true })
+		else
+			stars.push({ key: i, filled: false })
+
+	return (
+		<div className={styles.stars}>
+			{stars.map(star => <Star filled={star.filled} key={star.key} />)}
+		</div>
+	)
+}
+
+const Star = ({ filled }) => (
+	<div className={classNames(styles.star, filled && styles.filled)}>
+		<StarIcon size={30} />
+	</div>
+)
 
 export default Product;
