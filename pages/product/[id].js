@@ -49,7 +49,7 @@ export const getStaticProps = async (context) => {
   );
   const categories = await categoriesRes.json();
 
-  return { props: { product, categories, comments } };
+  return { props: { product, categories, comments }, revalidate: 20};
 };
 
 const Product = ({ product, categories, comments }) => {

@@ -3,7 +3,7 @@
 		{
 			"name":"bw-client",
 			"script":"node_modules/next/dist/bin/next",
-			"args":"start",
+			"args":"start -p 3001",
 			"cwd":"./",
 			"instances":2,
 			"exec_mode":"cluster"
