@@ -1,3 +1,4 @@
+nvm use 16 
 npm i 
 echo "all packages installed"
 mv Layouts/ layouts/
