@@ -9,4 +9,4 @@ echo "app built"
 echo "remove old version"
 pm2 stop bw-client && pm2 delete bw-client
 echo "starting to run app ....."
-npm run pm2 
+npm start
