@@ -1,5 +1,6 @@
 npm i 
 echo "all packages installed"
+mv Layouts/ layouts/
 npm run build
 echo "app built"
 echo "remove old version"
