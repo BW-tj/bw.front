@@ -8,8 +8,8 @@
 .root {
 	margin-top: 20px;
 	display: grid;
-	grid-template-columns: 3fr 2fr;
-	gap: 20px;
+	grid-template-columns: 3.5fr 2fr;
+	gap: 40px;
 	@include container;
 }
 
@@ -38,10 +38,20 @@
 }
 
 .price {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 	text-align: center;
 	font-size: 2.5rem;
 	font-weight: 600;
 	color: $text-color;
+	&-discount {
+		font-size: 1rem;
+		color: $search-placeholder-color;
+		text-decoration: line-through;
+		font-weight: 400;
+	}
 }
 
 .cart {
@@ -216,7 +226,9 @@
 }
 
 .discount {
+	margin-top: 10px;
 	font-size: 1rem;
+	text-align: center;
 	font-weight: 500;
 	color: $red;
 }

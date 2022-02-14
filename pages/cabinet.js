@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import If from '../components/If/If'
 import LayoutController from '../layouts/LayoutController'
 import styles from '../styles/Cabinet.module.scss'
-import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 export const getStaticProps = async () => {
@@ -21,8 +20,6 @@ export const getStaticProps = async () => {
 }
 
 const Cabinet = ({ categories }) => {
-
-	const router = useRouter()
 
 	const [loading, setLoading] = useState(true)
 
@@ -74,15 +71,14 @@ const Cabinet = ({ categories }) => {
 	}
 
 	const handleCancel = () => {
-		router.push('/')
-		window.location.reload()
+		window.location.replace('/')
 	}
 
 
 	useEffect(() => {
 		if (!user.isAuth)
-			router.push('/')
-	}, [user, router])
+			window.location.replace('/')
+	}, [user])
 
 	useEffect(() => {
 		const config = {

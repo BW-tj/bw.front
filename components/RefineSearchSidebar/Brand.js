@@ -10,10 +10,6 @@ const Brand = ({ styles, selectedBrands, brand, onClick }) => {
 		else
 			setActive(false);
 	}, [selectedBrands, brand.id])
-
-	React.useEffect(() => {
-		console.log(brand);
-	}, [brand])
 	
 	return (
 		<button className={styles.filter_value} onClick={() => onClick(brand.id)}>

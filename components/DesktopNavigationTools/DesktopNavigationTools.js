@@ -74,6 +74,11 @@ const DesktopNavigationTools = () => {
 							Профиль
 						</a>
 					</Link>
+					<Link href="/order-list">
+						<a className={classNames(styles.link)}>
+							Заказы
+						</a>
+					</Link>
 					<button className={classNames(styles.link, styles.warning)} onClick={handleLogOut}>
 						Выйти из аккаунта
 					</button>

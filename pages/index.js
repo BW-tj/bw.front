@@ -43,12 +43,6 @@ const Home = ({ categories, brands, banners }) => {
       try {
         setPending(true);
         let config = {}
-        if (user.isAuth)
-          config = {
-            headers: {
-              'Authorization': 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
-            }
-          }
         const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration', config)
         const products = await productsRes.json()
         setProducts(products)
@@ -74,7 +68,7 @@ const Home = ({ categories, brands, banners }) => {
           <Products>
             {pending ? 
               <skeletons.ProductsSkeleton /> :
-              products.data.map(product => {
+                products.data && products.data.map(product => {
                 let initialFavorite = false;
                 if (!user.isAuth)
                   favorites.forEach(favorite => {

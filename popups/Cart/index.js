@@ -4,12 +4,15 @@ import styles from './index.module.scss';
 import Image from 'next/image';
 import classNames from 'classnames';
 import { changeProductCount, changeProductCountService, removeFromCartService, removeFromCart } from '../../redux/actions/cart.actions';
+import { useRouter } from 'next/router';
 
 const Cart = ({ onClose }) => {
 
 	const user = useSelector(state => state.user)
 	const cart = useSelector(state => state.cart)
 	const dispatch = useDispatch()
+
+	const router = useRouter()
 
 	const handleIncrease = React.useCallback((id, currentCount) => {
     if (user.isAuth)
@@ -39,8 +42,9 @@ const Cart = ({ onClose }) => {
 	}, [dispatch, user])
 
 	const handleCheckout = React.useCallback(() => {
-	
-	}, [])
+		router.push('/order');
+		onClose();
+	}, [router, onClose])
 
 	React.useEffect(() => {
 		const handleWindowClick = e => {

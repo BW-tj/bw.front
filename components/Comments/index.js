@@ -5,13 +5,13 @@ import {
 } from '../../icons'
 import classNames from 'classnames';
 
-const Comments = ({ comments }) => {
+const Comments = ({ comments, onAdd }) => {
 	return (
 		<div className={styles.root}>
 			<div className={styles.title}>
 				Отзывы
 			</div>
-			<button className={classNames(styles.addButton, styles.active)}>
+			<button onClick={onAdd} className={classNames(styles.addButton, styles.active)}>
 				Оставить отзыв
 			</button>
 			

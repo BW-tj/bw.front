@@ -4,7 +4,6 @@ import { Range as DoubleRange } from 'rc-slider';
 
 const MultiRangeSlider = ({ timeout = 0, min, max, className = "", onChange, value }) => {
 
-  console.log(min, max, value)
   
   const [middleValue, setMiddleValue] = React.useState(
     value || [min, max]

@@ -60,7 +60,6 @@ const BannerSlider = ({ banners, className }) => {
 			<Slider 
 				beforeChange={handleBeforeChange}
 				afterChange={handleAfterChange}
-				onEdge={() => console.log(1)}
 				{...settings} 
 				ref={c => slider = c}
 			>

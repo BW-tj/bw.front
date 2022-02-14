@@ -149,6 +149,7 @@ const Category = ({ categories, category, subCategories }) => {
 							/> 
 						</div>
 						<div className={styles.sidebar}>
+							{console.log(products)}
 							<RefineSearchSidebar 
 								minPrice={products?.minPrice || 0}
 								maxPrice={products?.maxPrice || 0}

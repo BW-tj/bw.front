@@ -16,6 +16,8 @@ import KeyboardArrowDown from './KeyboardArrowDown'
 import UnfoldMore from './UnfoldMore'
 import CheckBoxOutlineBlank from './CheckBoxOutlineBlank'
 import CheckBox from './CheckBox'
+import RadioButtonChecked from './RadioButtonChecked'
+import RadioButtonUnchecked from './RadioButtonUnchecked'
 
 export {
 	Menu,
@@ -35,5 +37,7 @@ export {
 	KeyboardArrowDown,
 	UnfoldMore,
 	CheckBoxOutlineBlank,
-	CheckBox
+	CheckBox,
+	RadioButtonChecked,
+	RadioButtonUnchecked
 }

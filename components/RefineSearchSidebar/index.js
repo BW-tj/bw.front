@@ -23,7 +23,7 @@ const RefineSearchSidebar = ({
 			<div className={styles.title}>Уточнить поиск</div>
 
 			<div className={styles.filters}>
-
+				{console.log(maxPrice)}
 				<MinMaxPrice 
 					min={minPrice}
 					max={maxPrice}

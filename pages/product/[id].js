@@ -13,6 +13,8 @@ import {
 import ProductImages from '../../components/ProductImages';
 import Comments from '../../components/Comments';
 import Characteristics from '../../components/Characteristics';
+import { openPopup } from '../../redux/actions/popup.actions';
+import AddComment from '../../popups/AddComment';
 
 export const getStaticPaths = async () => {
   const res = await fetch(process.env.NEXT_PUBLIC_HOST + "/product/filtration");
@@ -49,12 +51,13 @@ export const getStaticProps = async (context) => {
   );
   const categories = await categoriesRes.json();
 
-  return { props: { product, categories, comments }, revalidate: 20};
+  return { props: { product, categories, initialComments: comments }, revalidate: 20};
 };
 
-const Product = ({ product, categories, comments }) => {
+const Product = ({ product, categories, initialComments }) => {
   
   const [width, setWidth] = React.useState(0);
+  const [comments, setComments] = React.useState(initialComments || []);
   const leftRef = React.useRef(null);
 
   const [countForCartValue, setCountForCartValue] = React.useState(1);
@@ -64,6 +67,20 @@ const Product = ({ product, categories, comments }) => {
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+
+  const handleCheckout = React.useCallback(() => {
+    window.location.href = '/order'
+  }, [])
+
+  const onCommentAdd = React.useCallback(() => {
+    dispatch(openPopup(props => 
+      <AddComment 
+        {...props} 
+        id={product.id} 
+        setComments={newComment => setComments(prev => [...prev, newComment])} 
+      />
+    ))
+  } , [product.id, dispatch])
 
 	const handleToggleFavorite = React.useCallback((value) => {
     setIsFavorite(value);
@@ -153,7 +170,7 @@ const Product = ({ product, categories, comments }) => {
           />
           <div className={styles.info}>
             <Characteristics characteristics={product.characteristics} />
-            <Comments comments={comments} />
+            <Comments comments={comments} onAdd={onCommentAdd} />
           </div>
         </div>
 
@@ -161,10 +178,17 @@ const Product = ({ product, categories, comments }) => {
           <div className={styles.right}>
             <div className={styles.price}>
               {product.price} с.
+              {product.discount !== 0 && 
+                <div className={styles['price-discount']}>
+                  {product.price - product.price * product.discount / 100} с.
+                </div>
+              }
+            </div>
+            {product.discount !== 0 && 
               <div className={styles.discount}>
                 {product.discount && ('акция '+ product.discount + '%')}
               </div>
-            </div>
+            }
 
             <div className={styles.description}>
               {product.description}
@@ -224,7 +248,10 @@ const Product = ({ product, categories, comments }) => {
                   <div className={styles.result}>
                     Итого: {countForCartValue * product.price} с.
                   </div>
-                  <button className={classNames(styles.addToCartButton, styles.active)}>
+                  <button 
+                    className={classNames(styles.addToCartButton, styles.active)}
+                    onClick={handleCheckout}
+                  >
                     Перейти к оплате
                   </button>
                 </div>
