@@ -52,11 +52,18 @@ const Order = ({ categories, paymentTypes, deliverytypes }) => {
 		const config = {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
+				'Content-Type': 'application/json', 
 			},
 			body
 		}
+		if (user.isAuth)
+			config = {
+				...config,
+				headers: {
+					...config.headers,
+					'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) 
+				}
+			}
 
 		const response = await fetch(process.env.NEXT_PUBLIC_HOST+'/order', config)
 
@@ -99,7 +106,7 @@ const Order = ({ categories, paymentTypes, deliverytypes }) => {
 										<div className={styles.paymentType__image}>
 											<Image 
 												alt={paymentType.name}
-												src={process.env.NEXT_PUBLIC_HOST_WITHOUT_API+'/'+paymentType.imagePath}
+												src={process.env.NEXT_PUBLIC_HOST_WITHOUT_API+paymentType.imagePath}
 												width={90} 
 												height={50} 
 											/>

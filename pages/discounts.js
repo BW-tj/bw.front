@@ -36,7 +36,7 @@ const Discounts = ({ categories }) => {
         if (user.isAuth)
           config = {
             headers: {
-              'Authorization': 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
+              'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
             }
           }
         const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration?tag=1', config)

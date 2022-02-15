@@ -65,6 +65,7 @@ const Product = ({ product, categories, initialComments }) => {
 
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
+  const favorites = useSelector((state) => state.favorites);
 
   const dispatch = useDispatch();
 
@@ -139,8 +140,9 @@ const Product = ({ product, categories, initialComments }) => {
   }, [product.id, cart]);
 
   React.useEffect(() => {
-    if (user.isAuth) setIsFavorite(product.isFavorite);
-  }, [product.isFavorite, user.isAuth]);
+    if (!product) return;
+    if (user.isAuth) setIsFavorite(favorites.find(item => item.productId === product.id || item.id === product.id));
+  }, [product, user.isAuth, favorites]);
 
   React.useEffect(() => {
     if (!leftRef || !leftRef.current) return

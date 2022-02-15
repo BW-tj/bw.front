@@ -10,27 +10,11 @@ const ProductImages = ({ product, width }) => {
 	const [slider, setSlider] = React.useState(null)
 
 	const settings = {
-		// customPaging: function(i) {
-		// 	return (
-		// 		<a className={styles.paging}>
-		// 			<Image 
-		// 				src={`${process.env.NEXT_PUBLIC_HOST_WITHOUT_API}/${images[i].imagePath}`}
-		// 				alt={'product-image-'+i}
-		// 				width={100}
-		// 				height={100} 
-		// 			/>
-		// 		</a>
-		// 	);
-		// },
-		// dots: false,
-		// dots: true,
-		dotsClass: "slick-dots slick-thumb",
 		infinite: false,
 		arrows: false,
 		speed: 200,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-
 	};
 
 	return (

@@ -42,7 +42,16 @@ const Home = ({ categories, brands, banners }) => {
     const getProducts = async () => {
       try {
         setPending(true);
-        let config = {}
+        let config = {
+          method: "GET",
+        }
+        if (user.isAuth)
+          config = {
+            ...config,
+            headers: {
+              "Authorization": "Bearer " + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN),
+            }
+          }
         const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration', config)
         const products = await productsRes.json()
         setProducts(products)

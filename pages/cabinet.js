@@ -54,12 +54,16 @@ const Cabinet = ({ categories }) => {
 	
 			const config = {
 				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
-				},
 				body
 			}
+			if (user.isAuth)
+				config = {
+					...config,
+					headers: {
+						...config.headers,
+						"Authorization": "Bearer " + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN),
+					}
+				}
 	
 			await fetch(process.env.NEXT_PUBLIC_HOST+'/users/profile', config)
 		}
@@ -85,7 +89,7 @@ const Cabinet = ({ categories }) => {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+				"Authorization": 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
 			}	
 		}
 

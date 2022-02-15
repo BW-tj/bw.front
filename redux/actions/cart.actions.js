@@ -8,7 +8,7 @@ export const pushCart = cart => async () => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+			'Authorization': 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
 		},
 		body: JSON.stringify(cart)
 	})
@@ -21,7 +21,7 @@ export const pullCart = () => async dispatch => {
 	const response = await fetch(url, {
 		method: 'GET',
 		headers: {
-			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) 
 		}
 	})
 
@@ -46,7 +46,7 @@ export const addToCartService = product => async dispatch => {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) 
 		},
 		body: JSON.stringify({ productId: product.id, count: 1 })
 	})
@@ -74,7 +74,7 @@ export const removeFromCartService = id => async dispatch => {
 	await fetch(url, {
 		method: "DELETE",
 		headers: {
-			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+			'Authorization': 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
 		}
 	})
 }

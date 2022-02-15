@@ -22,7 +22,7 @@ const CartSidebar = ({ deliveryType }) => {
 							<div className={styles.item__image}>
 								<Image
 									alt={item.name}
-									src={process.env.NEXT_PUBLIC_HOST_WITHOUT_API+item.imagePath}
+									src={process.env.NEXT_PUBLIC_HOST_WITHOUT_API+'/'+item.images[0].imagePath}
 									width={66}
 									height={66}
 								/>
@@ -34,7 +34,7 @@ const CartSidebar = ({ deliveryType }) => {
 								{item.count} шт.
 							</div>
 							<div className={styles.item__price}>
-								{item.totalPrice} с.
+								{item.price - item.price*item.discount / 100} с.
 							</div>
 						</div>	
 						<div className={styles.divider} />
@@ -49,7 +49,7 @@ const CartSidebar = ({ deliveryType }) => {
 
 			<div className={styles.result}>
 				<span>Сумма заказа</span>
-				<span>{cart.reduce((sum, item) => sum + item.totalPrice * item.count, 0) + (deliveryType ? deliveryType.price : 0) } с.</span>
+				<span>{cart.reduce((sum, item) => sum + (item.price - item.price*item.discount / 100) * item.count, 0) + (deliveryType ? deliveryType.price : 0) } с.</span>
 			</div>
 
 		</div>
