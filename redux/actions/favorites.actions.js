@@ -1,4 +1,5 @@
 import * as t from '../types'
+import { logout } from './user.actions'
 
 export const updateFavorites = initialFavorites => async dispatch => {
 	if (initialFavorites && initialFavorites.length) {

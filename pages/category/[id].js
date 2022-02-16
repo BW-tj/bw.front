@@ -12,6 +12,7 @@ import ProductCart from '../../components/ProductCart'
 import { Pagination } from '../../components/Pagination'
 import { QueryToString } from './../../functions/query';
 import SubcategoryList from '../../components/SubcategoryList'
+import { logout } from '../../redux/actions/user.actions'
 
 export const getStaticPaths = async () => {
   const res = await fetch(process.env.NEXT_PUBLIC_HOST+'/categories')

@@ -1,4 +1,5 @@
 import * as t from '../types'
+import { logout } from './user.actions';
 
 export const pushCart = cart => async () => {
 
@@ -84,7 +85,7 @@ export const removeFromCartService = id => async dispatch => {
 	await fetch(url, {
 		method: "DELETE",
 		headers: {
-			'Authorization': 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
+			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
 		}
 	})
 }

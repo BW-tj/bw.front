@@ -3,6 +3,7 @@ import React from 'react';
 import { 
 	Star as StarIcon
 } from '../../icons'
+import { logout } from '../../redux/actions/user.actions';
 import styles from './index.module.scss';
 
 const AddComment = ({ onClose, setComments, id }) => {

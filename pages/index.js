@@ -9,6 +9,8 @@ import LayoutController from '../layouts/LayoutController'
 import styles from '../styles/Home.module.scss'
 import * as skeletons from '../skeletons'
 import { useSelector } from 'react-redux';
+import PopularCategories from '../components/PopularCategories';
+import { logout } from '../redux/actions/user.actions';
 
 export const getStaticProps = async () => {
 
@@ -78,6 +80,7 @@ const Home = ({ categories, brands, banners }) => {
         <BannerSlider className={styles.banner_slider} banners={banners} />
 
         <div className="container">
+          <PopularCategories />
           <Products>
             {pending ? 
               <skeletons.ProductsSkeleton /> :

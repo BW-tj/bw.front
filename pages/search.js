@@ -11,6 +11,7 @@ import LayoutController from "../layouts/LayoutController";
 import Tools from '../components/Tools';
 import * as skeletons from '../skeletons';
 import styles from "../styles/Search.module.scss";
+import { logout } from '../redux/actions/user.actions';
 
 export const getStaticProps = async () => {
   const categories = await fetch(
@@ -94,6 +95,7 @@ const Search = ({ categories }) => {
         <div className={styles.container}>
           <div className={styles.sidebar}>
             <FilterSidebar 
+              isEmpty={products?.data.length === 0}
               filters={products?.filters || []}
               selectedFilters={params?.filters || []}
               toggleFilter={handleToggleFilter} 

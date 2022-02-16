@@ -2,8 +2,9 @@ import React from 'react';
 import Filter from './Filter';
 import styles from './index.module.scss'
 
-const FilterSidebar = ({ filters, selectedFilters, toggleFilter }) => {
+const FilterSidebar = ({ isEmpty, filters, selectedFilters, toggleFilter }) => {
 
+	if (isEmpty) return <></>
 	return (
 		<div className={styles.root}>
 			

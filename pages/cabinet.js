@@ -5,6 +5,7 @@ import If from '../components/If/If'
 import LayoutController from '../layouts/LayoutController'
 import styles from '../styles/Cabinet.module.scss'
 import { useSelector } from 'react-redux';
+import { logout } from '../redux/actions/user.actions';
 
 export const getStaticProps = async () => {
 

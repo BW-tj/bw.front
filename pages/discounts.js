@@ -7,6 +7,7 @@ import styles from '../styles/Discounts.module.scss';
 import * as skeletons from '../skeletons';
 import ProductCart from '../components/ProductCart';
 import { useSelector } from 'react-redux';
+import { logout } from '../redux/actions/user.actions';
 
 export const getStaticProps = async () => {
 
