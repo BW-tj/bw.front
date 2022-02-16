@@ -1,4 +1,5 @@
 import React from 'react'
+import MobileNavigation from '../../components/MobileNavigation'
 import styles from './MobileLayout.module.scss'
 
 const MobileLayout = ({
@@ -6,6 +7,8 @@ const MobileLayout = ({
 }) => {
 	return (
 		<div className={styles.root}>
+
+			<MobileNavigation />
 			
 			<div className={styles.content}>
 				{children}

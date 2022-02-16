@@ -29,6 +29,12 @@
 	margin-right: auto;
 }
 
+@mixin _360 {
+	@media (max-width: 360px){
+			@content;
+	}
+}
+
 @mixin _720 {
 	@media (max-width: 720px){
 			@content;

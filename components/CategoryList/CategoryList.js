@@ -70,7 +70,7 @@ const LeftBar = ({ categories, onMouseOver, activeCategory, onClose }) => {
 						{category.iconPath && 
 							<div className={styles.category_icon}>
 								<Image 
-									src={process.env.NEXT_PUBLIC_HOST + category.iconPath} 
+									src={process.env.NEXT_PUBLIC_HOST_WITHOUT_API + category.iconPath} 
 									alt='icon' 
 									width={20}
 									height={20}

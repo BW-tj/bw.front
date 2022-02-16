@@ -22,17 +22,24 @@ const OrderList = ({ categories }) => {
 
 	const user = useSelector(state => state.user)
 	const [data, setData] = React.useState([])
+	const [pending, setPending] = React.useState(false)
 
 	React.useEffect(() => {
 		const getData = async () => {
-			const response = await fetch(process.env.NEXT_PUBLIC_HOST + 'order/userorders/' + user.id);
-			if (response.status === 401 || response.status === 403) {
-				localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
-				window.location.href = '/'
-				dispatch(logout())
-			}const dataOrder = await response.json();
-
-			setData(dataOrder)
+			try {
+				setPending(true)
+				const response = await fetch(process.env.NEXT_PUBLIC_HOST + 'order/userorders/' + user.id);
+				if (response.status === 401 || response.status === 403) {
+					localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+					window.location.href = '/'
+					dispatch(logout())
+				}const dataOrder = await response.json();
+				
+				setData(dataOrder)
+			}
+			finally {
+				setPending(false)
+			}
 		}
 		getData()
 	}, [user.isAuth, user.id])
@@ -50,12 +57,18 @@ const OrderList = ({ categories }) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 			<div className={styles.root}>
-				
-				<div className={styles.container}>
 
-					<Title className={styles.title}>
-						Список ваших заказов
-					</Title>
+				<Title className={styles.title}>
+					Список ваших заказов
+				</Title>
+				
+				<div className="container">
+
+					{!pending && data.length === 0 &&
+						<div className={styles.noContent}>
+							У вас пока нет заказов
+						</div>
+					}
 
 				</div>
 

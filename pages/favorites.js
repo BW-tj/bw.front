@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Products from '../components/Products/Products';
 import Title from '../components/Title/Title';
@@ -29,7 +28,6 @@ const Favorites = ({ categories }) => {
 	const user = useSelector(state => state.user)
 	const favorites = useSelector(state => state.favorites)
 	const dispatch = useDispatch()
-	const router = useRouter()
 
 	React.useEffect(() => {
 		if (!user.isAuth) return
@@ -56,6 +54,11 @@ const Favorites = ({ categories }) => {
 					Избранное
 				</Title>
 				<div className="container">
+					{!pending &&favorites.length === 0 &&
+						<div className={styles.noContent}>
+							У вас пока нет избранных товаров
+						</div>
+					}
 					<Products>
 						{pending ? 
               <skeletons.ProductsSkeleton /> :
