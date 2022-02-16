@@ -28,7 +28,12 @@ const PopularCategories = () => {
 			const data = await response.json();
 			setCategories(data.map(item => ({...item, imagePath: process.env.NEXT_PUBLIC_HOST_WITHOUT_API+item.imagePath})))
 		}
+
 		getCategories()
+
+		return () => {
+			setCategories([])
+		}
 	}, [dispatch])
 
 	return (

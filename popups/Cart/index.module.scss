@@ -14,6 +14,9 @@
 	background: $secondary-color;
 	padding: 30px 20px;
 	border-radius: 3px;
+	@include _720 {
+		width: calc(100% - 30px);
+	}
 }
 
 .title {
@@ -56,6 +59,17 @@
 	&:hover {
 		box-shadow: 0 0 14px rgba(rgb(148, 148, 148), 0.2);
 	}
+	@include _720 {
+		padding: 20px;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 20px;
+	}
+}
+
+.item_commonPrice {
+	@include _720 {
+		margin-right: 20px;
+	}
 }
 
 .item_removeButton {
@@ -84,9 +98,16 @@
 	font-size: 1.125rem;
 }
 
-.item_countController {
+.item_countController_wrap {
+	display: flex;
+	align-items: center;
 	justify-content: center;
 	gap: 15px;
+}
+
+.item_countController {
+	gap: 15px;
+	justify-content: center;
 	.item_count {
 		width: 20px;
 		text-align: center;
@@ -116,6 +137,10 @@
 .item_end {
 	justify-content: flex-end;
 	gap: 20px;
+	@include _720 {
+		grid-column: 1 / span 2;
+		justify-content: space-between;
+	}
 }
 
 .totalInfo_wrap {
@@ -158,5 +183,12 @@
 	}
 	&:active {
 		background-color: darken($primary-color, 13%);
+	}
+}
+
+.item_countController {
+	@include _720 {
+		grid-column: 1 / span 2;
+		justify-content: space-between;
 	}
 }

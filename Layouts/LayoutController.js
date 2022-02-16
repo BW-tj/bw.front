@@ -36,7 +36,7 @@ const LayoutController = ({
 	return (
 		<>
 			<Popup />
-			<Layout>
+			<Layout categories={categories}>
 				{children}
 			</Layout>
 		</>

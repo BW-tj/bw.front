@@ -1,4 +1,5 @@
-@import '../../styles/_colors.scss';
+@import '../../styles/colors';
+@import '../../styles/mixins';
 
 .root {
 	height: 100vh;
@@ -9,6 +10,7 @@
 }
 
 .container {
+	width: 100%;
 	padding: 50px 0;
 }
 
@@ -21,6 +23,10 @@
 	background: $secondary-color;
 	padding: 30px 20px;
 	border-radius: 3px;
+	@include _720 {
+		margin: 0 auto;
+		width: calc(100% - 30px);
+	}
 }
 
 .title {

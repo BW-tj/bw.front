@@ -2,11 +2,15 @@
 @import '../../styles/mixins';
 
 .root {
-	width: 100%;
 	box-shadow: 0 0 24px rgba(rgb(94, 94, 94), 0.2);
 	padding: 20px 25px;
 	border-radius: 4px;
 	animation: fadeIn 500ms ease-out forwards;
+	@include _720 {
+		padding: 0;
+		margin-top: 50px;
+		box-shadow: none;
+	}
 }
 
 .title {
@@ -30,6 +34,13 @@
 		align-items: center;
 		justify-content: space-between;
 		font-weight: 500;
+		@include _720 {
+			padding: 10px 12px;
+			border-radius: 6px;
+			&:active, &:focus {
+				background: rgb(231, 231, 231);
+			}
+		}
 	}
 	&_menu_wrap {
 		transition: 100ms linear;
@@ -52,6 +63,13 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+		}
+		@include _720 {
+			padding: 10px 12px;
+			border-radius: 6px;
+			&:active, &:focus {
+				background: rgb(231, 231, 231);
+			}
 		}
 	}
 }

@@ -21,66 +21,66 @@
 	padding: 30px 15px;
 	display: flex;
 	flex-direction: column;
-	gap: 50px;
-	overflow-y: auto;
-}
-
-.cartGroup {
-	display: flex;
-	flex-direction: column;
 	gap: 20px;
-	&__title {
-		font-size: 1rem;
-		font-weight: 600;
-		color: $text-color;
-		letter-spacing: 0.03rem;
-	}
+	overflow-y: auto;
 }
 
 .close {
 	animation: fadeOut 200ms linear forwards;
 }
 
-.cart, .button_cart {
-	width: 100%;
-	padding: 20px;
-	border-radius: 10px;
+.title {
+	font-size: 1.125rem;
+	font-weight: 600;
+}
+
+.categories, .subCategories, .subSubCategories {
+	display: flex;
+	flex-direction: column;
+}
+
+.label {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	transition: 100ms linear;
-	gap: 10px;
-	font-size: 1.125em;
-	font-weight: 500;
+	justify-content: space-between;
+}
+
+.label__link {
+	width: 100%;
+	padding: 20px 20px;
+	font-weight: 600;
+	display: inline-block;
 	color: $text-color;
-	&__icon {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-}
-
-.button_cart {
-	background: rgb(238, 238, 238);
-	&:active {
+	transition: 100ms linear;
+	&:active, &:focus {
 		color: $primary-color;
-		background: lighten($primary-color, 40%);
-	}
-	&.disabled {
-		pointer-events: none;
-		opacity: 0.5;
 	}
 }
 
-.button_cart_cart {
-	&:active {
-		color: $yellow;
+.arrow {
+	align-self: stretch;
+	width: 60px;
+	color: $search-placeholder-color;
+	transition: 100ms linear;
+	&:active, &:focus {
+		color: $primary-color;
+	}
+	&.open {
+		transform: rotate(180deg);
 	}
 }
 
-.button_cart_favorite {
-	&:active {
-		color: $red;
+.subCategories {
+	.label__link {
+		padding-left: 25px;
+		font-weight: 500;
+	}
+}
+
+.subSubCategories {
+	.label__link {
+		padding-left: 30px;
+		font-weight: 400;
 	}
 }
 

@@ -9,6 +9,8 @@ import classNames from 'classnames';
 import { RadioButtonChecked, RadioButtonUnchecked } from '../icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/actions/user.actions';
+import Authorization from '../popups/Authorization/Authorization.popup';
+import { openPopup } from '../redux/actions/popup.actions';
 
 export const getStaticProps = async () => {
 
@@ -39,10 +41,16 @@ const Order = ({ categories, paymentTypes, deliverytypes }) => {
 	const dispatch = useDispatch()
 
 	const [text, setText] = React.useState('');
+	const [error, setError] = React.useState('');
 	const [selectedPaymentType, setSelectedPaymentType] = React.useState(paymentTypes.length ? paymentTypes[0] : '');
 	const [selectedDeliveryType, setSelectedDeliveryType] = React.useState(paymentTypes.length ? deliverytypes[0] : '');
 
 	const handleCheckout = React.useCallback(async () => {
+		
+		if (!user.isAuth) {
+			return setError('Пожалуйста, авторизуйтесь перед оформлением заявки');
+		}
+
 		const body = JSON.stringify({
 			deliveryTypeId: selectedDeliveryType.id,
 			paymentTypeId: selectedPaymentType.id,
@@ -53,17 +61,10 @@ const Order = ({ categories, paymentTypes, deliverytypes }) => {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json', 
+				'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) 
 			},
 			body
 		}
-		if (user.isAuth)
-			config = {
-				...config,
-				headers: {
-					...config.headers,
-					'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) 
-				}
-			}
 
 		const response = await fetch(process.env.NEXT_PUBLIC_HOST+'/order', config)
 		if (response.status === 401 || response.status === 403) {
@@ -78,6 +79,16 @@ const Order = ({ categories, paymentTypes, deliverytypes }) => {
 			dispatch(logout())
 		}
 	}, [dispatch, selectedDeliveryType, text, selectedPaymentType, user.isAuth])
+
+	React.useEffect(() => {
+		let timeout = null;
+		if (!user.isAuth) {
+			timeout = setTimeout(() => {
+				dispatch(openPopup(props => <Authorization {...props} />))
+			}, 1000)
+		}
+		return () => clearTimeout(timeout)
+	}, [user.isAuth, dispatch])
 
 	return (
     <LayoutController categories={categories}>
@@ -160,6 +171,11 @@ const Order = ({ categories, paymentTypes, deliverytypes }) => {
 						<button className={styles.submit} onClick={handleCheckout}>
 							Оформить заказ
 						</button>
+						{!user.isAuth &&
+							<div className={styles.error}>
+								{error}
+							</div>
+						}
 					</div>
 				</div>
 			</div>

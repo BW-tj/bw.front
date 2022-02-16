@@ -1,20 +1,41 @@
 import React from 'react';
+import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { openPopup } from '../../redux/actions/popup.actions';
 import MobileMenu from '../../popups/MobileMenu';
 import styles from './index.module.scss'
+import { Search } from '../../icons';
+import { useRouter } from 'next/dist/client/router';
 
-const MobileNavigation = () => {
+const MobileNavigation = ({ categories }) => {
 
 	const dispatch = useDispatch()
+	const router = useRouter()
 	const [searchValue, setSearchValue] = React.useState('')
 
+	const handleSearch = React.useCallback(() => {
+		let query = '/search?q=' + searchValue
+
+		router.replace(query)
+	}, [searchValue, router])
+
 	const handleBurgerClick = React.useCallback(() => {
-		dispatch(openPopup(props => <MobileMenu {...props} />))
-	}, [dispatch])
+		dispatch(openPopup(props => <MobileMenu categories={categories} {...props} />))
+	}, [dispatch, categories])
+
+	React.useMemo(() => {
+		if (router.query.q)
+			setSearchValue(router.query.q)
+	}, [router.query])
 	
 	return (
 		<div className={styles.root}>
+
+			<Link href="/">
+				<a className={styles.logo}>
+					Большая стирка
+				</a>
+			</Link>
 			
 			<div className={styles.container}>
 				<button className={styles.menuBurger} onClick={handleBurgerClick}>
@@ -23,7 +44,7 @@ const MobileNavigation = () => {
 					<div className={styles.menuBurgerLine}></div>
 				</button>
 
-				<div className={styles.searchWrap}>
+				<form onSubmit={e => e.preventDefault()} className={styles.searchWrap}>
 					<input 
 						value={searchValue}
 						onChange={e => setSearchValue(e.target.value)}
@@ -31,7 +52,10 @@ const MobileNavigation = () => {
 						placeholder="Поиск..." 
 						className={styles.search} 
 					/>
-				</div>
+					<button type="submit" className={styles.searchButton} onClick={handleSearch}>
+						<Search />
+					</button>
+				</form>
 			</div>
 
 		</div>

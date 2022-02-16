@@ -3,7 +3,16 @@
 
 .root {
 	margin: 40px 0;
-	height: 50px;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+	font-weight: 800;
+	color: $primary-color;
+	margin-bottom: 30px;
 }
 
 .container {
@@ -31,16 +40,32 @@
 .searchWrap {
 	width: 100%;
 	margin-left: 10px;
+	display: flex;
+	align-items: center;
 }
 
 .search {
 	padding: 12px 15px;
 	font-size: 1.125rem;
-	border-radius: 6px;
+	border-radius: 6px 0 0 6px;
 	border: 1px solid $grey-color;
 	transition: 100ms linear;
 	width: 100%;
 	&:focus {
 		border-color: $primary-color;
+	}
+}
+
+.searchButton {
+	width: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: $primary-color;
+	align-self: stretch;
+	color: #fff;
+	border-radius: 0 6px 6px 0;
+	&:active, &:focus {
+		background: darken($primary-color, 8%);
 	}
 }

@@ -3,12 +3,13 @@ import MobileNavigation from '../../components/MobileNavigation'
 import styles from './MobileLayout.module.scss'
 
 const MobileLayout = ({
-	children
+	children,
+	categories
 }) => {
 	return (
 		<div className={styles.root}>
 
-			<MobileNavigation />
+			<MobileNavigation categories={categories} />
 			
 			<div className={styles.content}>
 				{children}

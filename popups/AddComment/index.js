@@ -109,7 +109,7 @@ const Stars = ({ rating, setRating }) => {
 	const [hoverRating, setHoverRating] = React.useState(0)
 	const [stars, setStars] = React.useState([])
 
-	React.useMemo(() => {
+	React.useEffect(() => {
 		const newStars = []
 		for(let i = 1; i <= 5; i++)
 			newStars.push({ key: i, filled: i <= rating, lightFilled: i <= hoverRating })

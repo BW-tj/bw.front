@@ -16,30 +16,33 @@ const CartSidebar = ({ deliveryType }) => {
 
 			<div className={styles.cart}>
 
-				{cart.map(item => 
-					<React.Fragment key={item.id}>
-						<div className={styles.item}>
-							<div className={styles.item__image}>
-								<Image
-									alt={item.name}
-									src={process.env.NEXT_PUBLIC_HOST_WITHOUT_API+'/'+item.images[0].imagePath}
-									width={66}
-									height={66}
-								/>
-							</div>
-							<div className={styles.item__title}>
-								{item.name || item.productName}
-							</div>
-							<div className={styles.item__count}>
-								{item.count} шт.
-							</div>
-							<div className={styles.item__price}>
-								{item.price - item.price*item.discount / 100} с.
-							</div>
-						</div>	
-						<div className={styles.divider} />
-					</React.Fragment>
-				)}
+				{cart.map(item => {
+					const image = item?.images?.[0] || item.imagePath; 
+					return (
+						<React.Fragment key={item.id}>
+							<div className={styles.item}>
+								<div className={styles.item__image}>
+									<Image
+										alt={item.name}
+										src={process.env.NEXT_PUBLIC_HOST_WITHOUT_API+image}
+										width={66}
+										height={66}
+									/>
+								</div>
+								<div className={styles.item__title}>
+									{item.name || item.productName}
+								</div>
+								<div className={styles.item__count}>
+									{item.count} шт.
+								</div>
+								<div className={styles.item__price}>
+									{item.price - item.price*item.discount / 100} с.
+								</div>
+							</div>	
+							<div className={styles.divider} />
+						</React.Fragment>
+					)
+				})}
 
 			</div>
 			

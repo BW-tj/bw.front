@@ -87,21 +87,23 @@ const Cart = ({ onClose }) => {
 								{item.name || item.productName}
 							</div>
 							<div className={styles.item_countController}>
-								<button 
-									className={classNames(styles.item_countButton, styles.item_increase)}
-									onClick={() => handleIncrease(item.id || item.productId, item.count)}
-								>
-									+
-								</button>
-								<div className={styles.item_count}>
-									{item.count}
+								<div className={styles.item_countController_wrap}>
+									<button 
+										className={classNames(styles.item_countButton, styles.item_increase)}
+										onClick={() => handleIncrease(item.id || item.productId, item.count)}
+									>
+										+
+									</button>
+									<div className={styles.item_count}>
+										{item.count}
+									</div>
+									<button 
+										className={classNames(styles.item_countButton, styles.item_increase)}
+										onClick={() => handleDecrease(item.id || item.productId, item.count)}
+									>
+										-
+									</button>
 								</div>
-								<button 
-									className={classNames(styles.item_countButton, styles.item_increase)}
-									onClick={() => handleDecrease(item.id || item.productId, item.count)}
-								>
-									-
-								</button>
 								<div className={styles.item_price}>
 									x {item.price} с.
 								</div>

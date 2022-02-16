@@ -3,13 +3,21 @@
 
 .root {
 	height: 30px;
-	margin-bottom: 30px;
+	margin-bottom: 50px;
 	display: flex;
 	gap: 20px;
+	@include _720 {
+		height: auto;
+		flex-direction: column;
+	}
 }
 
 .dropdown {
+	width: 100%;
 	position: relative;
+	@include _720 {
+		width: calc(100vw - 60px);
+	}
 }
 
 .dropdown_label {
@@ -21,6 +29,7 @@
 	font-weight: 500;
 	font-size: 0.875em;
 	border-radius: 4px;
+	text-align: left;
 	&_icon {
 		display: flex;
 		align-items: center;
@@ -36,10 +45,14 @@
 	position: absolute;
 	background: #fff;
 	box-shadow: 0 0 14px rgba(rgb(160, 160, 160), 0.2);
-	top: calc(100% + 8px);
+	top: calc(100% + 20px);
 	z-index: 100;
 	padding: 8px 0;
 	animation: fadeIn 100ms	linear;
+	@include _720 {
+		width: 100%;
+		max-width: 100%;
+	}
 }
 
 .dropdown_menu_item {

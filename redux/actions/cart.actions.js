@@ -9,7 +9,7 @@ export const pushCart = cart => async () => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
+			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
 		},
 		body: JSON.stringify(cart)
 	})

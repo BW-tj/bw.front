@@ -107,9 +107,9 @@ const Home = ({ categories, brands, banners }) => {
           </Products>
         </div>
 
-        <Title className={styles.title}>Бренды</Title>
+        {/* <Title className={styles.title}>Бренды</Title>
 
-        <BrandsSlider brands={brands} className={styles.brand_slider} />
+        <BrandsSlider brands={brands} className={styles.brand_slider} /> */}
         
       </div>
     </LayoutController>

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import If from '../components/If/If'
 import LayoutController from '../layouts/LayoutController'
 import styles from '../styles/Cabinet.module.scss'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actions/user.actions';
 
 export const getStaticProps = async () => {
@@ -25,6 +25,7 @@ const Cabinet = ({ categories }) => {
 	const [loading, setLoading] = useState(true)
 
 	const user = useSelector(state => state.user)
+	const dispatch = useDispatch() 
 
 	const [errors, setErrors] = useState({
 		firstname: '', lastname: '', email: '', phone: '', password: ''
@@ -79,28 +80,25 @@ const Cabinet = ({ categories }) => {
 		window.location.replace('/')
 	}
 
+	useEffect(() => {
+		if (!user.isAuth) {
+		  localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+		  window.location.href = '/'
+		  dispatch(logout())
+		}
+	}, [user, dispatch])
 
 	useEffect(() => {
-		if (!user.isAuth)
-			window.location.replace('/')
-	}, [user])
-
-	useEffect(() => {
-		const config = {
+		let config = {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": 'Bearer ' + user.isAuth ? localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) : ''
+				"Authorization": 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
 			}	
 		}
 
 		fetch(`${process.env.NEXT_PUBLIC_HOST}/users/profile`, config)
 			.then(res => {
-				if (res.status === 401 || res.status === 403) {
-          localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
-          window.location.href = '/'
-          dispatch(logout())
-        }
 				return res.json()
 			})
 			.then(data => {
@@ -111,7 +109,7 @@ const Cabinet = ({ categories }) => {
 				setEmail(data.email)
 				setAddress(data.address)
 			})
-	}, [])
+	}, [dispatch, user.isAuth])
 
 	if (loading) return <></>
 	return (
