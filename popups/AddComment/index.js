@@ -27,6 +27,11 @@ const AddComment = ({ onClose, setComments, id }) => {
 		}
 
 		const response = await fetch(process.env.NEXT_PUBLIC_HOST + '/comment', config)
+		if (response.status === 401 || response.status === 403) {
+			localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+			window.location.href = '/'
+			dispatch(logout())
+		}
 
 		const data = await response.json();
 

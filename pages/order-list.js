@@ -26,7 +26,11 @@ const OrderList = ({ categories }) => {
 	React.useEffect(() => {
 		const getData = async () => {
 			const response = await fetch(process.env.NEXT_PUBLIC_HOST + 'order/userorders/' + user.id);
-			const dataOrder = await response.json();
+			if (response.status === 401 || response.status === 403) {
+				localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+				window.location.href = '/'
+				dispatch(logout())
+			}const dataOrder = await response.json();
 
 			setData(dataOrder)
 		}

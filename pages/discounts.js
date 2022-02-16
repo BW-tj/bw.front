@@ -40,6 +40,11 @@ const Discounts = ({ categories }) => {
             }
           }
         const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration?tag=1', config)
+        if (productRes.status === 401 || productRes.status === 403) {
+          localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+          window.location.href = '/'
+          dispatch(logout())
+        }
         const products = await productsRes.json()
         setProducts(products)
       }

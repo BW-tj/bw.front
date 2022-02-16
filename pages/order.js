@@ -66,6 +66,11 @@ const Order = ({ categories, paymentTypes, deliverytypes }) => {
 			}
 
 		const response = await fetch(process.env.NEXT_PUBLIC_HOST+'/order', config)
+		if (response.status === 401 || response.status === 403) {
+			localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+			window.location.href = '/'
+			dispatch(logout())
+		}
 
 		if (response.status === 401 || response.status === 403) {
 			localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)

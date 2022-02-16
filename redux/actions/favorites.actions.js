@@ -1,8 +1,8 @@
 import * as t from '../types'
 
 export const updateFavorites = initialFavorites => async dispatch => {
-	if (initialFavorites && initialFavorites.length)
-		await fetch(process.env.NEXT_PUBLIC_HOST + '/favorite/addrange', {
+	if (initialFavorites && initialFavorites.length) {
+		const response1 = await fetch(process.env.NEXT_PUBLIC_HOST + '/favorite/addrange', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -12,8 +12,14 @@ export const updateFavorites = initialFavorites => async dispatch => {
 				productIds: initialFavorites.map(item => item.id)
 			})
 		})
+		if (response1.status === 401 || response1.status === 403) {
+			localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+			window.location.href = '/'
+			dispatch(logout())
+		}
+	}
 	
-	const response = await fetch(process.env.NEXT_PUBLIC_HOST + '/favorite', {
+	const response2 = await fetch(process.env.NEXT_PUBLIC_HOST + '/favorite', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -21,7 +27,7 @@ export const updateFavorites = initialFavorites => async dispatch => {
 		}
 	})
 
-	const data = await response.json()
+	const data = await response2.json()
 
 	dispatch ({
 		type: t.UPDATE_FAVORITES,
@@ -47,7 +53,7 @@ export const addToFavorites = productCardData => async dispatch => {
 
 export const addToFavoritesService = productCardData => async dispatch => {
 	
-	await fetch(process.env.NEXT_PUBLIC_HOST + '/favorite', {
+	const response = await fetch(process.env.NEXT_PUBLIC_HOST + '/favorite', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -57,6 +63,11 @@ export const addToFavoritesService = productCardData => async dispatch => {
 			productId: productCardData.id
 		})
 	})
+	if (response.status === 401 || response.status === 403) {
+		localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+		window.location.href = '/'
+		dispatch(logout())
+	}
 
 	dispatch({
 		type: t.ADD_TO_FAVORITES,
@@ -71,13 +82,18 @@ export const removeFromFavorites = id => ({
 
 export const removeFromFavoritesService = id => async dispatch => {
 
-	await fetch(process.env.NEXT_PUBLIC_HOST + '/favorite/'+id, {
+	const response = await fetch(process.env.NEXT_PUBLIC_HOST + '/favorite/'+id, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN)
 		}
 	})
+	if (response.status === 401 || response.status === 403) {
+		localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+		window.location.href = '/'
+		dispatch(logout())
+	}
 
 	dispatch({
 		type: t.REMOVE_FROM_FAVORITES,

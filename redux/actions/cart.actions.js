@@ -4,7 +4,7 @@ export const pushCart = cart => async () => {
 
 	const url = process.env.NEXT_PUBLIC_HOST + '/basket/addrange';
 
-	await fetch(url, {
+	const response = await fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -12,6 +12,11 @@ export const pushCart = cart => async () => {
 		},
 		body: JSON.stringify(cart)
 	})
+	if (response.status === 401 || response.status === 403) {
+		localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+		window.location.href = '/'
+		dispatch(logout())
+	}
 }
 
 export const pullCart = () => async dispatch => {
@@ -24,6 +29,11 @@ export const pullCart = () => async dispatch => {
 			'Authorization': 'Bearer ' + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN) 
 		}
 	})
+	if (response.status === 401 || response.status === 403) {
+		localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+		window.location.href = '/'
+		dispatch(logout())
+	}
 
 	const newCart = await response.json()
 

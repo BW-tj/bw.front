@@ -53,7 +53,11 @@ const Home = ({ categories, brands, banners }) => {
             }
           }
         const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration', config)
-        const products = await productsRes.json()
+        if (productsRes.status === 401 || productsRes.status === 403) {
+          localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+          window.location.href = '/'
+          dispatch(logout())
+        }const products = await productsRes.json()
         setProducts(products)
       }
       finally {

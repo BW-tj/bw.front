@@ -94,7 +94,14 @@ const Cabinet = ({ categories }) => {
 		}
 
 		fetch(`${process.env.NEXT_PUBLIC_HOST}/users/profile`, config)
-			.then(res => res.json())
+			.then(res => {
+				if (res.status === 401 || res.status === 403) {
+          localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
+          window.location.href = '/'
+          dispatch(logout())
+        }
+				return res.json()
+			})
 			.then(data => {
 				setLoading(false)
 				setFirstname(data.name)
