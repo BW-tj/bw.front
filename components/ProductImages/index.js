@@ -17,8 +17,25 @@ const ProductImages = ({ product, width }) => {
 		slidesToScroll: 1,
 	};
 
+	const [style, setStyle] = React.useState({width: width+'px', gridTemplateColumns: `100px ${width - 100}px`})
+
+	React.useEffect(() => {
+
+		const handleResize = () => {
+			if (window.innerWidth < 720) {
+				setStyle({ width: width+'px', gridTemplateColumns: `${width}px` })
+			}
+		}
+
+		handleResize()
+
+		window.addEventListener('resize', handleResize)
+
+		return () => window.removeEventListener('resize', handleResize)
+	}, [width])
+
 	return (
-		<div className={styles.root} style={{width: width+'px', gridTemplateColumns: `100px ${width - 100}px`}}>
+		<div className={styles.root} style={style}>
 
 			<div className={styles.pagination}>
 				{images.map((image, i) => 
@@ -47,7 +64,7 @@ const ProductImages = ({ product, width }) => {
 								alt={'product-image-'+index}
 								width='100%'
 								height='100%'
-								layout='responsive' objectFit='contain'
+								layout='responsive' objectFit='cover'
 							/>
 						</div>
 					)}

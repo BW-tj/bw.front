@@ -67,6 +67,7 @@ const Favorites = ({ categories }) => {
 									id={product.id}
 									key={product.id}
 									data={product}
+									initialFavorite
 								/>
 							)
             }					

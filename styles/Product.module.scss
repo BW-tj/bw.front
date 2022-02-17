@@ -11,6 +11,11 @@
 	grid-template-columns: 3.5fr 2fr;
 	gap: 40px;
 	@include container;
+	@include _720 {
+		padding-bottom: 40px;
+		display: flex;
+		flex-direction: column-reverse;
+	}
 }
 
 .title {

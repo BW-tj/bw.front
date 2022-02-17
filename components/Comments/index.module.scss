@@ -8,6 +8,24 @@
 	position: relative;
 }
 
+.noContent {
+	background: rgb(245, 245, 245);
+	height: 180px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 12px;
+	font-size: 2rem;
+	font-weight: 400;
+	letter-spacing: 0.03em;
+	color: $search-placeholder-color;
+	@include _720 {
+		padding: 30px;
+		height: auto;
+		font-size: 1.25rem;
+	}
+}
+
 .title {
 	font-size: 2rem;
 	font-weight: 600;

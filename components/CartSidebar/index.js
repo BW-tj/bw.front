@@ -17,9 +17,10 @@ const CartSidebar = ({ deliveryType }) => {
 			<div className={styles.cart}>
 
 				{cart.map(item => {
-					const image = item?.images?.[0] || item.imagePath; 
+					const image = item?.images?.[0]?.imagePath || item?.images?.[0]; 
+					console.log(image)
 					return (
-						<React.Fragment key={item.id}>
+						<React.Fragment key={item.id || item.productId}>
 							<div className={styles.item}>
 								<div className={styles.item__image}>
 									<Image

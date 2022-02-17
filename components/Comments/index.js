@@ -14,6 +14,13 @@ const Comments = ({ comments, onAdd }) => {
 			<button onClick={onAdd} className={classNames(styles.addButton, styles.active)}>
 				Оставить отзыв
 			</button>
+
+			
+			{comments.length === 0 &&
+				<div className={styles.noContent}>
+					У продукта нет отзывов, станьте первым!
+				</div>
+			}
 			
 			{comments.map(comment => 
 				<div className={styles.comment} key={comment.id}>

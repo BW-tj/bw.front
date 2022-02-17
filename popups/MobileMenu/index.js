@@ -9,12 +9,14 @@ import Authorization from '../Authorization/Authorization.popup';
 import styles from './index.module.scss' 
 import MobileCategoryList from './../MobileCategoryList/index';
 import Cart from '../Cart';
+import { useRouter } from 'next/router';
 
 const MobileMenu = ({ onClose, categories }) => {
 
 	const user = useSelector(state => state.user)
 	const cart = useSelector(state => state.cart)
 	const dispatch = useDispatch()
+	const router = useRouter()
 	const [close, setClose] = React.useState(false);
 	
 	const handleLogin = React.useCallback(() => {
@@ -25,7 +27,7 @@ const MobileMenu = ({ onClose, categories }) => {
 		localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
 		await dispatch(logout())
 		await router.push('/')
-	}, [dispatch])
+	}, [dispatch, router])
 
 	const handleCart = React.useCallback(() => {
 		dispatch(openPopup(props => <Cart {...props} />))

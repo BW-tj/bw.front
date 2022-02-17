@@ -67,17 +67,17 @@ const Cart = ({ onClose }) => {
 					<div className={styles.title}>
 						Корзина
 					</div>
-					<button className={styles.clearButton}>
+					{/* <button className={styles.clearButton}>
 						Очистить корзирну
-					</button>
+					</button> */}
 				</div>
 				<div className={styles.list}>
 					{cart.map(item => 
 						<div className={styles.item} key={item.productId}>
 							<div className={styles.item_image}>
 								<Image 
-									src={"https://static.vecteezy.com/system/resources/thumbnails/002/487/856/small/banana-fruit-free-vector.jpg"} 
-									// src={process.env.NEXT_PUBLIC_HOST_WITHOUT_API + item.images[0]} 
+									// src={"https://static.vecteezy.com/system/resources/thumbnails/002/487/856/small/banana-fruit-free-vector.jpg"} 
+									src={process.env.NEXT_PUBLIC_HOST_WITHOUT_API + (item.images?.[0]?.imagePath || item.images?.[0] || item.imagePath)} 
 									alt={item.name || item.productName} 
 									width={100}
 									height={100}

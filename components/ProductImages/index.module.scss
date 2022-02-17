@@ -6,6 +6,9 @@
 	height: 700px;
 	display: grid;
 	grid-gap: 10px;
+	@include _720 {
+		height: auto;
+	}
 }
 
 .image {
@@ -13,15 +16,29 @@
 	position: relative;
 	overflow: hidden;
 	border-radius: 6px;
+	@include _720 {
+		height: auto;
+		margin-bottom: 40px;
+	}
 }
 
 .pagination {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+	@include _720 {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 }
 
 .paging {
 	overflow: hidden;
 	border-radius: 6px;
+	img {
+		object-fit: cover !important;
+	}
+	@include _720 {
+		height: 100px;
+	}
 }
