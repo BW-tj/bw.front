@@ -16,7 +16,7 @@ const DesktopLayout = ({
 	const [isCatergoryOpen, setCatergoryOpen] = useState(false)
 
 	return (
-		<>
+		<div className={styles.wrap}>
 			<If condition={isSearchFocused}>
 				<span className={styles.search_cover} onClick={() => setSearchFocued(false)}></span>
 			</If>
@@ -43,10 +43,9 @@ const DesktopLayout = ({
 					{children}
 				</div>
 
-				<Footer />
-
 			</div>
-		</>
+			<Footer />
+		</div>
 	)
 }
 
