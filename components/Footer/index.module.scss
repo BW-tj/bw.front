@@ -1,0 +1,98 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	background: rgb(245, 245, 245);
+	padding-top: 25px;
+	width: 100%;
+	margin-top: 30px;
+}
+
+.container {
+	@include container;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-row-gap: 40px;
+	grid-column-gap: 200px;
+	@include _720 {
+		grid-template-columns: 1fr;
+	}
+}
+
+.bw {
+	display: flex;
+	flex-direction: column;
+	&__title {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin-bottom: 20px;
+	}
+	&__info {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+	}
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		&__icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 10px;
+		}
+	}
+}
+
+.aboutUs {
+	&__title {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin-bottom: 20px;
+	}
+	&__text {
+		line-height: 24px;
+		font-size: 0.875rem;
+	}
+}
+
+.socialMedia {
+	&__title {
+		font-weight: 700;
+		font-size: 1.5rem;
+		margin-bottom: 20px;
+	}
+	&__icons {
+		display: flex;
+		align-items: center;
+		gap: 40px;
+	}
+	&__icon {
+		color: $text-color;
+		transition: 100ms linear;
+		&:hover {
+			color: $primary-color;
+		}
+		&:focus {
+			color: $text-color;
+		}
+		&:focus:hover {
+			color: $primary-color;
+		}
+	}
+}
+
+.copyriht {
+	background: #000;
+	margin-top: 25px;
+	color: #fff;
+	.container {
+		height: 52px;
+		display: flex;
+		align-items: center;
+		font-size: 0.875rem;
+	}
+}

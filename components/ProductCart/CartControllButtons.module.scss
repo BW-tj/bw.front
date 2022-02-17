@@ -22,6 +22,10 @@
 	&:hover {
 		color: $primary-color-d1;
 	}
+	@include _560 {
+		width: 40px;
+		border-radius: 50px;
+	}
 }
 
 .emptyBox {

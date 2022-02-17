@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
-import { FavoriteBorder, PersonOutline, SaveAlt, ShoppingCart } from '../../icons';
+import { FavoriteBorder, Grade, LocalHospital, LocalOffer, LogOut, Menu, PersonOutline, SaveAlt, ShoppingCart } from '../../icons';
 import { openPopup } from '../../redux/actions/popup.actions';
 import { logout } from '../../redux/actions/user.actions';
 import Authorization from '../Authorization/Authorization.popup';
@@ -27,7 +27,8 @@ const MobileMenu = ({ onClose, categories }) => {
 		localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
 		await dispatch(logout())
 		await router.push('/')
-	}, [dispatch, router])
+		onClose()
+	}, [dispatch, router, onClose])
 
 	const handleCart = React.useCallback(() => {
 		dispatch(openPopup(props => <Cart {...props} />))
@@ -106,22 +107,34 @@ const MobileMenu = ({ onClose, categories }) => {
 					<div className={styles.cartGroup__title}>
 						Магазин
 					</div>
-					<button className={classNames(styles.button_cart, styles.button_cart_favorite)} onClick={handleCategories}>
+					<button className={classNames(styles.button_cart, styles.button_cart_cart)} onClick={handleCategories}>
+						<div className={styles.button_cart__icon}>
+							<Menu />
+						</div>
 						Категории
 					</button>
 					<Link href="/new">
-						<a className={classNames(styles.button_cart, styles.button_cart_favorite)} onClick={handleClose}>
+						<a className={classNames(styles.button_cart, styles.button_cart_cart)} onClick={handleClose}>
+						<div className={styles.button_cart__icon}>
+							<LocalHospital />
+						</div>
 							Новые товары
 						</a>
 					</Link>
 					<Link href="/bestsellers">
-						<a className={classNames(styles.button_cart, styles.button_cart_favorite)} onClick={handleClose}>
+						<a className={classNames(styles.button_cart, styles.button_cart_cart)} onClick={handleClose}>
+						<div className={styles.button_cart__icon}>
+							<Grade />
+						</div>
 							Хит продаж
 						</a>
 					</Link>
 					<Link href="/discounts">
-						<a className={classNames(styles.button_cart, styles.button_cart_favorite)} onClick={handleClose}>
-							Акции
+						<a className={classNames(styles.button_cart, styles.button_cart_cart)} onClick={handleClose}>
+						<div className={styles.button_cart__icon}>
+							<LocalOffer />
+						</div>
+							Скидки
 						</a>
 					</Link>
 				</div>
@@ -133,6 +146,9 @@ const MobileMenu = ({ onClose, categories }) => {
 								Выход
 							</div>
 							<button className={classNames(styles.button_cart, styles.button_cart_favorite)} onClick={handleLogOut}>
+								<div className={styles.button_cart__icon}>
+									<LogOut />
+								</div>
 								Выйти из аккаунта
 							</button>
 						</>

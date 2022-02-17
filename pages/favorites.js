@@ -54,7 +54,7 @@ const Favorites = ({ categories }) => {
 					Избранное
 				</Title>
 				<div className="container">
-					{!pending &&favorites.length === 0 &&
+					{!pending && favorites.length === 0 &&
 						<div className={styles.noContent}>
 							У вас пока нет избранных товаров
 						</div>

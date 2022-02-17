@@ -1,8 +1,8 @@
 import Head from 'next/head';
+import LayoutController from '../layouts/LayoutController';
 import React from 'react';
 import Products from '../components/Products/Products';
 import Title from '../components/Title/Title';
-import LayoutController from '../layouts/LayoutController';
 import styles from '../styles/Discounts.module.scss';
 import * as skeletons from '../skeletons';
 import ProductCart from '../components/ProductCart';

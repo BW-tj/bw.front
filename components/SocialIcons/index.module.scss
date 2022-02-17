@@ -1,0 +1,42 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.root {
+	position: fixed;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	flex-direction: column;
+	border-radius: 4px 0 0 4px;
+	overflow: hidden;
+	z-index: 1000;
+}
+
+.icon {
+	padding: 8px;
+}
+
+.facebook {
+	background: #3b5998;
+	color: #fff;
+	&:active {
+		background: #33508f;
+	}
+}
+
+.instagram {
+	background: #e1306c;
+	color: #fff;
+	&:active {
+		background: #cc2960;
+	}
+}
+
+.telegram {
+	background: #0088cc;
+	color: #fff;
+	&:active {
+		background: #0177b3;
+	}
+}

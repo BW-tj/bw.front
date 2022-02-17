@@ -6,7 +6,6 @@ import {
 	FavoriteBorder as FavoriteBorderIcon
 } from '../../icons'
 import styles from './Title.module.scss'
-import { useSelector } from 'react-redux'
 
 const Title = ({ name, isFavorite, onToggleFavorite }) => (
 	<div className={styles.root}>

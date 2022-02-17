@@ -13,4 +13,8 @@
 	&:hover {
 		text-decoration: underline;
 	}
+	@include _560 {
+		font-size: 0.65rem;
+		padding: 0 5px;
+	}
 }

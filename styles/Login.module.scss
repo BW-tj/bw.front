@@ -1,0 +1,140 @@
+@import './colors';
+@import './mixins';
+
+.root {
+	width: 450px;
+	background: $secondary-color;
+	padding: 30px 20px;
+	border-radius: 3px;
+	@include _720 {
+		margin: 0 auto;
+		width: calc(100% - 30px);
+	}
+}
+
+.title {
+	font-size: 1.75rem;
+	color: $text-color;
+	text-align: center;
+	letter-spacing: 0.06rem;
+	margin-bottom: 30px;
+}
+
+.sub_title {
+	font-weight: 600;
+	margin-bottom: 10px;
+	opacity: 0.4;
+}
+
+.label {
+	margin-bottom: 20px;
+}		
+
+.labelError {
+	.input_wrap {
+		display: flex;
+		align-items: center;
+		border-radius: 3px;
+		border: 1px solid $red;
+	}
+}
+
+.input_wrap {
+	display: flex;
+	align-items: center;
+	border-radius: 3px;
+	border: 1px solid $grey-color;
+}
+
+.country_number {
+	padding: 0 10px;
+	font-size: 0.9rem;
+	font-weight: 600;
+	border-right: 1px solid $grey-color;
+	opacity: 0.6;
+}
+
+.error {
+	color: $red;
+	font-size: 0.875rem;
+	font-weight: 500;
+}
+
+.input {
+	width: 100%;
+	padding: 10px 14px;
+	font-weight: 600;
+	letter-spacing: 0.04rem;
+	transition: 100ms linear;
+	&:focus {
+		border-color: $search-placeholder-color;
+	}
+	&::placeholder {
+		color: $grey-color;
+	}
+}
+
+.button_group {
+	display: flex;
+	flex-direction: column;
+	margin-top: 30px;
+	gap: 10px;
+}
+
+.btn {
+	padding: 10px 12px;
+	border-radius: 3px;
+	letter-spacing: 0.03rem;
+	transition: 100ms linear;
+	border: 1px solid transparent;
+}
+
+.contained_btn {
+	background: $primary-color;
+	color: $secondary-color;
+	font-weight: 600;
+	&:hover {
+		background: $primary-color-d1;
+	}
+	&:active {
+		background: $primary-color-d2;
+	}
+}
+
+.contained_btn.loading {
+	pointer-events: none;
+	background: $primary-color-d2;
+	&:hover {
+		background: $primary-color-d2;
+	}
+}
+
+.outlined_btn {
+	font-size: 0.9rem;
+	font-weight: 500;
+	border: 1px solid $grey-color;
+	&:hover {
+		background: rgba(#000, .07);
+	}
+	&:active {
+		background: rgba(#000, .10);
+	}
+}
+
+.text_btn {
+	font-size: 0.875rem;
+	font-weight: 500;
+	&:hover {
+		text-decoration: underline;
+	}
+	&:active {
+		text-decoration: underline;
+	}
+}
+
+.error_info {
+	color: $red;
+	font-weight: 500;
+	font-size: 0.875rem;
+	margin-top: 4px;
+}

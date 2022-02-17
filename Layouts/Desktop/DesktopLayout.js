@@ -6,6 +6,7 @@ import Header from '../../components/Header/Header'
 import If from '../../components/If/If'
 import SubNavigation from '../../components/SubNavigation/SubNavigation'
 import styles from './DesktopLayout.module.scss'
+import Footer from './../../components/Footer/index';
 
 const DesktopLayout = ({
 	children
@@ -41,6 +42,8 @@ const DesktopLayout = ({
 				<div className={styles.content}>
 					{children}
 				</div>
+
+				<Footer />
 
 			</div>
 		</>

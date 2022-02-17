@@ -32,8 +32,11 @@
 	background: $secondary-color;
 	border-radius: 3px;
 	box-shadow: 2px 2px 14px rgba(#000, 0.2);
-	opacity: 0.8;
+	opacity: 0.3;
 	transition: 100ms linear;
+	@include _720 {
+		padding: 10px 2px;
+	}
 	&:hover {
 		opacity: 1;
 	}

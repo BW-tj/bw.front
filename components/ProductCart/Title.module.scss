@@ -17,6 +17,9 @@
 		&:hover {
 			color: darken($primary-color-d2, 5%);
 		}
+		@include _520 {
+			width: 100%;
+		}
 	}
 }
 

@@ -13,6 +13,7 @@
 	}
 
 	@include _720 {
+		padding: 0;
 		&:hover {
 			box-shadow: none;
 		}

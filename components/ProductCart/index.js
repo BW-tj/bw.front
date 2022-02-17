@@ -86,6 +86,8 @@ const ProductCart = ({ id = 1, initialFavorite=false, data = null }) => {
 
   useEffect(() => {
     if (!rootRef.current) return;
+    if (window.innerWidth < 720)
+      return setWidth(rootRef.current && rootRef.current.offsetWidth)
     setWidth(rootRef.current && rootRef.current.offsetWidth-40)
   }, [rootRef, product])
 

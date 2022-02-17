@@ -18,6 +18,14 @@ import CheckBoxOutlineBlank from './CheckBoxOutlineBlank'
 import CheckBox from './CheckBox'
 import RadioButtonChecked from './RadioButtonChecked'
 import RadioButtonUnchecked from './RadioButtonUnchecked'
+import FacebookFill from './FacebookFill'
+import InstagramFill from './InstagramFill'
+import TelegramFill from './TelegramFill'
+import Call from './Call'
+import Email from './Email'
+import LocationOn from './LocationOn'
+import BxHomeAlt from './BxHomeAlt'
+import LogOut from './LogOut'
 
 export {
 	Menu,
@@ -39,5 +47,13 @@ export {
 	CheckBoxOutlineBlank,
 	CheckBox,
 	RadioButtonChecked,
-	RadioButtonUnchecked
+	RadioButtonUnchecked,
+	FacebookFill,
+	InstagramFill,
+	TelegramFill,
+	Call,
+	Email,
+	LocationOn,
+	BxHomeAlt,
+	LogOut
 }

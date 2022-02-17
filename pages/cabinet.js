@@ -6,6 +6,7 @@ import LayoutController from '../layouts/LayoutController'
 import styles from '../styles/Cabinet.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actions/user.actions';
+import { useRouter } from 'next/router';
 
 export const getStaticProps = async () => {
 
@@ -26,6 +27,7 @@ const Cabinet = ({ categories }) => {
 
 	const user = useSelector(state => state.user)
 	const dispatch = useDispatch() 
+	const router = useRouter() 
 
 	const [errors, setErrors] = useState({
 		firstname: '', lastname: '', email: '', phone: '', password: ''
@@ -82,13 +84,14 @@ const Cabinet = ({ categories }) => {
 
 	useEffect(() => {
 		if (!user.isAuth) {
-		  localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
-		  window.location.href = '/'
+			localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
 		  dispatch(logout())
+		  router.push('/login')
 		}
-	}, [user, dispatch])
+	}, [user.isAuth, dispatch, router])
 
 	useEffect(() => {
+		if (!user.isAuth) return
 		let config = {
 			method: 'GET',
 			headers: {

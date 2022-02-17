@@ -6,7 +6,7 @@ import DesktopLayout from './Desktop/DesktopLayout'
 import MobileLayout from './Mobile/MobileLayout'
 
 const LayoutController = ({
-	children, categories=[]
+	children, categories=[], noFooter=false, noSocialMedia=false
 }) => {
 
   const dispatch = useDispatch()
@@ -36,7 +36,7 @@ const LayoutController = ({
 	return (
 		<>
 			<Popup />
-			<Layout categories={categories}>
+			<Layout categories={categories} noFooter={noFooter} noSocialMedia={noSocialMedia}>
 				{children}
 			</Layout>
 		</>
