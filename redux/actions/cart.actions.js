@@ -123,3 +123,7 @@ export const changeProductCountService = (id, count) => async dispatch => {
 		body: JSON.stringify({productId: id, count})
 	})
 }
+
+export const cartRemoveAll = () => ({
+	type: t.CART_REMOVE_ALL
+})

@@ -1,16 +1,17 @@
 import React from 'react';
-import styles from '../styles/Order.module.scss'
+import styles from '../../styles/Order.module.scss'
 import Head from 'next/head'
 import Image from 'next/image'
-import LayoutController from '../layouts/LayoutController';
-import Title from '../components/Title/Title';
-import CartSidebar from '../components/CartSidebar';
+import LayoutController from '../../layouts/LayoutController';
+import Title from '../../components/Title/Title';
+import CartSidebar from '../../components/CartSidebar';
 import classNames from 'classnames';
-import { RadioButtonChecked, RadioButtonUnchecked } from '../icons';
+import { RadioButtonChecked, RadioButtonUnchecked } from '../../icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../redux/actions/user.actions';
-import Authorization from '../popups/Authorization/Authorization.popup';
-import { openPopup } from '../redux/actions/popup.actions';
+import { logout } from '../../redux/actions/user.actions';
+import Authorization from '../../popups/Authorization/Authorization.popup';
+import { openPopup } from '../../redux/actions/popup.actions';
+import { useRouter } from 'next/router';
 
 export const getStaticProps = async () => {
 
@@ -39,6 +40,7 @@ const Order = ({ categories, paymentTypes, deliverytypes }) => {
 
 	const user = useSelector(state => state.user)
 	const dispatch = useDispatch()
+	const router = useRouter()
 
 	const [text, setText] = React.useState('');
 	const [error, setError] = React.useState('');
@@ -67,6 +69,12 @@ const Order = ({ categories, paymentTypes, deliverytypes }) => {
 		}
 
 		const response = await fetch(process.env.NEXT_PUBLIC_HOST+'/order', config)
+		
+		if (response.status === 204) {
+			router.push('/order-list')
+			dispatch(cartRemoveAll())
+		}
+
 		if (response.status === 401 || response.status === 403) {
 			localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
 			window.location.href = '/'
@@ -78,7 +86,8 @@ const Order = ({ categories, paymentTypes, deliverytypes }) => {
 			window.location.href = '/'
 			dispatch(logout())
 		}
-	}, [dispatch, selectedDeliveryType, text, selectedPaymentType, user.isAuth])
+		
+	}, [dispatch, selectedDeliveryType, text, selectedPaymentType, user.isAuth, router])
 
 	React.useEffect(() => {
 		let timeout = null;

@@ -26,6 +26,7 @@ import Email from './Email'
 import LocationOn from './LocationOn'
 import BxHomeAlt from './BxHomeAlt'
 import LogOut from './LogOut'
+import Assignment from './Assignment'
 
 export {
 	Menu,
@@ -55,5 +56,6 @@ export {
 	Email,
 	LocationOn,
 	BxHomeAlt,
-	LogOut
+	LogOut,
+	Assignment
 }

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
-import { FavoriteBorder, Grade, LocalHospital, LocalOffer, LogOut, Menu, PersonOutline, SaveAlt, ShoppingCart } from '../../icons';
+import { Assignment, FavoriteBorder, Grade, LocalHospital, LocalOffer, LogOut, Menu, PersonOutline, SaveAlt, ShoppingCart } from '../../icons';
 import { openPopup } from '../../redux/actions/popup.actions';
 import { logout } from '../../redux/actions/user.actions';
 import Authorization from '../Authorization/Authorization.popup';
@@ -99,6 +99,14 @@ const MobileMenu = ({ onClose, categories }) => {
 								<FavoriteBorder />
 							</div>
 							Избранные
+						</a>
+					</Link>
+					<Link href="/order-list">
+						<a onClick={() => onClose()} className={classNames(styles.button_cart, styles.button_cart_favorite)}>
+							<div className={styles.button_cart__icon}>
+								<Assignment />
+							</div>
+							Список заказов
 						</a>
 					</Link>
 				</div>
