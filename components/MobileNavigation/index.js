@@ -33,7 +33,7 @@ const MobileNavigation = ({ categories }) => {
 
 			<Link href="/">
 				<a className={styles.logo}>
-					Большая стирка
+					Чистая линия
 				</a>
 			</Link>
 			

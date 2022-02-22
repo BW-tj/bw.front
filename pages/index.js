@@ -73,7 +73,7 @@ const Home = ({ categories, brands, banners }) => {
   return (
     <LayoutController categories={categories}>
       <Head>
-        <title>Большая стирка</title>
+        <title>Чистая линия</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className={styles.root}>
