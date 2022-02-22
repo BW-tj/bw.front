@@ -15,6 +15,7 @@ const ProductImages = ({ product, width }) => {
 		speed: 200,
 		slidesToShow: 1,
 		slidesToScroll: 1,
+		adaptiveHeight: true
 	};
 
 	const [style, setStyle] = React.useState({width: width+'px', gridTemplateColumns: `100px ${width - 100}px`})
@@ -64,7 +65,7 @@ const ProductImages = ({ product, width }) => {
 								alt={'product-image-'+index}
 								width='100%'
 								height='100%'
-								layout='responsive' objectFit='cover'
+								layout='responsive' objectFit='contain'
 							/>
 						</div>
 					)}
