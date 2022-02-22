@@ -32,7 +32,8 @@ export const getStaticProps = async () => {
       categories,
 			paymentTypes,
 			deliverytypes
-    }
+    },
+		revalidate: 10
   }
 }
 

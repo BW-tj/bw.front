@@ -170,6 +170,9 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+	@include _720 {
+		width: 100%;
+	}
 }
 
 .totalInfo_up {

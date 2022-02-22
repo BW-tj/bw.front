@@ -157,6 +157,9 @@
 	margin-top: 30px;
 	display: grid;
 	grid-template-columns: 0.8fr 3fr;
+	@include _720 {
+		grid-template-columns: 1fr;
+	}
 }
 
 .totalInfo {

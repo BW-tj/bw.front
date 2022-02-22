@@ -72,7 +72,10 @@ export const getStaticProps = async context => {
 		})
 	})
 
-	return { props: { categories, category, subCategories } }
+	return { 
+		props: { categories, category, subCategories },
+		revalidate: 10
+	}
 }
 
 const Category = ({ categories, category, subCategories }) => {

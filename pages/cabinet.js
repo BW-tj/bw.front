@@ -17,7 +17,8 @@ export const getStaticProps = async () => {
   return {
     props: {
       categories,
-    }
+    },
+		revalidate: 10
   }
 }
 
@@ -58,6 +59,9 @@ const Cabinet = ({ categories }) => {
 	
 			const config = {
 				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
 				body
 			}
 			if (user.isAuth)
