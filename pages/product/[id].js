@@ -29,8 +29,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
-		revalidate: 10
+    fallback: 'blocking',
   };
 };
 
@@ -52,7 +51,10 @@ export const getStaticProps = async (context) => {
   );
   const categories = await categoriesRes.json();
 
-  return { props: { product, categories, initialComments: comments }, revalidate: 20};
+  return { 
+    props: { product, categories, initialComments: comments }, 
+    revalidate: 20
+  };
 };
 
 const Product = ({ product, categories, initialComments }) => {

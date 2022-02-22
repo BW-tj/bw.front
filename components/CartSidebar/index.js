@@ -37,7 +37,7 @@ const CartSidebar = ({ deliveryType }) => {
 									{item.count} шт.
 								</div>
 								<div className={styles.item__price}>
-									{item.price - item.price*item.discount / 100} с.
+									({Math.round(item.price - item.price*item.discount / 100)}) с.
 								</div>
 							</div>	
 							<div className={styles.divider} />
@@ -53,7 +53,7 @@ const CartSidebar = ({ deliveryType }) => {
 
 			<div className={styles.result}>
 				<span>Сумма заказа</span>
-				<span>{cart.reduce((sum, item) => sum + (item.price - item.price*item.discount / 100) * item.count, 0) + (deliveryType ? deliveryType.price : 0) } с.</span>
+				<span>{Math.round(cart.reduce((sum, item) => sum + (item.price - item.price*item.discount / 100) * item.count, 0) + (deliveryType ? deliveryType.price : 0))} с.</span>
 			</div>
 
 		</div>
