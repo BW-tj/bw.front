@@ -195,9 +195,9 @@ const Product = ({ product, categories, initialComments }) => {
               </div>
             }
 
-            <div className={styles.description}>
+            <pre className={styles.description}>
               {product.description}
-            </div>
+            </pre>
 
             <button className={classNames(styles.favor, isFavorite && styles.active)} onClick={() => handleToggleFavorite(!isFavorite)}>
               {isFavorite && 

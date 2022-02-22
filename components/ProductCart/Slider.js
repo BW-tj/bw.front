@@ -37,6 +37,11 @@ const Slider = ({ id, images = null, width=0 }) => {
 			<Link href={'/product/'+id}>
 				<a className={styles.image_link}>
 					<SliderConstructor {...settings} ref={c => slider = c}>
+						{/* <SliderItem 
+							width={width}
+							src={images.find(image => )}
+							key={index}
+						/> */}
 						{images && images.map((src, index) => 
 							<SliderItem 
 								width={width}

@@ -18,7 +18,7 @@ const Comments = ({ comments, onAdd }) => {
 			
 			{comments.length === 0 &&
 				<div className={styles.noContent}>
-					У продукта нет отзывов, станьте первым!
+					У продукта нет отзывов, оставьте его первым!
 				</div>
 			}
 			
