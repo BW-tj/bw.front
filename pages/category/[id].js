@@ -84,7 +84,7 @@ const Category = ({ categories, category, subCategories }) => {
   const [params, setParams] = React.useState({
 		minPrice: 0,
 		maxPrice: 1000,
-		categoryId: category.id,
+		categoryId: category[0].id,
 		pageNumber: 1,
 		pageSize: 30,
 		brands: [],
