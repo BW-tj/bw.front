@@ -17,8 +17,7 @@ export const getStaticPaths = async () => {
 
 	return {
 		paths,
-		fallback: false,
-		revalidate: 10
+		fallback: false
 	}
 } 
 
@@ -31,7 +30,10 @@ export const getStaticProps = async context => {
   const responseOrder = await fetch(process.env.NEXT_PUBLIC_HOST+'/order/'+id)
   const order = await responseOrder.json()
 
-	return { props: { categories, order, id } }
+	return { 
+		props: { categories, order, id },
+		revalidate: 10  
+	}
 }
 
 const OrderId = ({categories, order, id}) => {
