@@ -103,63 +103,65 @@ const Login = ({ categories }) => {
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 
-			<form 
-				className={styles.root} 
-				onSubmit={e => e.preventDefault()}
-			>
-					
-				<div className={styles.title}>
-					Авторизация
-				</div>
+			<div className="container">
+				<form 
+					className={styles.root} 
+					onSubmit={e => e.preventDefault()}
+				>
+						
+					<div className={styles.title}>
+						Авторизация
+					</div>
 
-				<Label 
-					type='email'
-					name='email'
-					sub_title='Введите эл.почту'
-					error={errors.email}
-					value={email}
-					onChange={e => setEmail(e.target.value)}
-					placeholder='name@company.example'
-				/>
+					<Label 
+						type='email'
+						name='email'
+						sub_title='Введите эл.почту'
+						error={errors.email}
+						value={email}
+						onChange={e => setEmail(e.target.value)}
+						placeholder='name@company.example'
+					/>
 
-				<Label 
-					type='password'
-					name='password'
-					sub_title='Введите пароль'
-					error={errors.password}
-					value={password}
-					placeholder='********'
-					onChange={e => setPassword(e.target.value)}
-				/>
+					<Label 
+						type='password'
+						name='password'
+						sub_title='Введите пароль'
+						error={errors.password}
+						value={password}
+						placeholder='********'
+						onChange={e => setPassword(e.target.value)}
+					/>
 
-				<div className={styles.button_group}>
-					{mainError !== '' && 
-						<div className={styles.error}>
-							{mainError}
-						</div>
-					}
-					<button 
-						ref={loginButton}
-						onClick={handleLogin}
-						className={classNames(styles.btn, styles.contained_btn)}
-					>
-						Войти
-					</button>
-					{/* <button 
-						onClick={() => handleRegister()}
-						className={classNames(styles.btn, styles.outlined_btn)}
-					>
-						Регистрация
-					</button> */}
-					<button 
-						onClick={() => handleForgotPassword()}
-						className={classNames(styles.btn, styles.text_btn)}
-					>
-						Забыли пароль?
-					</button>
-				</div>
+					<div className={styles.button_group}>
+						{mainError !== '' && 
+							<div className={styles.error}>
+								{mainError}
+							</div>
+						}
+						<button 
+							ref={loginButton}
+							onClick={handleLogin}
+							className={classNames(styles.btn, styles.contained_btn)}
+						>
+							Войти
+						</button>
+						{/* <button 
+							onClick={() => handleRegister()}
+							className={classNames(styles.btn, styles.outlined_btn)}
+						>
+							Регистрация
+						</button> */}
+						<button 
+							onClick={() => handleForgotPassword()}
+							className={classNames(styles.btn, styles.text_btn)}
+						>
+							Забыли пароль?
+						</button>
+					</div>
 
-			</form>
+				</form>
+			</div>
 		</LayoutController>
 	);
 }

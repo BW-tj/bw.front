@@ -12,6 +12,7 @@ import { logout } from '../../redux/actions/user.actions';
 import Authorization from '../../popups/Authorization/Authorization.popup';
 import { openPopup } from '../../redux/actions/popup.actions';
 import { useRouter } from 'next/router';
+import { cartRemoveAll } from '../../redux/actions/cart.actions';
 
 export const getStaticProps = async () => {
 
