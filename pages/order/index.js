@@ -34,7 +34,7 @@ export const getStaticProps = async () => {
 			paymentTypes,
 			deliverytypes
     },
-		revalidate: 10
+		revalidate: 20
   }
 }
 

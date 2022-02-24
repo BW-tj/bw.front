@@ -29,7 +29,7 @@ export const getStaticProps = async () => {
       brands,
       banners
     },
-		revalidate: 10
+		revalidate: 20
   }
 }
 

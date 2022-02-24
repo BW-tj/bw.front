@@ -32,7 +32,7 @@ export const getStaticProps = async context => {
 
 	return { 
 		props: { categories, order, id },
-    revalidate: 1
+    revalidate: 20
 	}
 }
 
