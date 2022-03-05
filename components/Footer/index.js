@@ -14,20 +14,20 @@ const Footer = () => {
 						Онлайн магазин «Чистая линия»
 					</div>
 					<div className={styles.bw__info}>
-						<div className={styles.bw__item}>
+						{/* <div className={styles.bw__item}>
 							<div className={styles.bw__item__icon}>
 								<LocationOn />
 							</div>
 							<div className={styles.bw__item__text}>
 								г. Душанбе, пр-т Рудаки 93/1
 							</div>
-						</div>
+						</div> */}
 						<div className={styles.bw__item}>
 							<div className={styles.bw__item__icon}>
 								<Call />
 							</div>
 							<div className={styles.bw__item__text}>
-								+(992) 987 365 365
+								<a href="tel: +992 933 00 69 69">+(992) 933 00 69 69</a>
 							</div>
 						</div>
 						<div className={styles.bw__item}>
@@ -35,7 +35,7 @@ const Footer = () => {
 								<Email />
 							</div>
 							<div className={styles.bw__item__text}>
-								info@bw.tj
+								<a href="mailto:chistayaLiniya2022@gmail.com">chistayaLiniya2022@gmail.com</a>
 							</div>
 						</div>
 					</div>
