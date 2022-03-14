@@ -100,3 +100,20 @@ const New = ({ categories }) => {
 }
 
 export default New;
+
+[
+  {
+    name: "Категория-1",
+    subcategories: [
+      {
+        name: "ПодКатегория-1",
+        subcategories: [
+          {
+            id: "test",
+            name: "Категория-1",
+          }
+        ] 
+      }
+    ]
+  }
+]

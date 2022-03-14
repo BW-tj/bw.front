@@ -27,7 +27,7 @@ const Footer = () => {
 								<Call />
 							</div>
 							<div className={styles.bw__item__text}>
-								<a href="tel: +992 933 00 69 69">+(992) 933 00 69 69</a>
+								<a href="tel: +992 93 300 6969">+(992) 933 00 69 69</a>
 							</div>
 						</div>
 						<div className={styles.bw__item}>
