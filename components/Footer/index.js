@@ -1,9 +1,26 @@
 import React from 'react';
-import Image from 'next/image'
 import styles from './index.module.scss';
-import { Call, Email, FacebookFill, InstagramFill, LocationOn, TelegramFill } from '../../icons';
+import { Call, Email, FacebookFill, InstagramFill, TelegramFill } from '../../icons';
 
 const Footer = () => {
+
+	const [data, setData] = React.useState({
+		email: "",
+		phone: "",
+		about: "",
+		telegram: "",
+		instagram: "",
+		facebook: "",
+	})
+
+	React.useEffect(() => {
+		fetch(process.env.NEXT_PUBLIC_HOST + '/contacts', { method: 'GET' })
+			.then(res => res.json())
+			.then(data => {
+				setData(data)
+			})
+	}, [])
+
 	return (
 		<div className={styles.root}>
 			
@@ -27,7 +44,7 @@ const Footer = () => {
 								<Call />
 							</div>
 							<div className={styles.bw__item__text}>
-								<a href="tel: +992 93 300 6969">+(992) 933 00 69 69</a>
+								<a href={"tel: " + data.phone}>+(992) {data.phone}</a>
 							</div>
 						</div>
 						<div className={styles.bw__item}>
@@ -35,7 +52,7 @@ const Footer = () => {
 								<Email />
 							</div>
 							<div className={styles.bw__item__text}>
-								<a href="mailto:chistayaLiniya2022@gmail.com">chistayaLiniya2022@gmail.com</a>
+								<a href={"mailto:" + data.email}>{data.email}</a>
 							</div>
 						</div>
 					</div>
@@ -48,7 +65,7 @@ const Footer = () => {
 					<div className={styles.socialMedia__icons}>
 						<a 
 							className={styles.socialMedia__icon} 
-							href="https://www.facebook.com" 
+							href={data.facebook} 
 							target="_blank" 
 							rel="noopener noreferrer"
 						>
@@ -56,7 +73,7 @@ const Footer = () => {
 						</a>
 						<a 
 							className={styles.socialMedia__icon} 
-							href="https://www.instagram.com" 
+							href={data.instagram} 
 							target="_blank" 
 							rel="noopener noreferrer"
 						>
@@ -64,7 +81,7 @@ const Footer = () => {
 						</a>
 						<a 
 							className={styles.socialMedia__icon} 
-							href="https://www.telegram.com" 
+							href={data.telegram} 
 							target="_blank" 
 							rel="noopener noreferrer"
 						>
@@ -78,9 +95,7 @@ const Footer = () => {
 						О нас
 					</div>
 					<div className={styles.aboutUs__text}>
-						Онлайн магазин <b>Чистая линия</b> - это онлайн платформа, соединяющая товары и покупателей в одном месте!
-
-						У нас вы найдете тысячи товаров. Мы быстро и бережно доставим ваш заказ до дверей вашего дома. Бесплатная доставка доступна при заказе от 49 сомони. Покупка товаров в рассрочку, возврат товара, гарантия от продавца.
+						{data.about}
 					</div>
 				</div>
 
