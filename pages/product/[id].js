@@ -182,10 +182,10 @@ const Product = ({ product, categories, initialComments }) => {
         <div className={styles.rightWrap}>
           <div className={styles.right}>
             <div className={styles.price}>
-              {product.price} с.
+              {product.price - product.price * product.discount / 100} с.
               {product.discount !== 0 && 
                 <div className={styles['price-discount']}>
-                  {product.price - product.price * product.discount / 100} с.
+                  {product.price} с.
                 </div>
               }
             </div>

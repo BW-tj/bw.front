@@ -1,10 +1,8 @@
-import { KeyboardArrowLeftIcon, KeyboardArrowRightIcon } from "../../icons"
+import { KeyboardArrowLeftIcon, KeyboardArrowRightIcon } from "../../icons";
 import classNames from "classnames";
 import React from "react";
 
-export const Pagination = ({
-	totalPages, page, onPageChange
-}) => {
+export const Pagination = ({ totalPages, page, onPageChange, className }) => {
   const [pages, setPages] = React.useState([]);
 
   React.useEffect(() => {
