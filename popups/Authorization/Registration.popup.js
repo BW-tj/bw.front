@@ -63,34 +63,39 @@ const Registration = ({ onClose }) => {
 	}
 
 	const handleRegister = async () => {
-		if (!checkValidation()) 
-			return
-
-		await loginButton.current.classList.add(styles.loading)
-
-		const response = await fetch(process.env.NEXT_PUBLIC_HOST + '/registration', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email,
-				password,
-				phoneNumber: phone,
-				firstName,
-				lastName
+		try {
+			if (!checkValidation()) 
+				return
+	
+			await loginButton.current.classList.add(styles.loading)
+	
+			const response = await fetch(process.env.NEXT_PUBLIC_HOST + '/registration', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					email,
+					password,
+					phoneNumber: phone,
+					firstName,
+					lastName
+				})
 			})
-		})
-
-		const data = await response.data;
-
-		if (response.status === 409)
-			return setErrors(prev => ({...prev, email: data.Message}));
-
-		await loginButton.current.classList.remove(styles.loading)
-
-		if (response.status === 204)
-			handleSuccess()
+	
+			const data = await response.data;
+	
+			await loginButton.current.classList.remove(styles.loading)
+	
+			if (response.status === 204)
+				handleSuccess()
+		}
+		catch (e) {
+			if (e.response) {
+				if (e.response.status === 409)
+					return setErrors(prev => ({...prev, email: data.Message}));
+			}
+		}
 	}
 
 	useEffect(() => {
