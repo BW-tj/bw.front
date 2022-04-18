@@ -4,6 +4,6 @@ module.exports = {
     BASE_URL: process.env.BASE_URL,
   },
   images: {
-    domains: ['api.chistayaliniya.tj', 'static.vecteezy.com'],
+    domains: ["192.168.15.199", "static.vecteezy.com", "api.chistayaliniya.tj"],
   },
-}
+};
