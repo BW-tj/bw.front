@@ -120,12 +120,12 @@ const Search = ({ categories }) => {
                   data={product}
                 />
               )}
-              <Pagination 
-                page={params?.pageNumber || 1}
-                totalPages={products?.totalPages || 1}
-                onPageChange={(page) => setParams(prev => ({...prev, pageNumber: page}))}
-              />
             </Products>
+            <Pagination 
+              page={params?.pageNumber || 1}
+              totalPages={products?.totalPages || 1}
+              onPageChange={(page) => setParams(prev => ({...prev, pageNumber: page}))}
+            />
           </div>
         </div>
       </div>

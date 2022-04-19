@@ -1,10 +1,9 @@
 import Head from 'next/head'
 import React from 'react';
 import BannerSlider from '../components/BannerSlider/BannerSlider'
-import BrandsSlider from '../components/BrandsSlider/BrandsSlider'
 import ProductCart from '../components/ProductCart'
 import Products from '../components/Products/Products'
-import Title from '../components/Title/Title'
+import { Pagination } from '../components/Pagination';
 import LayoutController from '../layouts/LayoutController'
 import styles from '../styles/Home.module.scss'
 import * as skeletons from '../skeletons'
@@ -38,6 +37,8 @@ const Home = ({ categories, brands, banners }) => {
   const [products, setProducts] = React.useState(null)
   const [pending, setPending] = React.useState(true)
 
+  const [pageNumber, setPageNumber] = React.useState(1)
+
   const favorites = useSelector(state => state.favorites)
   const user = useSelector(state => state.user)
 
@@ -55,7 +56,7 @@ const Home = ({ categories, brands, banners }) => {
               "Authorization": "Bearer " + localStorage.getItem(process.env.NEXT_PUBLIC_LS_TOKEN),
             }
           }
-        const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration', config)
+        const productsRes = await fetch(process.env.NEXT_PUBLIC_HOST+'/product/filtration?pageSize=20&pageNumber='+pageNumber, config)
         if (productsRes.status === 401 || productsRes.status === 403) {
           localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
           window.location.href = '/'
@@ -68,7 +69,7 @@ const Home = ({ categories, brands, banners }) => {
       }
     }
     getProducts()
-  }, [user.isAuth])
+  }, [pageNumber, user.isAuth])
   
   return (
     <LayoutController categories={categories}>
@@ -106,6 +107,11 @@ const Home = ({ categories, brands, banners }) => {
               })
             }
           </Products>
+          <Pagination 
+            page={pageNumber || 1}
+            totalPages={products?.totalPages || 1}
+            onPageChange={(page) => setPageNumber(page)}
+          />
         </div>
 
         {/* <Title className={styles.title}>Бренды</Title>
