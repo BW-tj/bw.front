@@ -24,9 +24,12 @@
 
 @media screen and (max-width: 500px) {
   .pagination {
-    justify-content: center;
+    justify-content: flex-start;
     &__item {
       margin: 0;
+      padding: 0.3rem 0.5rem;
+      background-color: transparent;
+      color: #000;
     }
   }
 }
