@@ -38,19 +38,19 @@ export const Pagination = ({ totalPages, page, onPageChange, className }) => {
   if (totalPages <= 1) return <></>;
   return (
     <div className={classNames("pagination", className)}>
-      {pages.map((page, index) =>
-        page.type === "page" ? (
+      {pages.map((cpage, index) =>
+        cpage.type === "page" ? (
           <div
             key={index}
             className={classNames(
               "pagination__item",
-              page.value === page && "pagination__item--active"
+              cpage.value === page && "pagination__item--active"
             )}
-            onClick={() => page.value && onPageChange(page.value)}
+            onClick={() => onPageChange(cpage.value)}
           >
-            {page.value}
+            {cpage.value}
           </div>
-        ) : page.type === "arrowRight" ? (
+        ) : cpage.type === "arrowRight" ? (
           <div
             key={index}
             className="pagination__item pagination__item--arrow"

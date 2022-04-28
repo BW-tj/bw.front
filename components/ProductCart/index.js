@@ -9,10 +9,22 @@ import Slider from "./Slider";
 import Stars from "./Stars";
 import Title from "./Title";
 import styles from "./index.module.scss";
-import { addToFavorites, addToFavoritesService, removeFromFavorites, removeFromFavoritesService } from '../../redux/actions/favorites.actions';
-import { changeProductCountService, changeProductCount, addToCart, addToCartService, removeFromCartService, removeFromCart } from '../../redux/actions/cart.actions';
+import {
+  addToFavorites,
+  addToFavoritesService,
+  removeFromFavorites,
+  removeFromFavoritesService,
+} from "../../redux/actions/favorites.actions";
+import {
+  changeProductCountService,
+  changeProductCount,
+  addToCart,
+  addToCartService,
+  removeFromCartService,
+  removeFromCart,
+} from "../../redux/actions/cart.actions";
 
-const ProductCart = ({ id = 1, initialFavorite=false, data = null }) => {
+const ProductCart = ({ id = 1, initialFavorite = false, data = null }) => {
   const [product, setProduct] = useState(null);
   const [isFavorite, setIsFavorite] = useState(initialFavorite);
   const [countInCart, setCountInCart] = useState(0);
@@ -23,48 +35,39 @@ const ProductCart = ({ id = 1, initialFavorite=false, data = null }) => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-	const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
 
-	const handleToggleFavorite = React.useCallback((value) => {
-    setIsFavorite(value);
-		if (!user.isAuth)
-			if (value)
-				dispatch(addToFavorites(data))
-      else
-        dispatch(removeFromFavorites(data.id))
-    else
-      if (value)
-        dispatch(addToFavoritesService(data))
-			else
-        dispatch(removeFromFavoritesService(data.id))
-	}, [dispatch, user.isAuth, data])
+  const handleToggleFavorite = React.useCallback(
+    (value) => {
+      setIsFavorite(value);
+      if (!user.isAuth)
+        if (value) dispatch(addToFavorites(data));
+        else dispatch(removeFromFavorites(data.id));
+      else if (value) dispatch(addToFavoritesService(data));
+      else dispatch(removeFromFavoritesService(data.id));
+    },
+    [dispatch, user.isAuth, data]
+  );
 
   const handleAddToCart = React.useCallback(async () => {
-		if (user.isAuth)
-      dispatch(addToCartService(data));
-    else
-      dispatch(addToCart(data));
-	}, [data, dispatch, user.isAuth])
+    if (user.isAuth) dispatch(addToCartService(data));
+    else dispatch(addToCart(data));
+  }, [data, dispatch, user.isAuth]);
 
   const handleIncreaseProductCountInCart = React.useCallback(async () => {
     if (user.isAuth)
-      dispatch(changeProductCountService(data.id, countInCart+1));
-    else
-		  dispatch(changeProductCount(data.id, countInCart+1));
-	}, [data.id, dispatch, countInCart, user.isAuth])
+      dispatch(changeProductCountService(data.id, countInCart + 1));
+    else dispatch(changeProductCount(data.id, countInCart + 1));
+  }, [data.id, dispatch, countInCart, user.isAuth]);
 
   const handleDecreaseProductCountInCart = React.useCallback(async () => {
-    if (countInCart === 1) 
-      if (user.isAuth)
-        dispatch(removeFromCartService(data.id));
-      else
-        dispatch(removeFromCart(data.id));
-    else
-      if (user.isAuth)
-        dispatch(changeProductCountService(data.id, countInCart-1));
-      else
-        dispatch(changeProductCount(data.id, countInCart-1));
-	}, [data.id, dispatch, countInCart, user.isAuth])
+    if (countInCart === 1)
+      if (user.isAuth) dispatch(removeFromCartService(data.id));
+      else dispatch(removeFromCart(data.id));
+    else if (user.isAuth)
+      dispatch(changeProductCountService(data.id, countInCart - 1));
+    else dispatch(changeProductCount(data.id, countInCart - 1));
+  }, [data.id, dispatch, countInCart, user.isAuth]);
 
   useEffect(() => {
     if (!data) return;
@@ -87,24 +90,21 @@ const ProductCart = ({ id = 1, initialFavorite=false, data = null }) => {
   useEffect(() => {
     if (!rootRef.current) return;
     if (window.innerWidth < 720)
-      return setWidth(rootRef.current && rootRef.current.offsetWidth)
-    setWidth(rootRef.current && rootRef.current.offsetWidth-40)
-  }, [rootRef, product])
+      return setWidth(rootRef.current && rootRef.current.offsetWidth);
+    setWidth(rootRef.current && rootRef.current.offsetWidth - 40);
+  }, [rootRef, product]);
 
   useEffect(() => {
-
     const handleWindowResize = () => {
-      if (window.innerWidth < 1200)
-        setHeight(150);
-      else
-        setHeight(300);
-    }
+      if (window.innerWidth < 1200) setHeight(150);
+      else setHeight(300);
+    };
 
-    handleWindowResize()
-    
-    window.addEventListener('resize', handleWindowResize);
-    return () => window.removeEventListener('resize', handleWindowResize);
-  }, [])
+    handleWindowResize();
+
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
 
   if (!product) return <></>;
   return (
@@ -132,14 +132,18 @@ const ProductCart = ({ id = 1, initialFavorite=false, data = null }) => {
       <If
         condition={countInCart === 0}
         altContent={
-          <CartControllButtons 
-            count={countInCart} 
-            onIncrease={handleIncreaseProductCountInCart} 
-            onDecrease={handleDecreaseProductCountInCart} 
+          <CartControllButtons
+            count={countInCart}
+            onIncrease={handleIncreaseProductCountInCart}
+            onDecrease={handleDecreaseProductCountInCart}
           />
         }
       >
-        <AddToCartButton onClick={handleAddToCart} id={id} dispatch={dispatch} />
+        <AddToCartButton
+          onClick={handleAddToCart}
+          id={id}
+          dispatch={dispatch}
+        />
       </If>
     </div>
   );
