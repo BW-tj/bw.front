@@ -1,54 +1,53 @@
-@import '../../styles/mixins';
-@import '../../styles/colors';
+@import "../../styles/mixins";
+@import "../../styles/colors";
 
 .root {
-	position: relative;
-	border-radius: 8px;
-	overflow: hidden;
-	img {
-		border-radius: 8px;
-		object-fit: cover;
-	}
-	&:hover {
-		.arrow_button {
-			opacity: 1;
-		}
-	}
-	@include container;
-	@include _720 {
-		display: none;
-	}
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  img {
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  &:hover {
+    .arrow_button {
+      opacity: 1;
+    }
+  }
+  @include container;
+  @include _720 {
+  }
 }
 
 .arrow_button {
-	position: absolute;
-	background: rgba(#fff, .4);
-	width: 50px;
-	height: 50px;
-	border-radius: 50px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: 100ms linear;
-	top: 50%;
-	transform: translateY(-50%);
-	z-index: 100;
-	opacity: 0;
-	@include _1000 {
-		display: none;
-	}
-	svg {
-		opacity: 0.5;
-	}
-	&:active {
-		transform: scale(0.97) translateY(-50%);
-	}
+  position: absolute;
+  background: rgba(#fff, 0.4);
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 100ms linear;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  opacity: 0;
+  @include _1000 {
+    display: none;
+  }
+  svg {
+    opacity: 0.5;
+  }
+  &:active {
+    transform: scale(0.97) translateY(-50%);
+  }
 }
 
 .arrow_button_prev {
-	left: 60px;
+  left: 60px;
 }
 
 .arrow_button_next {
-	right: 60px;
+  right: 60px;
 }

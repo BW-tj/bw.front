@@ -1,64 +1,65 @@
-@import '../../styles/colors';
-@import '../../styles/mixins';
+@import "../../styles/colors";
+@import "../../styles/mixins";
 
 .root {
-	width: 100%;
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	overflow: hidden;
-	z-index: 1000;
-	box-shadow: 0 -3px 6px rgba(rgb(160, 160, 160), 0.2);
-	background: #fff;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 1000;
+  box-shadow: 0 -3px 6px rgba(rgb(160, 160, 160), 0.2);
+  background: #ddd;
+  box-shadow: 0 0 1px #000;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .item {
-	padding: 10px 14px;
-	transition: 100ms linear;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 0px;
-	color: $text-color;
-	&:active {
-		color: $primary-color;
-	}
-	&__icon {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		position: relative;
-		&Info {
-			top: -5px;
-			z-index: 1000;
-			right: -3px;
-			position: absolute;
-			font-size: 0.75rem;
-			border-radius: 10px;
-			line-height: 13px;
-			padding: 0px 3px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			&_blue {
-				color: #fff;
-				background: $primary-color;
-				border: 1px solid #fff;
-			}
-			&_favorites {
-				color: $navigation-icon-color;
-				background: #fff;
-				font-weight: 600;
-				border: 1px solid $navigation-icon-color;
-			}
-		}
-	}
-	&__text {
-		font-size: 0.75rem;
-	}
-	&.active {
-		color: $primary-color;
-	}
+  padding: 10px 14px;
+  transition: 100ms linear;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+  color: $text-color;
+  &:active {
+    color: $primary-color;
+  }
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    &Info {
+      top: -5px;
+      z-index: 1000;
+      right: -3px;
+      position: absolute;
+      font-size: 0.75rem;
+      border-radius: 10px;
+      line-height: 13px;
+      padding: 0px 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &_blue {
+        color: #fff;
+        background: $primary-color;
+        border: 1px solid #fff;
+      }
+      &_favorites {
+        color: $navigation-icon-color;
+        background: #fff;
+        font-weight: 600;
+        border: 1px solid $navigation-icon-color;
+      }
+    }
+  }
+  &__text {
+    font-size: 0.75rem;
+  }
+  &.active {
+    color: $primary-color;
+  }
 }
