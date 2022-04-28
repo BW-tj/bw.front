@@ -1,10 +1,10 @@
+import React from "react";
 import { KeyboardArrowLeftIcon, KeyboardArrowRightIcon } from "../../icons";
 import classNames from "classnames";
-import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Pagination = ({ totalPages, page, onPageChange, className }) => {
   const [pages, setPages] = React.useState([]);
-
   React.useEffect(() => {
     const newPages = [];
     if (totalPages < 10) {
@@ -35,7 +35,7 @@ export const Pagination = ({ totalPages, page, onPageChange, className }) => {
     setPages(newPages);
   }, [page, totalPages]);
 
-  if (totalPages <= 1) return <></>;
+  // if (totalPages <= 1) return null;
   return (
     <div className={classNames("pagination", className)}>
       {pages.map((cpage, index) =>
@@ -56,7 +56,7 @@ export const Pagination = ({ totalPages, page, onPageChange, className }) => {
             className="pagination__item pagination__item--arrow"
             onClick={() => onPageChange(page + 1)}
           >
-            <KeyboardArrowRightIcon size={20} />
+            <FontAwesomeIcon icon="fa-solid fa-arrow-right" size={30} />
           </div>
         ) : (
           <div
@@ -64,7 +64,7 @@ export const Pagination = ({ totalPages, page, onPageChange, className }) => {
             className="pagination__item pagination__item--arrow"
             onClick={() => onPageChange(page - 1)}
           >
-            <KeyboardArrowLeftIcon size={20} />
+            <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
           </div>
         )
       )}
