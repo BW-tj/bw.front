@@ -1,257 +1,260 @@
-@import './colors';
-@import './mixins';
+@import "./colors";
+@import "./mixins";
 
 .rightWrap {
-	position: relative;	
+  position: relative;
 }
 
 .root {
-	margin-top: 20px;
-	display: grid;
-	grid-template-columns: 3.5fr 2fr;
-	gap: 40px;
-	@include container;
-	@include _720 {
-		padding-bottom: 40px;
-		display: flex;
-		flex-direction: column-reverse;
-	}
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 3.5fr 2fr;
+  gap: 40px;
+  @include container;
+  @include _720 {
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .title {
-	font-size: 2rem;
-	font-weight: 600;
-	color: $text-color;
+  font-size: 2rem;
+  font-weight: 600;
+  color: $text-color;
 }
 
 .subTitle {
-	margin-top: 10px;
-	display: flex;
-	gap: 20px;
-	color: $search-placeholder-color;
-	letter-spacing: 0.03rem;
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+  color: $search-placeholder-color;
+  letter-spacing: 0.03rem;
 }
 
 .right {
-	position: sticky;
-	top: 30px;
-	background: #fff;
-	box-shadow: 0 0 15px rgba(rgb(160, 160, 160), 0.2);
-	border-radius: 8px;
-	padding: 30px 20px;
-	align-self: start;
+  position: sticky;
+  top: 30px;
+  background: #fff;
+  box-shadow: 0 0 15px rgba(rgb(160, 160, 160), 0.2);
+  border-radius: 8px;
+  padding: 30px 20px;
+  align-self: start;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .price {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	text-align: center;
-	font-size: 2.5rem;
-	font-weight: 600;
-	color: $text-color;
-	&-discount {
-		font-size: 1rem;
-		color: $search-placeholder-color;
-		text-decoration: line-through;
-		font-weight: 400;
-	}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: $text-color;
+  &-discount {
+    font-size: 1rem;
+    color: $search-placeholder-color;
+    text-decoration: line-through;
+    font-weight: 400;
+  }
 }
 
 .description {
-	white-space: pre-wrap;
+  white-space: pre-wrap;
+  margin-top: 2rem;
 }
 
 .cart {
-	display: flex;
-	align-items: stretch;
-	gap: 10px;
-	margin-top: 20px;
-	&_icon {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 20px;
+  &_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .countForCart {
-	position: relative;
-	border-radius: 6px;
-	width: 100%;
-	height: 50px;
-	overflow: hidden;
-	display: flex;
-	align-items: center;
-	border: 1px solid $grey-color;
-	margin-bottom: 20px;
+  position: relative;
+  border-radius: 6px;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: 1px solid $grey-color;
+  margin-bottom: 20px;
 }
 
 .countForCart_button {
-	position: absolute;
-	width: 50px;
-	height: 100%;
-	font-size: 1.5rem;
-	font-weight: 600;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: #ffff;
-	color: $search-placeholder-color;
-	transition: 100ms linear;
-	&:hover {
-		background-color: $primary-color;
-		border-color: $primary-color;
-		color: #fff;
-	}
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffff;
+  color: $search-placeholder-color;
+  transition: 100ms linear;
+  &:hover {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: #fff;
+  }
 }
 
 .countForCart_buttonDecrease {
-	left: 0;
-	border-right: 1px solid $grey-color;
+  left: 0;
+  border-right: 1px solid $grey-color;
 }
 
 .countForCart_buttonIncrease {
-	right: 0;
-	border-left: 1px solid $grey-color;
+  right: 0;
+  border-left: 1px solid $grey-color;
 }
 
 .countForCart__title {
-	margin-bottom: 7px;
-	font-weight: 600;
+  margin-bottom: 7px;
+  font-weight: 600;
 }
 
 .countForCart__wrap {
-	display: flex;
-	width: 100%;
-	flex-direction: column;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
 }
 
 .countForCart_value {
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	padding: 0 20px;
-	font-size: 1.25rem;
-	font-weight: 600;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 0 20px;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .addToCartButton {
-	width: 100%;
-	height: 50px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0 12px;
-	border-radius: 6px;
-	gap: 7px;
-	background: $primary-color;
-	color: #fff;
-	font-weight: 600;
-	transition: 100ms linear;
-	border: 2px solid transparent;
-	&:hover {
-		background-color: darken($primary-color, 9%);
-	}
-	&:active {
-		background-color: darken($primary-color, 14%);
-	}
-	&.active {
-		background: #fff;
-		color: $primary-color;
-		border-color: $primary-color;
-		&:hover {
-			background-color: lighten($primary-color, 37%);
-		}
-		&:active {
-			background-color: lighten($primary-color, 32%);
-		}
-	}
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border-radius: 6px;
+  gap: 7px;
+  background: $primary-color;
+  color: #fff;
+  font-weight: 600;
+  transition: 100ms linear;
+  border: 2px solid transparent;
+  &:hover {
+    background-color: darken($primary-color, 9%);
+  }
+  &:active {
+    background-color: darken($primary-color, 14%);
+  }
+  &.active {
+    background: #fff;
+    color: $primary-color;
+    border-color: $primary-color;
+    &:hover {
+      background-color: lighten($primary-color, 37%);
+    }
+    &:active {
+      background-color: lighten($primary-color, 32%);
+    }
+  }
 }
 
 .favor {
-	justify-content: center;
-	width: 100%;
-	margin-top: 20px;
-	display: flex;
-	align-items: center;
-	transition: 100ms linear;
-	gap: 10px;
-	height: 50px;
-	background: $red;
-	border: 2px solid transparent;
-	color: #fff;
-	border-radius: 6px;
-	&:hover {
-		background-color: darken($red, 9%);
-	}
-	&:active {
-		background-color: darken($red, 14%);
-	}
-	&.active {
-		border-color: $red;
-		background: #fff;
-		color: $red;
-		&:hover {
-			background-color: lighten($red, 37%);
-		}
-		&:active {
-			background-color: lighten($red, 32%);
-		}
-	}
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  transition: 100ms linear;
+  gap: 10px;
+  height: 50px;
+  background: $red;
+  border: 2px solid transparent;
+  color: #fff;
+  border-radius: 6px;
+  &:hover {
+    background-color: darken($red, 9%);
+  }
+  &:active {
+    background-color: darken($red, 14%);
+  }
+  &.active {
+    border-color: $red;
+    background: #fff;
+    color: $red;
+    &:hover {
+      background-color: lighten($red, 37%);
+    }
+    &:active {
+      background-color: lighten($red, 32%);
+    }
+  }
 }
 
 .favor_icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: 100ms linear;
-	border-radius: 6px;
-	&.active {
-		color: $red;
-	}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 100ms linear;
+  border-radius: 6px;
+  &.active {
+    color: $red;
+  }
 }
 
 .stars {
-	display: flex;
-	align-items: center;
-	margin-top: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .star {
-	color: $grey-color;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	&.filled {
-		color: $yellow;
-	}
+  color: $grey-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.filled {
+    color: $yellow;
+  }
 }
 
 .result {
-	font-size: 0.875rem;
-	font-weight: 600;
-	margin-bottom: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .discount {
-	margin-top: 10px;
-	font-size: 1rem;
-	text-align: center;
-	font-weight: 500;
-	color: $red;
+  margin-top: 10px;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 500;
+  color: $red;
 }
 
 .characteristics {
-	margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .info {
-	display: flex;
-	flex-direction: column;
-	gap: 50px;
-	margin-top: 30px;
-	@include _720 {
-		margin-top: 0;
-	}
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-top: 30px;
+  @include _720 {
+    margin-top: 0;
+  }
 }

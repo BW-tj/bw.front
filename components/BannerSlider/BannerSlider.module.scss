@@ -5,9 +5,12 @@
   position: relative;
   border-radius: 8px;
   overflow: hidden;
+  padding: 0 !important;
   img {
     border-radius: 8px;
     object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
   &:hover {
     .arrow_button {
@@ -15,7 +18,8 @@
     }
   }
   @include container;
-  @include _720 {
+  @include _520 {
+    height: 100px;
   }
 }
 

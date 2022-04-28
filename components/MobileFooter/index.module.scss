@@ -49,10 +49,14 @@
         border: 1px solid #fff;
       }
       &_favorites {
-        color: $navigation-icon-color;
-        background: #fff;
+        background: tomato;
+        width: 20px;
+        height: 20px;
+        color: #fff;
         font-weight: 600;
         border: 1px solid $navigation-icon-color;
+        top: -7px;
+        right: -7px;
       }
     }
   }

@@ -5,16 +5,26 @@ import styles from "../../styles/Product.module.scss";
 import classNames from "classnames";
 import { Favorite, FavoriteBorder, ShoppingCart } from "../../icons";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, addToCartService, changeProductCount, changeProductCountService, removeFromCart, removeFromCartService } from '../../redux/actions/cart.actions';
-import { addToFavorites, addToFavoritesService, removeFromFavorites, removeFromFavoritesService } from '../../redux/actions/favorites.actions';
-import { 
-	Star as StarIcon
-} from '../../icons'
-import ProductImages from '../../components/ProductImages';
-import Comments from '../../components/Comments';
-import Characteristics from '../../components/Characteristics';
-import { openPopup } from '../../redux/actions/popup.actions';
-import AddComment from '../../popups/AddComment';
+import {
+  addToCart,
+  addToCartService,
+  changeProductCount,
+  changeProductCountService,
+  removeFromCart,
+  removeFromCartService,
+} from "../../redux/actions/cart.actions";
+import {
+  addToFavorites,
+  addToFavoritesService,
+  removeFromFavorites,
+  removeFromFavoritesService,
+} from "../../redux/actions/favorites.actions";
+import { Star as StarIcon } from "../../icons";
+import ProductImages from "../../components/ProductImages";
+import Comments from "../../components/Comments";
+import Characteristics from "../../components/Characteristics";
+import { openPopup } from "../../redux/actions/popup.actions";
+import AddComment from "../../popups/AddComment";
 
 export const getStaticPaths = async () => {
   const res = await fetch(process.env.NEXT_PUBLIC_HOST + "/product/filtration");
@@ -29,7 +39,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: 'blocking',
+    fallback: "blocking",
   };
 };
 
@@ -51,14 +61,13 @@ export const getStaticProps = async (context) => {
   );
   const categories = await categoriesRes.json();
 
-  return { 
-    props: { product, categories, initialComments: comments }, 
-    revalidate: 20
+  return {
+    props: { product, categories, initialComments: comments },
+    revalidate: 20,
   };
 };
 
 const Product = ({ product, categories, initialComments }) => {
-  
   const [width, setWidth] = React.useState(0);
   const [comments, setComments] = React.useState(initialComments || []);
   const leftRef = React.useRef(null);
@@ -73,68 +82,64 @@ const Product = ({ product, categories, initialComments }) => {
   const dispatch = useDispatch();
 
   const handleCheckout = React.useCallback(() => {
-    window.location.href = '/order'
-  }, [])
+    window.location.href = "/order";
+  }, []);
 
   const onCommentAdd = React.useCallback(() => {
-    dispatch(openPopup(props => 
-      <AddComment 
-        {...props} 
-        id={product.id} 
-        setComments={newComment => setComments(prev => [...prev, newComment])} 
-      />
-    ))
-  } , [product.id, dispatch])
+    dispatch(
+      openPopup((props) => (
+        <AddComment
+          {...props}
+          id={product.id}
+          setComments={(newComment) =>
+            setComments((prev) => [...prev, newComment])
+          }
+        />
+      ))
+    );
+  }, [product.id, dispatch]);
 
-	const handleToggleFavorite = React.useCallback((value) => {
-    setIsFavorite(value);
-		if (!user.isAuth)
-			if (value)
-				dispatch(addToFavorites(product))
-      else
-        dispatch(removeFromFavorites(product.id))
-    else
-      if (value)
-        dispatch(addToFavoritesService(product))
-			else
-        dispatch(removeFromFavoritesService(product.id))
-	}, [dispatch, user.isAuth, product])
+  const handleToggleFavorite = React.useCallback(
+    (value) => {
+      setIsFavorite(value);
+      if (!user.isAuth)
+        if (value) dispatch(addToFavorites(product));
+        else dispatch(removeFromFavorites(product.id));
+      else if (value) dispatch(addToFavoritesService(product));
+      else dispatch(removeFromFavoritesService(product.id));
+    },
+    [dispatch, user.isAuth, product]
+  );
 
   const handleDeacreaseCountForCart = React.useCallback(() => {
-    if (countForCartValue === 1) 
-      if (user.isAuth)
-        dispatch(removeFromCartService(product.id));
-      else
-        dispatch(removeFromCart(product.id));
-    else
-      if (user.isAuth)
-        dispatch(changeProductCountService(product.id, countForCartValue-1));
-      else
-        dispatch(changeProductCount(product.id, countForCartValue-1));
+    if (countForCartValue === 1)
+      if (user.isAuth) dispatch(removeFromCartService(product.id));
+      else dispatch(removeFromCart(product.id));
+    else if (user.isAuth)
+      dispatch(changeProductCountService(product.id, countForCartValue - 1));
+    else dispatch(changeProductCount(product.id, countForCartValue - 1));
   }, [user.isAuth, dispatch, countForCartValue, product.id]);
 
   const handleIncreaseCountForCart = React.useCallback(() => {
     if (user.isAuth)
-      dispatch(changeProductCountService(product.id, countForCartValue+1));
-    else
-		  dispatch(changeProductCount(product.id, countForCartValue+1));
+      dispatch(changeProductCountService(product.id, countForCartValue + 1));
+    else dispatch(changeProductCount(product.id, countForCartValue + 1));
   }, [user.isAuth, dispatch, product.id, countForCartValue]);
 
-  const handleSetCountForCart = React.useCallback((value) => {
-		if (!value || value === '') 
-			return setCountForCartValue(value);
-    if (user.isAuth)
-      dispatch(changeProductCountService(product.id, Number(value)));
-    else
-		  dispatch(changeProductCount(product.id, Number(value)));
-  }, [user.isAuth, dispatch, product.id]);
+  const handleSetCountForCart = React.useCallback(
+    (value) => {
+      if (!value || value === "") return setCountForCartValue(value);
+      if (user.isAuth)
+        dispatch(changeProductCountService(product.id, Number(value)));
+      else dispatch(changeProductCount(product.id, Number(value)));
+    },
+    [user.isAuth, dispatch, product.id]
+  );
 
   const handleAddToCart = React.useCallback(() => {
-		if (user.isAuth)
-      dispatch(addToCartService(product));
-    else
-      dispatch(addToCart(product));
-	}, [user.isAuth, dispatch, product]);
+    if (user.isAuth) dispatch(addToCartService(product));
+    else dispatch(addToCart(product));
+  }, [user.isAuth, dispatch, product]);
 
   React.useEffect(() => {
     setCountForCartValue(
@@ -144,12 +149,17 @@ const Product = ({ product, categories, initialComments }) => {
 
   React.useEffect(() => {
     if (!product) return;
-    if (user.isAuth) setIsFavorite(favorites.find(item => item.productId === product.id || item.id === product.id));
+    if (user.isAuth)
+      setIsFavorite(
+        favorites.find(
+          (item) => item.productId === product.id || item.id === product.id
+        )
+      );
   }, [product, user.isAuth, favorites]);
 
   React.useEffect(() => {
-    if (!leftRef || !leftRef.current) return
-    setWidth(leftRef.current.offsetWidth) 
+    if (!leftRef || !leftRef.current) return;
+    setWidth(leftRef.current.offsetWidth);
   }, []);
 
   return (
@@ -169,10 +179,7 @@ const Product = ({ product, categories, initialComments }) => {
               Артикуль {product.vendorCode}
             </div>
           </div>
-          <ProductImages 
-            width={width} 
-            product={product} 
-          />
+          <ProductImages width={width} product={product} />
           <div className={styles.info}>
             <Characteristics characteristics={product.characteristics} />
             <Comments comments={comments} onAdd={onCommentAdd} />
@@ -181,41 +188,34 @@ const Product = ({ product, categories, initialComments }) => {
 
         <div className={styles.rightWrap}>
           <div className={styles.right}>
-            <div className={styles.price}>
-              {product.price - product.price * product.discount / 100} с.
-              {product.discount !== 0 && 
-                <div className={styles['price-discount']}>
-                  {product.price} с.
-                </div>
-              }
-            </div>
-            {product.discount !== 0 && 
+            {product.discount !== 0 && (
               <div className={styles.discount}>
-                {product.discount && ('акция '+ product.discount + '%')}
+                {product.discount && "акция " + product.discount + "%"}
               </div>
-            }
+            )}
 
-            <pre className={styles.description}>
-              {product.description}
-            </pre>
+            <pre className={styles.description}>{product.description}</pre>
 
-            <button className={classNames(styles.favor, isFavorite && styles.active)} onClick={() => handleToggleFavorite(!isFavorite)}>
-              {isFavorite && 
+            <button
+              className={classNames(styles.favor, isFavorite && styles.active)}
+              onClick={() => handleToggleFavorite(!isFavorite)}
+            >
+              {isFavorite && (
                 <>
                   <div className={classNames(styles.favor_icon, styles.active)}>
                     <Favorite size={22} />
                   </div>
                   Убрать из избранного
                 </>
-              }
-              {!isFavorite && 
+              )}
+              {!isFavorite && (
                 <>
                   <div className={styles.favor_icon}>
                     <FavoriteBorder size={22} />
                   </div>
                   Добавить в избранное
                 </>
-              }
+              )}
             </button>
 
             <div className={styles.cart}>
@@ -253,8 +253,11 @@ const Product = ({ product, categories, initialComments }) => {
                   <div className={styles.result}>
                     Итого: {countForCartValue * product.price} с.
                   </div>
-                  <button 
-                    className={classNames(styles.addToCartButton, styles.active)}
+                  <button
+                    className={classNames(
+                      styles.addToCartButton,
+                      styles.active
+                    )}
                     onClick={handleCheckout}
                   >
                     Перейти к оплате
@@ -273,7 +276,14 @@ const Product = ({ product, categories, initialComments }) => {
                 </button>
               )}
             </div>
-
+            <div className={styles.price}>
+              {product.price - (product.price * product.discount) / 100} с.
+              {product.discount !== 0 && (
+                <div className={styles["price-discount"]}>
+                  {product.price} с.
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -282,25 +292,25 @@ const Product = ({ product, categories, initialComments }) => {
 };
 
 const Stars = ({ rating }) => {
-	const stars = []
-	
-	for(let i = 1; i <= 5; i++)
-		if (i <= rating)
-			stars.push({ key: i, filled: true })
-		else
-			stars.push({ key: i, filled: false })
+  const stars = [];
 
-	return (
-		<div className={styles.stars}>
-			{stars.map(star => <Star filled={star.filled} key={star.key} />)}
-		</div>
-	)
-}
+  for (let i = 1; i <= 5; i++)
+    if (i <= rating) stars.push({ key: i, filled: true });
+    else stars.push({ key: i, filled: false });
+
+  return (
+    <div className={styles.stars}>
+      {stars.map((star) => (
+        <Star filled={star.filled} key={star.key} />
+      ))}
+    </div>
+  );
+};
 
 const Star = ({ filled }) => (
-	<div className={classNames(styles.star, filled && styles.filled)}>
-		<StarIcon size={30} />
-	</div>
-)
+  <div className={classNames(styles.star, filled && styles.filled)}>
+    <StarIcon size={30} />
+  </div>
+);
 
 export default Product;
