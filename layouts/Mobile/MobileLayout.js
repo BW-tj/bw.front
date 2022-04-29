@@ -1,33 +1,33 @@
-import React from 'react'
-import Footer from '../../components/Footer'
-import MobileFooter from '../../components/MobileFooter'
-import MobileNavigation from '../../components/MobileNavigation'
-import SocialIcons from '../../components/SocialIcons'
-import styles from './MobileLayout.module.scss'
+import React from "react";
+import Footer from "../../components/Footer";
+import MobileFooter from "../../components/MobileFooter";
+import MobileNavigation from "../../components/MobileNavigation";
+import SocialIcons from "../../components/SocialIcons";
+import styles from "./MobileLayout.module.scss";
 
-const MobileLayout = ({
-	children,
-	categories,
-	noFooter,
-	noSocialMedia
-}) => {
-	return (
-		<div className={styles.root}>
+const MobileLayout = ({ children, categories, noFooter, noSocialMedia }) => {
+  return (
+    <div className={styles.root}>
+      {!noSocialMedia && <SocialIcons />}
 
-			{!noSocialMedia && <SocialIcons />}
+      <MobileFooter />
 
-			<MobileFooter />
+      <div
+        style={{
+          position: "fixed",
+          backgroundColor: "#fff",
+          zIndex: 100,
+          top: 0,
+        }}
+      >
+        <MobileNavigation categories={categories} />
+      </div>
 
-			<MobileNavigation categories={categories} />
-			
-			<div className={styles.content}>
-				{children}
-			</div>
+      <div className={styles.content}>{children}</div>
 
-			{!noFooter && <Footer />}
+      {!noFooter && <Footer />}
+    </div>
+  );
+};
 
-		</div>
-	)
-}
-
-export default MobileLayout
+export default MobileLayout;

@@ -1,47 +1,47 @@
-@import '../../styles/colors';
-@import '../../styles/mixins';
+@import "../../styles/colors";
+@import "../../styles/mixins";
 
 .root {
-	@include container;
-	margin-top: 20px;
-	display: flex;
-	align-items: center;
+  @include container;
+  margin-top: 120px;
+  display: flex;
+  align-items: center;
 }
 
 .button {
-	display: flex;
-	align-items: center;
-	padding: 10px 20px;
-	border-radius: 50px;
-	transition: 100ms linear;
-	color: $text-color;
-	&:hover {
-		box-shadow: 0 0 14px rgba(#000, 0.2);
-		color: $primary-color-d2;
-		.button_text {
-			color: $primary-color-d2;
-		}
-	}
-	&:active {
-		transform: scale(0.98);
-	}
-	&.active {
-		box-shadow: 0 0 14px rgba(#000, 0.2);
-		color: $primary-color-d2;
-		.button_text {
-			color: $primary-color-d2;
-		}
-	}
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 50px;
+  transition: 100ms linear;
+  color: $text-color;
+  &:hover {
+    box-shadow: 0 0 14px rgba(#000, 0.2);
+    color: $primary-color-d2;
+    .button_text {
+      color: $primary-color-d2;
+    }
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+  &.active {
+    box-shadow: 0 0 14px rgba(#000, 0.2);
+    color: $primary-color-d2;
+    .button_text {
+      color: $primary-color-d2;
+    }
+  }
 }
 
 .button_icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
 }
 
 .button_text {
-	font-size: 0.875rem;
-	color: $text-color;
+  font-size: 0.875rem;
+  color: $text-color;
 }
