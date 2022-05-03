@@ -1,5 +1,6 @@
 import React from "react";
 import Footer from "../../components/Footer";
+import { MobileCategoriesSlider } from "../../components/MobileCategoriesSlider";
 import MobileFooter from "../../components/MobileFooter";
 import MobileNavigation from "../../components/MobileNavigation";
 import SocialIcons from "../../components/SocialIcons";

@@ -1,0 +1,19 @@
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  &-icon {
+    padding: 1.2rem;
+    border-radius: 25px;
+    background-color: rgb(240, 234, 234);
+    img {
+      width: 70px;
+    }
+  }
+  &-name {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+}

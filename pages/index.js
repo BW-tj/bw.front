@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import BannerSlider from "../components/BannerSlider/BannerSlider";
 import ProductCart from "../components/ProductCart";
 import Products from "../components/Products/Products";
@@ -10,6 +10,7 @@ import * as skeletons from "../skeletons";
 import { useSelector } from "react-redux";
 import PopularCategories from "../components/PopularCategories";
 import { logout } from "../redux/actions/user.actions";
+import { MobileCategoriesSlider } from "../components/MobileCategoriesSlider";
 
 export const getStaticProps = async () => {
   const categoriesRes = await fetch(
@@ -41,8 +42,10 @@ const Home = ({ categories, brands, banners }) => {
 
   const favorites = useSelector((state) => state.favorites);
   const user = useSelector((state) => state.user);
+  let [windowWidth, setWindowWidth] = useState(0);
 
   React.useEffect(() => {
+    setWindowWidth(window.innerWidth);
     const getProducts = async () => {
       try {
         setPending(true);
@@ -86,7 +89,7 @@ const Home = ({ categories, brands, banners }) => {
       </Head>
       <div className={styles.root}>
         <BannerSlider className={styles.banner_slider} banners={banners} />
-
+        {windowWidth < 600 && <MobileCategoriesSlider />}
         <div className="container">
           <PopularCategories />
           <Products>

@@ -97,12 +97,27 @@ const Category = ({ categories, category, subCategories }) => {
 
   const loadData = React.useCallback(async (_params) => {
     try {
-      let url = process.env.NEXT_PUBLIC_HOST + "/product/filtration?";
+      let url =
+        process.env.NEXT_PUBLIC_HOST +
+        "/product/filtration?categoryId" +
+        _params.categoryId +
+        "&sort=" +
+        _params.sort +
+        "&selectedBrands=" +
+        _params.selectedBrands +
+        "&minPrice=" +
+        _params.minPrice +
+        "&maxPrice=" +
+        _params.maxPrice;
+
       QueryToString(_params);
+
       const config = {
         method: "GET",
       };
+
       setPending(true);
+
       const response = await fetch(url, config);
       if (response.status === 401 || response.status === 403) {
         localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN);
