@@ -1,4 +1,3 @@
-import { icon } from "@fortawesome/fontawesome-svg-core";
 import Link from "next/link";
 import React, { Component, useEffect, useState } from "react";
 import Slider from "react-slick";
@@ -46,7 +45,7 @@ export const MobileCategoriesSlider = () => {
 
   const sliderOptions = {
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
   };
 
   return (
