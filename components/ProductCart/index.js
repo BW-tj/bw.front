@@ -118,6 +118,7 @@ const ProductCart = ({ id = 1, initialFavorite = false, data = null }) => {
 
       <Title
         id={id}
+        src={"product/" + id}
         dispatch={dispatch}
         name={
           product.name.slice(0, 30) + (product.name.length > 30 ? "..." : "")
