@@ -17,7 +17,7 @@ const Registration = ({ onClose }) => {
   const [phone, setPhone] = useState("");
   const router = useRouter();
 
-  const [errors, setErrors] = useState({ email: "", passowrd: "" });
+  const [errors, setErrors] = useState({ phone: "" });
   const user = useSelector((state) => state.user);
 
   const loginButton = useRef(null);
@@ -31,10 +31,13 @@ const Registration = ({ onClose }) => {
   const checkValidation = () => {
     clearErrors();
 
-    if (phone.trim().length < 5) {
+    const phoneRegex =
+      /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+    if (!phoneRegex.test(phone)) {
       setErrors((prev) => ({
         ...prev,
-        phone: "Минимальная длина номера телефона 5 символов",
+        phone: "Введите корректный номер",
       }));
       return false;
     }
@@ -54,35 +57,31 @@ const Registration = ({ onClose }) => {
   };
 
   const handleRegister = async () => {
-    try {
-      if (!checkValidation()) return;
+    if (!checkValidation()) return;
 
-      await loginButton.current.classList.add(styles.loading);
+    await loginButton.current.classList.add(styles.loading);
 
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_HOST + "/phoneregitration",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            phoneNumber: phone,
-          }),
-        }
-      );
+    let data = null;
 
-      const data = await response.data;
-
-      await loginButton.current.classList.remove(styles.loading);
-
-      if (response.status === 204) handleSuccess();
-    } catch (e) {
-      if (e.response) {
-        if (e.response.status === 409)
-          return setErrors((prev) => ({ ...prev, email: data.Message }));
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_HOST + "/phoneregitration",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          phoneNumber: phone,
+        }),
       }
-    }
+    );
+
+    await loginButton.current.classList.remove(styles.loading);
+    console.log(response);
+    const result = response;
+
+    if (response.status >= 200 && response.status < 300) handleSuccess();
+    else setErrors((prev) => ({ ...prev, phone: result.Message }));
   };
 
   useEffect(() => {

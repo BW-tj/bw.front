@@ -54,20 +54,19 @@ const Authorization = ({ onClose }) => {
     if (!checkValidation()) return;
 
     await loginButton.current.classList.add(styles.loading);
-
-    const response = await fetch(process.env.NEXT_PUBLIC_HOST + "/loginPhone", {
+    const response = await fetch(process.env.NEXT_PUBLIC_HOST + "/loginphone", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        phone,
+        phoneNumber: phone,
       }),
     });
 
     if (response.status >= 400) {
       loginButton.current.classList.remove(styles.loading);
-      return setMainError("Неверный логин или пароль");
+      return setMainError("Неверный номер телефона");
     }
 
     const userData = await response.json();
