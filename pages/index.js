@@ -63,12 +63,13 @@ const Home = ({ categories, brands, banners }) => {
           };
         const productsRes = await fetch(
           process.env.NEXT_PUBLIC_HOST +
-            "/product/filtration?pageSize=20&pageNumber=" +
+            "/product/getproductbyhide?&pageSize=20&pageNumber=" +
             pageNumber,
           config
         );
         if (productsRes.status === 401 || productsRes.status === 403) {
           localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN);
+
           window.location.href = "/";
           dispatch(logout());
         }

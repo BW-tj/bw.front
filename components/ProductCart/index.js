@@ -114,8 +114,8 @@ const ProductCart = ({ id = 1, initialFavorite = false, data = null }) => {
         isNew={product.isNew}
         promotionPercent={product.promotionPercent}
       />
-      <Slider id={id} images={data.images} width={width} height={height} />
-
+      <Slider id={id} images={[data.imagePath]} width={width} height={height} />
+      {/* changedahaha - images*/}
       <Title
         id={id}
         src={"product/" + id}
@@ -126,11 +126,8 @@ const ProductCart = ({ id = 1, initialFavorite = false, data = null }) => {
         isFavorite={isFavorite}
         onToggleFavorite={handleToggleFavorite}
       />
-
       <Price price={product.price} />
-
       <Stars rating={product.rating} />
-
       <If
         condition={countInCart === 0}
         altContent={
