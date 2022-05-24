@@ -99,7 +99,7 @@ const Category = ({ categories, category, subCategories }) => {
     try {
       let url =
         process.env.NEXT_PUBLIC_HOST +
-        "/product/filtration?categoryId" +
+        "/product/getproductbyhide?categoryId" +
         _params.categoryId +
         "&sort=" +
         _params.sort +
@@ -136,7 +136,7 @@ const Category = ({ categories, category, subCategories }) => {
   React.useEffect(() => {
     let url =
       process.env.NEXT_PUBLIC_HOST +
-      "/product/filtration?categoryId=" +
+      "/product/getproductbyhide?categoryId=" +
       category[category.length - 1].id +
       "&pageNumber=" +
       params.pageNumber +
