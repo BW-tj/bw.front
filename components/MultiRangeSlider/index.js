@@ -1,13 +1,16 @@
 import React, { memo, useEffect } from "react";
-import 'rc-slider/assets/index.css';
-import { Range as DoubleRange } from 'rc-slider';
+import "rc-slider/assets/index.css";
+import { Range as DoubleRange } from "rc-slider";
 
-const MultiRangeSlider = ({ timeout = 0, min, max, className = "", onChange, value }) => {
-
-  
-  const [middleValue, setMiddleValue] = React.useState(
-    value || [min, max]
-  );
+const MultiRangeSlider = ({
+  timeout = 0,
+  min,
+  max,
+  className = "",
+  onChange,
+  value,
+}) => {
+  const [middleValue, setMiddleValue] = React.useState(value || [min, max]);
 
   useEffect(() => {
     if (!onChange) return;
@@ -35,7 +38,7 @@ const MultiRangeSlider = ({ timeout = 0, min, max, className = "", onChange, val
   );
 };
 
-export default memo(MultiRangeSlider, (prevProps, nextProps) => {
+const multiRangeSlider = memo(MultiRangeSlider, (prevProps, nextProps) => {
   if (prevProps.min !== nextProps.min || prevProps.max !== nextProps.max)
     return false;
   if (
@@ -45,3 +48,7 @@ export default memo(MultiRangeSlider, (prevProps, nextProps) => {
     return true;
   else return false;
 });
+
+multiRangeSlider.displayName = "MultiRangeSlider";
+
+export default multiRangeSlider;
