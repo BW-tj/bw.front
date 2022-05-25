@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { QueryToString } from '../functions/query';
-import { Pagination } from '../components/Pagination';
+import { QueryToString } from "../functions/query";
+import { Pagination } from "../components/Pagination";
 import Title from "../components/Title/Title";
-import ProductCart from '../components/ProductCart'
-import Products from '../components/Products/Products'
-import FilterSidebar from './../components/FilterSidebar';
+import ProductCart from "../components/ProductCart";
+import Products from "../components/Products/Products";
+import FilterSidebar from "./../components/FilterSidebar";
 import LayoutController from "../layouts/LayoutController";
-import Tools from '../components/Tools';
-import * as skeletons from '../skeletons';
+import Tools from "../components/Tools";
+import * as skeletons from "../skeletons";
 import styles from "../styles/Search.module.scss";
-import { logout } from '../redux/actions/user.actions';
+import { logout } from "../redux/actions/user.actions";
 
 export const getStaticProps = async () => {
   const categories = await fetch(
@@ -22,7 +22,7 @@ export const getStaticProps = async () => {
     props: {
       categories,
     },
-		revalidate: 20
+    revalidate: 20,
   };
 };
 
@@ -33,33 +33,44 @@ const Search = ({ categories }) => {
 
   const router = useRouter();
 
-  const handleToggleFilter = React.useCallback((filterValueId) => {
-    if (!params || !params.filters) return
-    if (params.filters.includes(filterValueId))
-      setParams(prev => ({...prev, filters: prev.filters.filter(item => item !== filterValueId)}))
-    else 
-      setParams(prev => ({...prev, filters: [...prev.filters, filterValueId]}))
-  }, [params])
+  const handleToggleFilter = React.useCallback(
+    (filterValueId) => {
+      if (!params || !params.filters) return;
+      if (params.filters.includes(filterValueId))
+        setParams((prev) => ({
+          ...prev,
+          filters: prev.filters.filter((item) => item !== filterValueId),
+        }));
+      else
+        setParams((prev) => ({
+          ...prev,
+          filters: [...prev.filters, filterValueId],
+        }));
+    },
+    [params]
+  );
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const urlParams = Object.fromEntries(urlSearchParams.entries());
 
-    setParams(prev => ({
-      ...prev, 
+    setParams((prev) => ({
+      ...prev,
       query: urlParams.q,
       categoryId: urlParams.categoryId ? urlParams.categoryId : "",
       filters: [],
       pageNumber: 1,
       pageSize: 30,
-      sort: 1
+      sort: 1,
     }));
   }, [router.query]);
 
-  useEffect(() => {    
+  useEffect(() => {
     if (!params) return;
     let url =
-      process.env.NEXT_PUBLIC_HOST + "/product/filtration?" + QueryToString(params);
+      process.env.NEXT_PUBLIC_HOST +
+      "/product/getproductbyhide?" +
+      QueryToString(params);
     const config = {
       method: "GET",
     };
@@ -68,22 +79,21 @@ const Search = ({ categories }) => {
         setPending(true);
         const response = await fetch(url, config);
         if (response.status === 401 || response.status === 403) {
-          localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN)
-          window.location.href = '/'
-          dispatch(logout())
+          localStorage.removeItem(process.env.NEXT_PUBLIC_LS_TOKEN);
+          window.location.href = "/";
+          dispatch(logout());
         }
         const data = await response.json();
         setProducts(data);
-      }
-      finally {
+      } finally {
         window.setTimeout(() => {
           setPending(false);
-        }, 200)
+        }, 200);
       }
-    }
+    };
     getData();
-  }, [params])
-  
+  }, [params]);
+
   return (
     <LayoutController categories={categories}>
       <Head>
@@ -91,40 +101,43 @@ const Search = ({ categories }) => {
       </Head>
       <div className={styles.root}>
         <Title className={styles.title}>
-          Результаты поиска {!pending ? products?.data.length : '...'}
+          Результаты поиска {!pending ? products?.data.length : "..."}
         </Title>
         <div className={styles.container}>
           <div className={styles.sidebar}>
-            <FilterSidebar 
+            <FilterSidebar
               isEmpty={products?.data.length === 0}
               filters={products?.filters || []}
               selectedFilters={params?.filters || []}
-              toggleFilter={handleToggleFilter} 
-            /> 
+              toggleFilter={handleToggleFilter}
+            />
           </div>
           <div className={styles.products}>
-            <Tools 
+            <Tools
               pageSize={params?.pageSize || 30}
-              onPageSizeChange={pageSize => setParams(prev => ({...prev, pageSize}))} 
-              sort={params?.sort || 1} 
-              onSort={sort => setParams(prev => ({...prev, sort}))} 
+              onPageSizeChange={(pageSize) =>
+                setParams((prev) => ({ ...prev, pageSize }))
+              }
+              sort={params?.sort || 1}
+              onSort={(sort) => setParams((prev) => ({ ...prev, sort }))}
             />
             <Products>
-              {pending && 
-                <skeletons.ProductsSkeleton />
-              }
-              {!pending && products.data.map(product => 
-                <ProductCart 
-                  id={product.id}
-                  key={product.id}
-                  data={product}
-                />
-              )}
+              {pending && <skeletons.ProductsSkeleton />}
+              {!pending &&
+                products.data.map((product) => (
+                  <ProductCart
+                    id={product.id}
+                    key={product.id}
+                    data={product}
+                  />
+                ))}
             </Products>
-            <Pagination 
+            <Pagination
               page={params?.pageNumber || 1}
               totalPages={products?.totalPages || 1}
-              onPageChange={(page) => setParams(prev => ({...prev, pageNumber: page}))}
+              onPageChange={(page) =>
+                setParams((prev) => ({ ...prev, pageNumber: page }))
+              }
             />
           </div>
         </div>

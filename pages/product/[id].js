@@ -27,7 +27,9 @@ import { openPopup } from "../../redux/actions/popup.actions";
 import AddComment from "../../popups/AddComment";
 
 export const getStaticPaths = async () => {
-  const res = await fetch(process.env.NEXT_PUBLIC_HOST + "/product/filtration");
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_HOST + "/product/getproductbyhide"
+  );
   const products = await res.json();
   const paths = [];
 
