@@ -115,7 +115,7 @@ const Registration = ({ onClose }) => {
             error={errors.phone}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="+992 XXX XX XX XX"
+            placeholder="+992XXXXXXXXX"
           />
 
           <div className={styles.button_group}>

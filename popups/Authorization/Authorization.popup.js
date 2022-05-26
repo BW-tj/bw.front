@@ -113,7 +113,7 @@ const Authorization = ({ onClose }) => {
           error={errors.phone}
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          placeholder="+992 (xx) xxx-xx-xx"
+          placeholder="+992ХХХХХХХХХ"
         />
 
         <div className={styles.button_group}>
