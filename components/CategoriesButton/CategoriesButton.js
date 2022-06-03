@@ -5,7 +5,7 @@ import styles from './CategoriesButton.module.scss'
 const CategoriesButton = ({ active, onClick }) => (
 	<button 
 		className={classNames(
-			styles.button, 
+			"styles.button", 
 			active && styles.active
 		)}
 		onClick={onClick}
