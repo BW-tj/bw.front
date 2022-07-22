@@ -20,6 +20,11 @@
   @include container;
   @include _520 {
     height: 100px;
+    img {
+      border-radius: 10px;
+      object-fit: cover;
+      width: 100%;
+    }
   }
 }
 
