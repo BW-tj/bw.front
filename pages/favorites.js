@@ -34,8 +34,8 @@ const Favorites = ({ categories }) => {
 		if (!user.isAuth) return
 		let timeout 
 		const getData = async () => {
-			await setPending(true)
-			await dispatch(updateFavorites())
+			setPending(true)
+			dispatch(updateFavorites())
 			timeout = window.setTimeout(() => {
 				setPending(false)
 			}, 500)
