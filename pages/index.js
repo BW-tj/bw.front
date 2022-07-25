@@ -18,6 +18,7 @@ export const getStaticProps = async () => {
   );
   const categories = await categoriesRes.json();
 
+  
   const brandsRes = await fetch(process.env.NEXT_PUBLIC_HOST + "/brands");
   const brands = await brandsRes.json();
 
